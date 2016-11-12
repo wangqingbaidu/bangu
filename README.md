@@ -3,7 +3,7 @@ This project is about smart ehouse which base on python, I use [Raspberry pi](ht
 
 You can contact me via email : 564326047@qq.com(wangqingbaid) 
 
-Or visit my blog  [www.wangqingbaidu.cn](www.wangqingbaidu.cn) for latest news.
+Or visit my blog  [www.wangqingbaidu.cn](http://www.wangqingbaidu.cn) for latest news.
 
 ###For business or industrialization please call (+86)13261527505
 
