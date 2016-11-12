@@ -1,5 +1,5 @@
 # bangu 盘古
-This project is about smart ehouse which base on python, I use Raspberry to get senor data and GPIO to display message . Also it can simply display on screen through a website which is based on Django.
+This project is about smart ehouse which base on python, I use [Raspberry pi](https://www.raspberrypi.org/) to get senor data and GPIO to display message . Also it can be simply displayed on screen through a website which is based on Django.
 
 You can contact me via email : 564326047@qq.com(wangqingbaid) 
 
