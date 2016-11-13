@@ -23,6 +23,7 @@ from RaspGPIO import raspgpio
 import time
 totalRunTime = 0
 def led_flicker_weather():
+    global totalRunTime
     rpin = 11
     spin = 13
     cpin = 15
