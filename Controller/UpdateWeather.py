@@ -56,3 +56,5 @@ def GetWeather2DB(cfg = BanguConfig().get_basic_settings()):
            
 if __name__ == '__main__':
     GetWeather2DB()
+    desc = model.get_latest_weather().desc
+    print desc
