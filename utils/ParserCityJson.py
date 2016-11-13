@@ -16,6 +16,16 @@ Note: Please keep the above information whenever or wherever the codes are used.
 '''
 import json, os
 class ParserCityJson:
+    """
+    This class is used to convert city json file to dict type.
+    Path to json file must contains three columns id, cityEn, countryCode
+        id stands for the city id.
+        cityEn stands for English name of this city.
+        countryCode stands for short name of country which this city belongs to.
+    Parameters
+    -------------
+    @jsonFile: Path to city json file.
+    """
     cities = None
     def __init__(self, jsonFile = '../city.json'):
         self.jsonFile = jsonFile

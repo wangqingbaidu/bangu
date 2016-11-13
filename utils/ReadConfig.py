@@ -57,4 +57,6 @@ class BanguConfig:
     def get_pins_settings(self):
         return {} if not self.configuration.has_key('pins') else self.configuration['pins']
     
+    def get_basic_settings(self):
+        return {} if not self.configuration.has_key('basic') else self.configuration['basic']
     

@@ -1,5 +1,7 @@
 eclipse.preferences.version=1
+encoding//Controller/UpdateWeather.py=UTF-8
 encoding//Model/ModelDB.py=UTF-8
+encoding//Model/__init__.py=UTF-8
 encoding//View/Hardware/LED_WeatherForecast.py=UTF-8
 encoding//View/Hardware/RaspGPIO.py=UTF-8
 encoding//test/TestReadConfig.py=UTF-8
