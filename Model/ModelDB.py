@@ -34,7 +34,7 @@ class ModelDB:
         DB_CONNECT_STRING = 'sqlite:///../bangu.db'
         self.engine = create_engine(DB_CONNECT_STRING, echo=echo)
         self.session = sessionmaker(bind=self.engine)()
-        self.flush_db()
+#         self.flush_db()
         self.init_db()
         
     def init_db(self):
@@ -50,6 +50,9 @@ class ModelDB:
     def insert_weather(self, weather):
         self.session.execute(Weather.__table__.insert(), weather)
         self.session.commit()
+    
+    def get_latest_weather(self):
+        return self.session.query(Weather).order_by(Weather.id.desc()).first()
         
 class City(BaseModel):    
     __tablename__ = 'city'

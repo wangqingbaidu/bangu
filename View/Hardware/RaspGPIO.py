@@ -16,6 +16,7 @@ Note: Please keep the above information whenever or wherever the codes are used.
 '''
 import RPi.GPIO as GPIO
 GPIO.setwarnings(False)
+from utils.ReadConfig import BanguConfig
 
 class RaspGPIO:
     """
@@ -27,7 +28,7 @@ class RaspGPIO:
     """
     def __init__(self,
                  model = 'board',
-                 pins = None):
+                 pins = BanguConfig().get_pins_settings()):
         
         self.__Define_GPIO_model(model)            
         self.__Define_GPIO_pin(pins)
@@ -96,3 +97,6 @@ class RaspGPIO:
                 print 'GPIO model %s pin %d is not %s.' %(self.model, pin, 'GPIO.IN')
         else:            
             print 'GPIO model %s pin %d is not defined!' %(self.model, pin)
+            
+
+raspgpio = RaspGPIO()

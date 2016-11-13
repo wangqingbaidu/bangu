@@ -38,11 +38,11 @@ class BanguConfig:
         self.__valid_config()
         
     def __valid_config(self):
-        self.__valid_pings_section()
+        self.__valid_pins_section()
         
         
     
-    def __valid_pings_section(self):
+    def __valid_pins_section(self):
         if self.configuration.has_key('pins'):
             tmp = {}
             for pin in self.configuration['pins'].keys():
