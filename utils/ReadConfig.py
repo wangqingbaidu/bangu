@@ -26,7 +26,7 @@ class BanguConfig:
     -------------
     @cfgfile: Path to config file.
     """
-    def __init__(self, cfgfile = '../bangu.cfg'):
+    def __init__(self, cfgfile = os.getenv('BANGUHOME', '~/bangu')+ '/bangu.cfg'):
         if not os.path.exists(cfgfile):
             print 'Config file %s read failed!' %cfgfile
             exit()
