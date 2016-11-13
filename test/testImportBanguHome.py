@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*- 
 '''
-Controller.UpdateWeather is a part of the project bangu.
+test.testImportBanguHome is a part of the project bangu.
 bangu is an open-source project which follows MVC design pattern mainly based on python.
 
 Copyright (C) 2014 - 2016, Vlon Jang(WeChat:wangqingbaidu)
@@ -17,5 +17,4 @@ Note: Please keep the above information whenever or wherever the codes are used.
 import sys, os
 sys.path.append(os.getenv('BANGUHOME', '~/bangu'))
 reload(sys)
-from ModelDB import ModelDB
-model = ModelDB()
+

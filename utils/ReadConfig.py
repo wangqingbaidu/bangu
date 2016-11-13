@@ -14,7 +14,11 @@ Contact Info: you can send an email to 564326047@qq.com(Vlon)
 
 Note: Please keep the above information whenever or wherever the codes are used.
 '''
-import ConfigParser, os
+import sys, os
+sys.path.append(os.getenv('BANGUHOME', '~/bangu'))
+reload(sys)
+
+import ConfigParser
 class BanguConfig:
     """
     This class is used to initialize bangu configurations.

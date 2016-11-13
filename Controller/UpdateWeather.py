@@ -14,7 +14,11 @@ Contact Info: you can send an email to 564326047@qq.com(Vlon)
 
 Note: Please keep the above information whenever or wherever the codes are used.
 '''
-import sys, urllib, urllib2, json
+import sys, os
+sys.path.append(os.getenv('BANGUHOME', '~/bangu'))
+reload(sys)
+
+import urllib, urllib2, json
 from utils.ReadConfig import BanguConfig
 from datetime import datetime
 from Model import model
