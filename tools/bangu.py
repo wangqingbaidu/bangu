@@ -50,8 +50,8 @@ if args.opts == 'install':
 """#!/bin/sh
 ### BEGIN INIT INFO
 # Provides:          wangqingbaidu@bangu
-# Required-Start:    $remote_fs $network
-# Required-Stop:     $remote_fs $network
+# Required-Start:    $remote_fs
+# Required-Stop:     $remote_fs
 # Default-Start:     2 3 4 5
 # Default-Stop:      0 1 6
 # Short-Description: Start or stop bangu.
@@ -77,6 +77,7 @@ esac
     os.system('insserv -v -d /etc/init.d/bangu')
     
 elif args.opts == 'run':
+    time.sleep(60)
     if not os.path.exists('/usr/local/lib/python2.7/dist-packages/GetBanguHome.py'):
         shutil.copy('GetBanguHome.py', '/usr/local/lib/python2.7/dist-packages/')
         
