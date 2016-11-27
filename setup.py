@@ -15,9 +15,9 @@ Contact Info: you can send an email to 564326047@qq.com(Vlon)
 Note: Please keep the above information whenever or wherever the codes are used.
 '''
 import argparse, shutil
-parser = argparse.ArgumentParser(description='balabala')
+parser = argparse.ArgumentParser(description='install bangu by root')
 parser.add_argument('opts', choices=['install', 'build'])
 args = parser.parse_args()
 
-if args.opt == 'install':
+if args.opts == 'install':
     shutil.copyfile('GetBanguHome.py', '/usr/local/lib/python2.7/dist-packages/')
