@@ -20,7 +20,7 @@ from utils.ReadConfig import BanguConfig
 from datetime import datetime
 from utils.ReadConfig import configurations
 import time
-from ModelDB import ModelDB
+from Model import ModelDB
 from Model import model
 
 def GetWeather2DB(cfg = configurations.get_basic_settings()):
