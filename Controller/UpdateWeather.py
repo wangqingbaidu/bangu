@@ -18,11 +18,13 @@ import GetBanguHome
 import urllib, urllib2, json
 from utils.ReadConfig import BanguConfig
 from datetime import datetime
-from Model import model
 from utils.ReadConfig import configurations
 import time
+from ModelDB import ModelDB
+from Model import model
 
 def GetWeather2DB(cfg = configurations.get_basic_settings()):
+    model = ModelDB()
     if type(cfg) != dict or not cfg.has_key('apikey'):
         print 'apikey must be contained!'
         exit()

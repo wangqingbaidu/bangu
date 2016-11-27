@@ -35,6 +35,10 @@ elif args.opts == 'test':
     thread.start_new_thread(ThreadUpdateWeather2DB, (600,))
     thread.start_new_thread(ThreadWeatherLEDFlicker, tuple())
     
+    while True:
+        pass
+    
+    
     
 
     
