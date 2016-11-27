@@ -23,8 +23,8 @@ if args.opts == 'install':
     if not os.path.exists('/usr/local/lib/python2.7/dist-packages/GetBanguHome.py'):
         shutil.copy('GetBanguHome.py', '/usr/local/lib/python2.7/dist-packages/')
     current_dir = os.getcwd()
-    sh = """
-#!/bin/sh
+    sh = \
+"""#!/bin/sh
 ### BEGIN INIT INFO
 # Provides:          wangqingbaidu@bangu
 # Required-Start:    $remote_fs
