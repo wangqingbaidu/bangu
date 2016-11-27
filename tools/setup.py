@@ -31,7 +31,7 @@ if args.opts == 'install':
     bangu_auto.close()
     os.system('ln -s /etc/init.d/bangu /etc/rc.d/rc3.d/Sbangu')
     
-elif args.opts == 'test':
+elif args.opts == 'run':
     if not os.path.exists('/usr/local/lib/python2.7/dist-packages/GetBanguHome.py'):
         shutil.copy('GetBanguHome.py', '/usr/local/lib/python2.7/dist-packages/')
     
