@@ -57,7 +57,7 @@ elif args.opts == 'run':
         shutil.copy('GetBanguHome.py', '/usr/local/lib/python2.7/dist-packages/')
         
     work_path = os.path.dirname(sys.argv[0])
-    os.chdir(work_path + './')
+    os.chdir(os.path.join(work_path, './'))
     
     import GetBanguHome, thread
     from Controller.UpdateWeather import ThreadUpdateWeather2DB
