@@ -26,12 +26,12 @@ if args.opts == 'install':
     sh = """
 #!/bin/sh
 ### BEGIN INIT INFO
-# Provides:          bangu
+# Provides:          wangqingbaidu@bangu
 # Required-Start:    $remote_fs
 # Required-Stop:     $remote_fs
-# Default-Start:     2 3 4 5
-# Default-Stop:      0 1 6
-# Short-Description: Start or stop the HTTP Proxy.
+# Default-Start:     1 2 3 4 5
+# Default-Stop:      0 6
+# Short-Description: Start or stop the bangu.
 ### END INIT INFO
 case $1 in
     start)
@@ -43,14 +43,14 @@ case $1 in
 *)
 echo "Usage: $0 (start|stop)"
 ;;
-esac""".format(current_dir + '/' + 'bangu.py ', 'run &', 'kill')
+esac""".format(current_dir + '/' + 'bangu.py', 'run &', 'kill')
     bangu_auto = open('/etc/init.d/bangu', 'w')
     bangu_auto.write(sh)
     bangu_auto.close()
     if os.path.exists('/etc/rc3.d/S100bangu'):
         os.system('rm /etc/rc3.d/S100bangu')
-    os.system('ln -s /etc/init.d/bangu /etc/rc3.d/S100bangu')
-    
+#     os.system('ln -s /etc/init.d/bangu /etc/rc3.d/S100bangu')
+    os.system('insserv -v -d /etc/init.d/bangu')
     
 elif args.opts == 'run':
     if not os.path.exists('/usr/local/lib/python2.7/dist-packages/GetBanguHome.py'):
