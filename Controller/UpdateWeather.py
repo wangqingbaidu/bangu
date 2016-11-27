@@ -20,6 +20,8 @@ from utils.ReadConfig import BanguConfig
 from datetime import datetime
 from Model import model
 
+import time
+
 def GetWeather2DB(cfg = BanguConfig().get_basic_settings()):
     if type(cfg) != dict or not cfg.has_key('apikey'):
         print 'apikey must be contained!'
@@ -50,7 +52,11 @@ def GetWeather2DB(cfg = BanguConfig().get_basic_settings()):
         
         model.insert_weather(weather)
         
-           
+def ThreadUpdateWeather2DB(decay = 600):
+    while True:
+        GetWeather2DB()
+        time.sleep(decay)
+        
 if __name__ == '__main__':
     GetWeather2DB()
     desc = model.get_latest_weather().desc

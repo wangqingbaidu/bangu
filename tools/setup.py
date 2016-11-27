@@ -28,6 +28,11 @@ elif args.opts == 'test':
     
     import GetBanguHome, thread
     
+    from Controller import UpdateWeather
+    from View.Hardware import LED_WeatherForecast
+    
+    
+    
 
     
     
