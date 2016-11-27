@@ -47,9 +47,9 @@ esac""".format(current_dir + '/' + 'bangu.py ', 'run &', 'kill')
     bangu_auto = open('/etc/init.d/bangu', 'w')
     bangu_auto.write(sh)
     bangu_auto.close()
-    if os.path.exists('/etc/rc3.d/Sbangu'):
-        os.system('rm /etc/rc3.d/Sbangu')
-    os.system('ln -s /etc/init.d/bangu /etc/rc3.d/Sbangu')
+    if os.path.exists('/etc/rc3.d/S100bangu'):
+        os.system('rm /etc/rc3.d/S100bangu')
+    os.system('ln -s /etc/init.d/bangu /etc/rc3.d/S100bangu')
     
     
 elif args.opts == 'run':
@@ -73,7 +73,7 @@ elif args.opts == 'run':
 elif args.opts == 'kill':
     res = os.popen('ps -ef|grep bangu').readlines()
     for item in res:
-        if 'kill' not in item and 'ps -ef|grep bangu' not in item:
+        if 'kill' not in item and 'grep bangu' not in item:
             pid = item.split()[1]
             print item.replace('\n', ''), '---------------Killed!'
             os.system('kill -9 %s'% pid)
