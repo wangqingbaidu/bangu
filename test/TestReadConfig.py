@@ -18,6 +18,7 @@ from utils import ReadConfig
 
 if __name__ == '__main__':
     cfg = ReadConfig.BanguConfig('../bangu.cfg')
+    print cfg.get_weather_pins_settings()
     pin_settings = cfg.get_pins_settings()
     for ps in pin_settings.keys():
         print ps, pin_settings[ps]

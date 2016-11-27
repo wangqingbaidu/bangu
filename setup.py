@@ -14,10 +14,20 @@ Contact Info: you can send an email to 564326047@qq.com(Vlon)
 
 Note: Please keep the above information whenever or wherever the codes are used.
 '''
-import argparse, shutil
+import argparse, shutil, os
 parser = argparse.ArgumentParser(description='install bangu by root')
-parser.add_argument('opts', choices=['install', 'build'])
+parser.add_argument('opts', choices=['install', 'test', 'auto'])
 args = parser.parse_args()
 
 if args.opts == 'install':
-    shutil.copy('GetBanguHome.py', '/usr/local/lib/python2.7/dist-packages/')
+    if not os.path.exists('/usr/local/lib/python2.7/dist-packages/GetBanguHome.py'):
+        shutil.copy('GetBanguHome.py', '/usr/local/lib/python2.7/dist-packages/')
+elif args.opts == 'test':
+    if not os.path.exists('/usr/local/lib/python2.7/dist-packages/GetBanguHome.py'):
+        shutil.copy('GetBanguHome.py', '/usr/local/lib/python2.7/dist-packages/')
+    
+    import GetBanguHome, thread
+    
+
+    
+    

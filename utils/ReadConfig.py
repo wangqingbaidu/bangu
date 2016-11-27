@@ -14,17 +14,21 @@ Contact Info: you can send an email to 564326047@qq.com(Vlon)
 
 Note: Please keep the above information whenever or wherever the codes are used.
 '''
-import sys, os
-sys.path.append(os.getenv('BANGUHOME', '~/bangu'))
-reload(sys)
+import GetBanguHome
 
-import ConfigParser
+import ConfigParser, os
 class BanguConfig:
     """
     This class is used to initialize bangu configurations.
     Parameters
     -------------
     @cfgfile: Path to config file.
+    
+    Functions
+    -------------
+    @__valid_config: Check all configurations settings.
+    @__valid_XXX_section: Check XXX section settings.
+    @get_XXX_settings: return XXX section settings.
     """
     def __init__(self, cfgfile = os.getenv('BANGUHOME', '~/bangu')+ '/bangu.cfg'):
         if not os.path.exists(cfgfile):
@@ -43,6 +47,7 @@ class BanguConfig:
         
     def __valid_config(self):
         self.__valid_pins_section()
+        self.__valid_weather_pins_section()
         
         
     
@@ -58,9 +63,29 @@ class BanguConfig:
                     print "Wrong configure of pins %s=%s" %(pin, self.configuration['pins'][pin])
             self.configuration['pins'] = tmp    
             
+    def __valid_weather_pins_section(self):        
+        if self.configuration.has_key('pins') and self.configuration.has_key('weatherLED'):
+            tmp = {}
+            for wpin in self.configuration['weatherLED'].keys():
+                try:
+                    low = wpin.lower()
+                    pin = int(self.configuration['weatherLED'][wpin])
+                    if not self.configuration['pins'].has_key(pin):
+                        self.configuration['pins'][pin] = 'out'
+                        print 'pin %d is add to be out' %pin
+                    assert self.configuration['pins'][pin] == 'out'
+                    tmp[low] = pin
+                except:
+                    print "Wrong configure of pins %s=%s or this pin is set to be `in`" \
+                        %(wpin, self.configuration['weatherLED'][wpin])
+            self.configuration['weatherLED'] = tmp    
+        
     def get_pins_settings(self):
         return {} if not self.configuration.has_key('pins') else self.configuration['pins']
     
     def get_basic_settings(self):
         return {} if not self.configuration.has_key('basic') else self.configuration['basic']
+    
+    def get_weather_pins_settings(self):
+        return {} if not self.configuration.has_key('weatherLED') else self.configuration['weatherLED']
     

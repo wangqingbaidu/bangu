@@ -14,22 +14,17 @@ Contact Info: you can send an email to 564326047@qq.com(Vlon)
 
 Note: Please keep the above information whenever or wherever the codes are used.
 '''
-import sys, os
-sys.path.append(os.getenv('BANGUHOME', '~/bangu'))
-reload(sys)
+import  GetBanguHome
 
 from Model import model
 from RaspGPIO import raspgpio
 import time
 totalRunTime = 0
-def led_flicker_weather():
+def led_flicker_weather(rpin=11, gpin=13, ypin=15):
     global totalRunTime
-    rpin = 11
-    spin = 13
-    cpin = 15
     raspgpio.pin_set_low(rpin)
-    raspgpio.pin_set_low(spin)
-    raspgpio.pin_set_low(cpin)
+    raspgpio.pin_set_low(gpin)
+    raspgpio.pin_set_low(ypin)
     desc = model.get_latest_weather().desc
     AlarmCode = -1
     if 205 <= desc < 500:
@@ -46,23 +41,23 @@ def led_flicker_weather():
             raspgpio.pin_set_low(rpin)
     elif AlarmCode == 1:
                 if totalRunTime % 2 == 0:
-                        raspgpio.pin_set_heigh(spin)
+                        raspgpio.pin_set_heigh(gpin)
                 else:
-                        raspgpio.pin_set_low(spin)
+                        raspgpio.pin_set_low(gpin)
     elif AlarmCode == 2:
                 if totalRunTime % 2 == 0:
-                        raspgpio.pin_set_heigh(cpin)
+                        raspgpio.pin_set_heigh(ypin)
                 else:
-                        raspgpio.pin_set_low(cpin)
+                        raspgpio.pin_set_low(ypin)
     else:
         if totalRunTime % 2 ==0:
             raspgpio.pin_set_heigh(rpin)
-            raspgpio.pin_set_heigh(spin)
-            raspgpio.pin_set_heigh(cpin)    
+            raspgpio.pin_set_heigh(gpin)
+            raspgpio.pin_set_heigh(ypin)    
         else:
             raspgpio.pin_set_low(rpin)
-            raspgpio.pin_set_low(spin)
-            raspgpio.pin_set_low(cpin)
+            raspgpio.pin_set_low(gpin)
+            raspgpio.pin_set_low(ypin)
 
     time.sleep(1)
     totalRunTime = totalRunTime + 1

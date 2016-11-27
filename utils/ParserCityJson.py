@@ -14,11 +14,9 @@ Contact Info: you can send an email to 564326047@qq.com(Vlon)
 
 Note: Please keep the above information whenever or wherever the codes are used.
 '''
-import sys, os
-sys.path.append(os.getenv('BANGUHOME', '~/bangu'))
-reload(sys)
+import GetBanguHome
 
-import json
+import json, os
 class ParserCityJson:
     """
     This class is used to convert city json file to dict type.
