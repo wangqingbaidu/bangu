@@ -45,7 +45,7 @@ if args.opts == 'install':
         os.system('echo "{0}" >> {1} && source {1}'.format('export BANGUHOME=' + bangu_home, bashrc_path))
     
     #Set to auto run.
-    current_dir = os.getcwd()
+    exe_dir = os.path.join(bangu_home, 'tools')
     sh = \
 """#!/bin/sh
 ### BEGIN INIT INFO
@@ -67,7 +67,7 @@ case $1 in
 echo "Usage: $0 (start|stop)"
 ;;
 esac
-""".format(current_dir + '/' + 'bangu.py', 'run &', 'kill')
+""".format(exe_dir + '/' + 'bangu.py', 'run &', 'kill')
     bangu_auto = open('/etc/init.d/bangu', 'w')
     bangu_auto.write(sh)
     bangu_auto.close()
