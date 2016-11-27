@@ -88,4 +88,5 @@ class BanguConfig:
     
     def get_weather_pins_settings(self):
         return {} if not self.configuration.has_key('weatherLED') else self.configuration['weatherLED']
-    
+
+configurations = BanguConfig()  

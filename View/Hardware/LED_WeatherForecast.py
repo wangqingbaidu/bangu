@@ -19,8 +19,9 @@ import  GetBanguHome
 from Model import model
 from RaspGPIO import raspgpio
 import time
+from utils.ReadConfig import configurations
 totalRunTime = 0
-def led_flicker_weather(rpin=11, gpin=13, ypin=15):
+def WeatherLEDFlicker(rpin=11, gpin=13, ypin=15):
     global totalRunTime
     raspgpio.pin_set_low(rpin)
     raspgpio.pin_set_low(gpin)
@@ -62,6 +63,14 @@ def led_flicker_weather(rpin=11, gpin=13, ypin=15):
     time.sleep(1)
     totalRunTime = totalRunTime + 1
     
+def ThreadWeatherLEDFlicker():
+    wled = configurations.get_weather_pins_settings()
+    try:
+        while True:
+            WeatherLEDFlicker(wled['rpin'], wled['gpin'], wled['ypin'])
+    except:
+        print 'Red or Green or Yellow LED not set!'    
+        
 if __name__ == '__main__':
     while True:
-        led_flicker_weather()
+        WeatherLEDFlicker()

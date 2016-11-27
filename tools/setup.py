@@ -28,9 +28,12 @@ elif args.opts == 'test':
     
     import GetBanguHome, thread
     
-    from Controller import UpdateWeather
+    from Controller.UpdateWeather import ThreadUpdateWeather2DB
     from View.Hardware import LED_WeatherForecast
+    from utils.ReadConfig import configurations
     
+    thread.start_new_thread(ThreadUpdateWeather2DB, (600))
+    thread.start_new_thread(LED_WeatherForecast, ())
     
     
 
