@@ -23,8 +23,7 @@ import time
 from Model import ModelDB
 from Model import model
 
-def GetWeather2DB(cfg = configurations.get_basic_settings()):
-    model = ModelDB()
+def GetWeather2DB(cfg = configurations.get_basic_settings(), db = model):
     if type(cfg) != dict or not cfg.has_key('apikey'):
         print 'apikey must be contained!'
         exit()
@@ -52,11 +51,12 @@ def GetWeather2DB(cfg = configurations.get_basic_settings()):
         weather['pm25'] = float(json_content['aqi']['city']['pm25'])
         weather['desc'] = int(json_content['now']['cond']['code'])
         
-        model.insert_weather(weather)
+        db.insert_weather(weather)
         
 def ThreadUpdateWeather2DB(decay = 600):
+    db = ModelDB()
     while True:
-        GetWeather2DB()
+        GetWeather2DB(db = db)
         time.sleep(decay)
         
 if __name__ == '__main__':

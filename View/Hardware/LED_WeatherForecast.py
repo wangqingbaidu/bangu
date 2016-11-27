@@ -17,16 +17,17 @@ Note: Please keep the above information whenever or wherever the codes are used.
 import  GetBanguHome
 
 from Model import model
+from Model import ModelDB
 from RaspGPIO import raspgpio
 import time
 from utils.ReadConfig import configurations
 totalRunTime = 0
-def WeatherLEDFlicker(rpin=11, gpin=13, ypin=15):
+def WeatherLEDFlicker(rpin=11, gpin=13, ypin=15, db = model):
     global totalRunTime
     raspgpio.pin_set_low(rpin)
     raspgpio.pin_set_low(gpin)
     raspgpio.pin_set_low(ypin)
-    desc = model.get_latest_weather().desc
+    desc = db.get_latest_weather().desc
     AlarmCode = -1
     if 205 <= desc < 500:
         AlarmCode = 0
@@ -65,8 +66,9 @@ def WeatherLEDFlicker(rpin=11, gpin=13, ypin=15):
 def ThreadWeatherLEDFlicker():
     wled = configurations.get_weather_pins_settings()
     try:
+        db = ModelDB()
         while True:
-            WeatherLEDFlicker(wled['rpin'], wled['gpin'], wled['ypin'])
+            WeatherLEDFlicker(wled['rpin'], wled['gpin'], wled['ypin'], db)
             time.sleep(1)
     except:
         print 'Red or Green or Yellow LED not set!'    
