@@ -19,6 +19,8 @@ parser = argparse.ArgumentParser(description='install bangu by root')
 parser.add_argument('opts', choices=['install', 'test', 'auto'])
 args = parser.parse_args()
 
+import time
+
 if args.opts == 'install':
     if not os.path.exists('/usr/local/lib/python2.7/dist-packages/GetBanguHome.py'):
         shutil.copy('GetBanguHome.py', '/usr/local/lib/python2.7/dist-packages/')
@@ -36,7 +38,7 @@ elif args.opts == 'test':
     thread.start_new_thread(ThreadWeatherLEDFlicker, tuple())
     
     while True:
-        pass
+        time.sleep(60000)
     
     
     
