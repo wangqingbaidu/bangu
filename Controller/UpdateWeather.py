@@ -24,6 +24,13 @@ from Model import ModelDB
 from Model import model
 
 def GetWeather2DB(cfg = configurations.get_basic_settings(), db = model):
+    """
+    This method is used to put weather which get from API to DB.
+    Parameters
+    -------------
+    @cfg: Bangu system basic settings.
+    @db: which DB connection to be used, Test use global. Thread use own. 
+    """
     if type(cfg) != dict or not cfg.has_key('apikey'):
         print 'apikey must be contained!'
         exit()

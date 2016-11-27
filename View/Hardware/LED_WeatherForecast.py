@@ -75,4 +75,5 @@ def ThreadWeatherLEDFlicker():
         
 if __name__ == '__main__':
     while True:
-        ThreadWeatherLEDFlicker()
+        WeatherLEDFlicker()
+        time.sleep(1)
