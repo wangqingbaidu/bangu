@@ -14,12 +14,10 @@ Contact Info: you can send an email to 564326047@qq.com(Vlon)
 
 Note: Please keep the above information whenever or wherever the codes are used.
 '''
-import argparse, shutil, os
+import argparse, shutil, os, time, sys
 parser = argparse.ArgumentParser(description='install bangu by root')
 parser.add_argument('opts', choices=['install', 'run', 'kill'])
 args = parser.parse_args()
-
-import time
 
 if args.opts == 'install':
     if not os.path.exists('/usr/local/lib/python2.7/dist-packages/GetBanguHome.py'):
@@ -57,9 +55,11 @@ esac""".format(current_dir + '/' + 'bangu.py ', 'run &', 'kill')
 elif args.opts == 'run':
     if not os.path.exists('/usr/local/lib/python2.7/dist-packages/GetBanguHome.py'):
         shutil.copy('GetBanguHome.py', '/usr/local/lib/python2.7/dist-packages/')
+        
+    work_path = os.path.dirname(sys.argv[0])
+    os.chdir(work_path)
     
     import GetBanguHome, thread
-    
     from Controller.UpdateWeather import ThreadUpdateWeather2DB
     from View.Hardware.LED_WeatherForecast import ThreadWeatherLEDFlicker
     from utils.ReadConfig import configurations
@@ -69,12 +69,13 @@ elif args.opts == 'run':
     
     while True:
         time.sleep(901022)
+        
 elif args.opts == 'kill':
     res = os.popen('ps -ef|grep bangu').readlines()
-    for item in res[:-1]:
-        if 'kill' not in item:
+    for item in res:
+        if 'kill' not in item and 'ps -ef|grep bangu' not in item:
             pid = item.split()[1]
-            print item.replace('\n', ''), 'Killed!'
+            print item.replace('\n', ''), '---------------Killed!'
             os.system('kill -9 %s'% pid)
         
     
