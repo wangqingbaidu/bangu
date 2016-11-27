@@ -50,8 +50,8 @@ if args.opts == 'install':
 """#!/bin/sh
 ### BEGIN INIT INFO
 # Provides:          wangqingbaidu@bangu
-# Required-Start:    $remote_fs
-# Required-Stop:     $remote_fs
+# Required-Start:    $remote_fs $network
+# Required-Stop:     $remote_fs $network
 # Default-Start:     2 3 4 5
 # Default-Stop:      0 1 6
 # Short-Description: Start or stop bangu.

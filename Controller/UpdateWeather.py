@@ -38,27 +38,30 @@ def GetWeather2DB(cfg = configurations.get_basic_settings(), db = model):
     if not cfg.has_key('city') or not cfg.has_key('country'):
         cfg['city'] = 'beijing'
         cfg['counrty'] = 'CN'
-        
-    url = 'http://apis.baidu.com/heweather/weather/free?city=%s' %cfg['city']
-    req = urllib2.Request(url)
     
-    req.add_header("apikey", cfg['apikey'])
-    
-    resp = urllib2.urlopen(req)
-    content = resp.read()
-    weather = {}
-    if(content):
-        json_content = json.loads(content)['HeWeather data service 3.0'][0]
-        weather['city'] = cfg['city']
-        weather['country'] = cfg['country']
-        weather['datetime'] = datetime.now()
-        weather['humidity'] = json_content['now']['hum']
-        weather['tmp_max'] = float(json_content['daily_forecast'][0]['tmp']['max'])
-        weather['tmp_min'] = float(json_content['daily_forecast'][0]['tmp']['min'])
-        weather['pm25'] = float(json_content['aqi']['city']['pm25'])
-        weather['desc'] = int(json_content['now']['cond']['code'])
+    try:
+        url = 'http://apis.baidu.com/heweather/weather/free?city=%s' %cfg['city']
+        req = urllib2.Request(url)
         
-        db.insert_weather(weather)
+        req.add_header("apikey", cfg['apikey'])
+        
+        resp = urllib2.urlopen(req)
+        content = resp.read()
+        weather = {}
+        if(content):
+            json_content = json.loads(content)['HeWeather data service 3.0'][0]
+            weather['city'] = cfg['city']
+            weather['country'] = cfg['country']
+            weather['datetime'] = datetime.now()
+            weather['humidity'] = json_content['now']['hum']
+            weather['tmp_max'] = float(json_content['daily_forecast'][0]['tmp']['max'])
+            weather['tmp_min'] = float(json_content['daily_forecast'][0]['tmp']['min'])
+            weather['pm25'] = float(json_content['aqi']['city']['pm25'])
+            weather['desc'] = int(json_content['now']['cond']['code'])
+            
+            db.insert_weather(weather)
+    except:
+        pass
         
 def ThreadUpdateWeather2DB(decay = 600):
     db = ModelDB()
