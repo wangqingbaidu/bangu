@@ -30,7 +30,7 @@ class BanguConfig:
     @__valid_XXX_section: Check XXX section settings.
     @get_XXX_settings: return XXX section settings.
     """
-    def __init__(self, cfgfile = os.getenv('BANGUHOME', '~/bangu')+ '/bangu.cfg'):
+    def __init__(self, cfgfile = GetBanguHome.getHome(os.getcwd()) + '/bangu.cfg'):
         if not os.path.exists(cfgfile):
             print 'Config file %s read failed!' %cfgfile
             exit()

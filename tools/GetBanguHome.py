@@ -28,3 +28,11 @@ print 'Bangu Home is', current_path
 sys.path.append(current_path)
 reload(sys)
 
+def getHome(bangu_home=os.getenv('BANGUHOME', '~/bangu')):
+    while True:
+        items = os.listdir(bangu_home)
+        if 'Model' in items and 'View' in items and 'Controller' in items:
+            break
+        else:
+            bangu_home = os.path.dirname(bangu_home) 
+    return bangu_home
