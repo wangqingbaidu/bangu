@@ -24,15 +24,7 @@ while True:
     else:
         current_path = os.path.dirname(current_path)
 
-print 'Bangu Home is', current_path
-bashrc_path = os.environ['HOME'] + '/.bashrc'
-bashrc_file = open(bashrc_path)
-bashrc = bashrc_file.read()
-bashrc_file.close()
-
-if not 'export BANGUHOME=' + current_path in bashrc:
-    os.system('echo "{0}" >> {1} && source {1}'.format('export BANGUHOME=' + current_path, bashrc_path))
-    
+print 'Bangu Home is', current_path    
 sys.path.append(current_path)
 reload(sys)
 

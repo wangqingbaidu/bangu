@@ -29,9 +29,9 @@ if args.opts == 'install':
 # Provides:          wangqingbaidu@bangu
 # Required-Start:    $remote_fs
 # Required-Stop:     $remote_fs
-# Default-Start:     1 2 3 4 5
-# Default-Stop:      0 6
-# Short-Description: Start or stop the bangu.
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Start or stop bangu.
 ### END INIT INFO
 case $1 in
     start)
@@ -43,14 +43,27 @@ case $1 in
 *)
 echo "Usage: $0 (start|stop)"
 ;;
-esac""".format(current_dir + '/' + 'bangu.py', 'run &', 'kill')
+esac
+""".format(current_dir + '/' + 'bangu.py', 'run &', 'kill')
     bangu_auto = open('/etc/init.d/bangu', 'w')
     bangu_auto.write(sh)
     bangu_auto.close()
-    if os.path.exists('/etc/rc3.d/S100bangu'):
-        os.system('rm /etc/rc3.d/S100bangu')
-#     os.system('ln -s /etc/init.d/bangu /etc/rc3.d/S100bangu')
     os.system('insserv -v -d /etc/init.d/bangu')
+    bashrc_path = os.environ['HOME'] + '/.bashrc'
+    bashrc_file = open(bashrc_path)
+    bashrc = bashrc_file.read()
+    bashrc_file.close()
+    
+    bangu_home = current_dir
+    while True:
+        items = os.listdir(bangu_home)
+        if 'Model' in items and 'View' in items and 'Controller' in items:
+            break
+        else:
+            current_path = os.path.dirname(bangu_home)
+    
+    if not 'export BANGUHOME=' + bangu_home in bashrc:
+        os.system('echo "{0}" >> {1} && source {1}'.format('export BANGUHOME=' + current_path, bashrc_path))
     
 elif args.opts == 'run':
     if not os.path.exists('/usr/local/lib/python2.7/dist-packages/GetBanguHome.py'):
