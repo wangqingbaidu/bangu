@@ -66,6 +66,7 @@ elif args.opts == 'kill':
         pid = item.split()[1]
         print item
         os.system('kill -9 %s', pid)
+        
     
     
 
