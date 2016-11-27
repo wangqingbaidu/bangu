@@ -22,6 +22,29 @@ args = parser.parse_args()
 if args.opts == 'install':
     if not os.path.exists('/usr/local/lib/python2.7/dist-packages/GetBanguHome.py'):
         shutil.copy('GetBanguHome.py', '/usr/local/lib/python2.7/dist-packages/')
+    
+    #Change environment settings
+    bangu_home = os.getcwd()
+    while True:
+        items = os.listdir(bangu_home)
+        if 'Model' in items and 'View' in items and 'Controller' in items:
+            break
+        else:
+            bangu_home = os.path.dirname(bangu_home)
+            if bangu_home == '' or bangu_home == '/':
+                bangu_home = os.environ['HOME'] + '/bangu'
+                if not os.path.exists(bangu_home):
+                    print 'Can not find bangu HOME!'
+                    exit()
+    
+    bashrc_path = os.environ['HOME'] + '/.bashrc'
+    bashrc_file = open(bashrc_path)
+    bashrc = bashrc_file.read()
+    bashrc_file.close()
+    if not 'export BANGUHOME=' + bangu_home in bashrc:
+        os.system('echo "{0}" >> {1} && source {1}'.format('export BANGUHOME=' + bangu_home, bashrc_path))
+    
+    #Set to auto run.
     current_dir = os.getcwd()
     sh = \
 """#!/bin/sh
@@ -48,24 +71,10 @@ esac
     bangu_auto = open('/etc/init.d/bangu', 'w')
     bangu_auto.write(sh)
     bangu_auto.close()
+    os.system('chmod 777 /etc/init.d/bangu')
     
     os.system('insserv -r /etc/init.d/bangu')
     os.system('insserv -v -d /etc/init.d/bangu')
-    bashrc_path = os.environ['HOME'] + '/.bashrc'
-    bashrc_file = open(bashrc_path)
-    bashrc = bashrc_file.read()
-    bashrc_file.close()
-    
-    bangu_home = current_dir
-    while True:
-        items = os.listdir(bangu_home)
-        if 'Model' in items and 'View' in items and 'Controller' in items:
-            break
-        else:
-            bangu_home = os.path.dirname(bangu_home)
-    
-    if not 'export BANGUHOME=' + bangu_home in bashrc:
-        os.system('echo "{0}" >> {1} && source {1}'.format('export BANGUHOME=' + bangu_home, bashrc_path))
     
 elif args.opts == 'run':
     if not os.path.exists('/usr/local/lib/python2.7/dist-packages/GetBanguHome.py'):
