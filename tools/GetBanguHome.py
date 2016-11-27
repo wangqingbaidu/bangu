@@ -28,6 +28,7 @@ print 'Bangu Home is', current_path
 bashrc_file = open('~/.bashrc')
 bashrc = bashrc_file.read()
 bashrc_file.close()
+
 if not 'export BANGUHOME=' + current_path in bashrc:
     os.system('echo "%s" >> ~/.bashrc && source ~/.bashrc' %('export BANGUHOME=' + current_path))
     
