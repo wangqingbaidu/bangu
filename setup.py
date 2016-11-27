@@ -20,4 +20,4 @@ parser.add_argument('opts', choices=['install', 'build'])
 args = parser.parse_args()
 
 if args.opts == 'install':
-    shutil.copytree('GetBanguHome.py', '/usr/local/lib/python2.7/dist-packages/')
+    shutil.copy('GetBanguHome.py', '/usr/local/lib/python2.7/dist-packages/')
