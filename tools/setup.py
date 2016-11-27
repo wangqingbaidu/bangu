@@ -33,7 +33,7 @@ elif args.opts == 'test':
     from utils.ReadConfig import configurations
     
     thread.start_new_thread(ThreadUpdateWeather2DB, (600,))
-    thread.start_new_thread(ThreadWeatherLEDFlicker, (None,))
+    thread.start_new_thread(ThreadWeatherLEDFlicker, tuple())
     
     
 
