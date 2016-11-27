@@ -31,7 +31,7 @@ bashrc = bashrc_file.read()
 bashrc_file.close()
 
 if not 'export BANGUHOME=' + current_path in bashrc:
-    os.system('echo "{0}" >> {1} && source {1}'.format('export BANGUHOME=' + current_path, bashrc_path)
+    os.system('echo "{0}" >> {1} && source {1}'.format('export BANGUHOME=' + current_path, bashrc_path))
     
 sys.path.append(current_path)
 reload(sys)
