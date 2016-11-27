@@ -14,9 +14,7 @@ Contact Info: you can send an email to 564326047@qq.com(Vlon)
 
 Note: Please keep the above information whenever or wherever the codes are used.
 '''
-import sys, os
-sys.path.append(os.getenv('BANGUHOME', '~/bangu'))
-reload(sys)
+import GetBanGuHome
 
 from sqlalchemy.engine import create_engine
 from sqlalchemy.orm.session import sessionmaker
@@ -25,6 +23,7 @@ from sqlalchemy.sql.schema import Column
 from sqlalchemy.types import CHAR, Integer, String, Float, DateTime
 BaseModel = declarative_base()
 from utils.ParserCityJson import ParserCityJson
+import os
 
 class ModelDB:
     """
