@@ -48,6 +48,8 @@ esac
     bangu_auto = open('/etc/init.d/bangu', 'w')
     bangu_auto.write(sh)
     bangu_auto.close()
+    
+    os.system('insserv -r /etc/init.d/bangu')
     os.system('insserv -v -d /etc/init.d/bangu')
     bashrc_path = os.environ['HOME'] + '/.bashrc'
     bashrc_file = open(bashrc_path)
@@ -60,10 +62,10 @@ esac
         if 'Model' in items and 'View' in items and 'Controller' in items:
             break
         else:
-            current_path = os.path.dirname(bangu_home)
+            bangu_home = os.path.dirname(bangu_home)
     
     if not 'export BANGUHOME=' + bangu_home in bashrc:
-        os.system('echo "{0}" >> {1} && source {1}'.format('export BANGUHOME=' + current_path, bashrc_path))
+        os.system('echo "{0}" >> {1} && source {1}'.format('export BANGUHOME=' + bangu_home, bashrc_path))
     
 elif args.opts == 'run':
     if not os.path.exists('/usr/local/lib/python2.7/dist-packages/GetBanguHome.py'):
