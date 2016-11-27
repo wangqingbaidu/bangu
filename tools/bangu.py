@@ -26,7 +26,15 @@ if args.opts == 'install':
         shutil.copy('GetBanguHome.py', '/usr/local/lib/python2.7/dist-packages/')
     current_dir = os.getcwd()
     sh = """
-#!/bin/sh\npython
+#!/bin/sh
+### BEGIN INIT INFO
+# Provides:          bangu
+# Required-Start:    $remote_fs
+# Required-Stop:     $remote_fs
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Start or stop the HTTP Proxy.
+### END INIT INFO
 case $1 in
     start)
         python {0} {1}
@@ -37,11 +45,12 @@ case $1 in
 *)
 echo "Usage: $0 (start|stop)"
 ;;
-esac    
-    """.format(current_dir + '/' + 'setup.py ', 'run &', 'kill')
+esac""".format(current_dir + '/' + 'bangu.py ', 'run &', 'kill')
     bangu_auto = open('/etc/init.d/bangu', 'w')
     bangu_auto.write(sh)
     bangu_auto.close()
+    if os.path.exists('/etc/rc3.d/Sbangu'):
+        os.system('rm /etc/rc3.d/Sbangu')
     os.system('ln -s /etc/init.d/bangu /etc/rc3.d/Sbangu')
     
     
@@ -63,9 +72,10 @@ elif args.opts == 'run':
 elif args.opts == 'kill':
     res = os.popen('ps -ef|grep bangu').readlines()
     for item in res[:-1]:
-        pid = item.split()[1]
-        print item
-        os.system('kill -9 %s'% pid)
+        if 'kill' not in item:
+            pid = item.split()[1]
+            print item.replace('\n', ''), 'Killed!'
+            os.system('kill -9 %s'% pid)
         
     
     
