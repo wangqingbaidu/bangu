@@ -65,7 +65,7 @@ elif args.opts == 'kill':
     for item in res[:-1]:
         pid = item.split()[1]
         print item
-        os.system('kill -9 %s', pid)
+        os.system('kill -9 %s'% pid)
         
     
     
