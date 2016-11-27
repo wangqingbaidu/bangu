@@ -32,8 +32,8 @@ elif args.opts == 'test':
     from View.Hardware import LED_WeatherForecast
     from utils.ReadConfig import configurations
     
-    thread.start_new_thread(ThreadUpdateWeather2DB, (600))
-    thread.start_new_thread(LED_WeatherForecast, ())
+    thread.start_new_thread(ThreadUpdateWeather2DB, (600,))
+    thread.start_new_thread(LED_WeatherForecast, tuple())
     
     
 
