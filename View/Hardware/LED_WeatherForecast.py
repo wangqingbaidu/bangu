@@ -60,7 +60,6 @@ def WeatherLEDFlicker(rpin=11, gpin=13, ypin=15):
             raspgpio.pin_set_low(gpin)
             raspgpio.pin_set_low(ypin)
 
-    time.sleep(1)
     totalRunTime = totalRunTime + 1
     
 def ThreadWeatherLEDFlicker():
@@ -68,9 +67,11 @@ def ThreadWeatherLEDFlicker():
     try:
         while True:
             WeatherLEDFlicker(wled['rpin'], wled['gpin'], wled['ypin'])
+            time.sleep(1)
     except:
         print 'Red or Green or Yellow LED not set!'    
         
 if __name__ == '__main__':
     while True:
         WeatherLEDFlicker()
+        time.sleep(1)
