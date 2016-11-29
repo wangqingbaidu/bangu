@@ -16,7 +16,7 @@ Note: Please keep the above information whenever or wherever the codes are used.
 '''
 import argparse, shutil, os, time, sys
 parser = argparse.ArgumentParser(description='install bangu by root')
-parser.add_argument('opts', choices=['install', 'run', 'kill'])
+parser.add_argument('opts', choices=['install', 'start', 'stop'])
 args = parser.parse_args()
 
 if args.opts == 'install':
@@ -67,7 +67,7 @@ case $1 in
 echo "Usage: $0 (start|stop)"
 ;;
 esac
-""".format(exe_dir + '/' + 'bangu.py', 'run &', 'kill')
+""".format(exe_dir + '/' + 'bangu.py', 'start &', 'stop')
     bangu_auto = open('/etc/init.d/bangu', 'w')
     bangu_auto.write(sh)
     bangu_auto.close()
@@ -76,7 +76,7 @@ esac
     os.system('insserv -r /etc/init.d/bangu')
     os.system('insserv -v -d /etc/init.d/bangu')
     
-elif args.opts == 'run':
+elif args.opts == 'start':
     time.sleep(10)
     if not os.path.exists('/usr/local/lib/python2.7/dist-packages/GetBanguHome.py'):
         shutil.copy('GetBanguHome.py', '/usr/local/lib/python2.7/dist-packages/')
@@ -95,12 +95,12 @@ elif args.opts == 'run':
     while True:
         time.sleep(901022)
         
-elif args.opts == 'kill':
+elif args.opts == 'stop':
     res = os.popen('ps -ef|grep bangu').readlines()
     for item in res:
-        if 'kill' not in item and 'grep bangu' not in item:
+        if 'stop' not in item and 'grep bangu' not in item:
             pid = item.split()[1]
-            print item.replace('\n', ''), '---------------Killed!'
+            print item.replace('\n', ''), ' ---------------Killed!'
             os.system('kill -9 %s'% pid)
         
     
