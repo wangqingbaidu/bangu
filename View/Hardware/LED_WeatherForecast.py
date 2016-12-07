@@ -32,7 +32,7 @@ def WeatherLEDFlicker(rpin=11, gpin=13, ypin=15, db = model):
     lastUpdate = db.get_latest_weather().datetime
     
     AlarmCode = -1
-    if datetime.now() - lastUpdate < timedelta(hours = 8, minutes = 10):
+    if datetime.now() - lastUpdate < timedelta(hours = 1, minutes = 10):
         if 205 <= desc < 500:
             AlarmCode = 0
         elif desc < 205:
