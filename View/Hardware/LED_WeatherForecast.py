@@ -20,6 +20,7 @@ from Model import model
 from Model import ModelDB
 from RaspGPIO import raspgpio
 import time
+from datetime import datetime, timedelta
 from utils.ReadConfig import configurations
 totalRunTime = 0
 def WeatherLEDFlicker(rpin=11, gpin=13, ypin=15, db = model):
@@ -28,13 +29,16 @@ def WeatherLEDFlicker(rpin=11, gpin=13, ypin=15, db = model):
     raspgpio.pin_set_low(gpin)
     raspgpio.pin_set_low(ypin)
     desc = db.get_latest_weather().desc
+    lastUpdate = db.get_latest_weather().datetime
+    
     AlarmCode = -1
-    if 205 <= desc < 500:
-        AlarmCode = 0
-    elif desc < 205:
-        AlarmCode = 1
-    else:
-        AlarmCode = 2
+    if datetime.now() - lastUpdate < timedelta(hours = 8, minutes = 10):
+        if 205 <= desc < 500:
+            AlarmCode = 0
+        elif desc < 205:
+            AlarmCode = 1
+        else:
+            AlarmCode = 2
     
     if AlarmCode == 0:
         if totalRunTime % 2 == 0:
