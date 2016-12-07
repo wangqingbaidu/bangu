@@ -20,8 +20,8 @@ parser.add_argument('opts', choices=['install', 'start', 'stop'])
 args = parser.parse_args()
 
 if args.opts == 'install':
-    if not os.path.exists('/usr/local/lib/python2.7/dist-packages/GetBanguHome.py'):
-        shutil.copy('GetBanguHome.py', '/usr/local/lib/python2.7/dist-packages/')
+    #install GetBanguHome model to system.
+    shutil.copy('GetBanguHome.py', '/usr/local/lib/python2.7/dist-packages/')
     
     #Change environment settings
     bangu_home = os.getcwd()
