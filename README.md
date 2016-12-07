@@ -1,4 +1,4 @@
-#bangu --from zero to one   盘古, 开天辟地              
+#BANGU -- From Zero To One   盘古, 开天辟地              
 ##<font color=red>Weather with LED completed!</font>
 
 This project is about smart ehouse which base on python, I use [Raspberry pi](https://www.raspberrypi.org/) to get senor data and GPIO to display message . Also it can be simply displayed on screen through a website which is based on Django.
