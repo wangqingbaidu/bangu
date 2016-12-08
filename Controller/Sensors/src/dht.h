@@ -93,11 +93,18 @@ int dht::read(uint8_t pin)
 		while(digitalRead(pin) == HIGH)
 			if (loopCnt-- == 0) return -2;
 
-		if ((micros() - t) > 40) bits[idx] |= (1 << cnt);
+		if ((micros() - t) > 40)
+		{
+			bits[idx] |= (1 << cnt);
+			putc('1');
+		}
+		else
+			putc('0');
 		if (cnt == 0)   // next byte?
 		{
 			cnt = 7;
 			idx++;
+			putc('\n')
 		}
 		else cnt--;
 	}
