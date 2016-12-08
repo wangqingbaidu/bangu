@@ -45,16 +45,9 @@ int dht::read11(uint8_t pin)
 	// CONVERT AND STORE
 	humidity    = bits[0];  // bit[1] == 0;
 	temperature = bits[2];  // bits[3] == 0;
-	printf("h:%f\nt:%f\n", humidity, temperature);
+	printf("h:%f\nt:%f\ns:%f\n", humidity, temperature, bits[4]);
 	// TEST CHECKSUM
 	uint8_t sum = bits[0] + bits[2]; // bits[1] && bits[3] both 0
-	char string[25];
-	itoa(humidity, string, 2);
-	printf('hb:%s\n', string);
-	itoa(temperature, string, 2);
-	printf('tb:%s\n', string);
-	itoa(sum, string, 2);
-	printf('sb:%s\n', string);
 	if (bits[4] != sum) return -1;
 
 	return 0;
