@@ -35,6 +35,7 @@ def GetTmpHum2DB(cfg = configurations.get_tmphum_pin_setting(), db = model):
             hum, tmp = hum_tmp.replace('\n', '').split()
             humtmp['hum'] = int(hum)
             humtmp['tmp'] = int(tmp)
+            humtmp['datetime'] = datetime.now()
             db.insert_tmphum(humtmp)
     except:
         pass

@@ -88,6 +88,7 @@ class TmpHum(BaseModel):
     id = Column(Integer, primary_key=True)
     tmp = Column(Float)
     hum = Column(Float)
+    datetime  = Column(DateTime) 
     
 
 if __name__ == '__main__':
