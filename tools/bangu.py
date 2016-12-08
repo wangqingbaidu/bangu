@@ -86,11 +86,13 @@ elif args.opts == 'start':
     
     import GetBanguHome, thread
     from Controller.UpdateWeather import ThreadUpdateWeather2DB
+    from Controller.IndoorTmpHum import ThreadIndoorTmpHum2DB
     from View.Hardware.LED_WeatherForecast import ThreadWeatherLEDFlicker
     from utils.ReadConfig import configurations
     
     thread.start_new_thread(ThreadUpdateWeather2DB, (600,))
     thread.start_new_thread(ThreadWeatherLEDFlicker, tuple())
+    thread.start_new_thread(ThreadIndoorTmpHum2DB, (60,))
     
     while True:
         time.sleep(901022)
