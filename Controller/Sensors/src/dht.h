@@ -14,6 +14,7 @@
 
 #include <wiringPi.h>
 #include <stdio.h>
+#include <stdlib.h>
 #define TIMEOUT 10000
 #define DHT_LIB_VERSION "0.1.01"
 
@@ -47,6 +48,13 @@ int dht::read11(uint8_t pin)
 	printf("h:%f\nt:%f\n", humidity, temperature);
 	// TEST CHECKSUM
 	uint8_t sum = bits[0] + bits[2]; // bits[1] && bits[3] both 0
+	char string[25];
+	itoa(humidity, string, 2);
+	printf('hb:%s\n', string);
+	itoa(temperature, string, 2);
+	printf('tb:%s\n', string);
+	itoa(sum, string, 2);
+	printf('sb:%s\n', string);
 	if (bits[4] != sum) return -1;
 
 	return 0;
@@ -96,15 +104,11 @@ int dht::read(uint8_t pin)
 		if ((micros() - t) > 40)
 		{
 			bits[idx] |= (1 << cnt);
-			putchar('1');
 		}
-		else
-			putchar('0');
 		if (cnt == 0)   // next byte?
 		{
 			cnt = 7;
 			idx++;
-			putchar('\n');
 		}
 		else cnt--;
 	}
