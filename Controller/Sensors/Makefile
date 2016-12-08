@@ -7,8 +7,6 @@ HTSRCDIR=./src/
 HTSRC=TempHum.cpp
 HTM=$(addprefix $(SRCDIR), %(HTSRC))
 
-g++ -o run TempHum.cpp
-
 all:
 	$(HTEXEC)
 
