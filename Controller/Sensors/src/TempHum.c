@@ -12,9 +12,9 @@ dht DHT;
 
 int main()
 {
+	wiringPiSetup ();
 	while (1)
 	{
-		wiringPiSetup ();
 		int chk = DHT.read11(DHT11_PIN);
 		if (chk == 0)
 		{
