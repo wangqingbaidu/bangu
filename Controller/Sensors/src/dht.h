@@ -96,15 +96,15 @@ int dht::read(uint8_t pin)
 		if ((micros() - t) > 40)
 		{
 			bits[idx] |= (1 << cnt);
-			putc('1');
+			putchar('1');
 		}
 		else
-			putc('0');
+			putchar('0');
 		if (cnt == 0)   // next byte?
 		{
 			cnt = 7;
 			idx++;
-			putc('\n')
+			putchar('\n');
 		}
 		else cnt--;
 	}
