@@ -8,7 +8,7 @@
 #include <unistd.h>
 dht DHT;
 
-#define DHT11_PIN 23//put the sensor in the digital pin 4
+#define DHT11_PIN 4//put the sensor in the digital pin 4
 
 int main()
 {
