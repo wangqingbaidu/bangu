@@ -16,7 +16,7 @@
 #define TIMEOUT 10000
 #define DHT_LIB_VERSION "0.1.01"
 
-typedef unsigned int uint_8_t;
+typedef unsigned int uint8_t;
 
 class dht
 {
