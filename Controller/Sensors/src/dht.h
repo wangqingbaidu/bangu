@@ -43,7 +43,7 @@ int dht::read11(uint8_t pin)
 	// CONVERT AND STORE
 	humidity    = bits[0];  // bit[1] == 0;
 	temperature = bits[2];  // bits[3] == 0;
-
+	printf("h:%f\nt:%f\n", humidity, temperature);
 	// TEST CHECKSUM
 	uint8_t sum = bits[0] + bits[2]; // bits[1] && bits[3] both 0
 	if (bits[4] != sum) return -1;
