@@ -121,7 +121,7 @@ int main(int argc, char* argv[])
 {
 	wiringPiSetup();
 	dht DHT;
-	int pin = DHT11_PIN
+	int pin = DHT11_PIN;
 	if (argc > 1)
 		pin = atoi(argv[1])
 	int chk = DHT.read11(pin);
