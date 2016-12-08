@@ -50,41 +50,6 @@ int dht::read11(uint8_t pin)
 
 	return 0;
 }
-
-// return values:
-//  0 : OK
-// -1 : checksum error
-// -2 : timeout
-int dht::read22(uint8_t pin)
-{
-	// READ VALUES
-	int rv = read(pin);
-	if (rv != 0) return rv;
-
-	// CONVERT AND STORE
-	humidity    = word(bits[0], bits[1]) * 0.1;
-
-	int sign = 1;
-	if (bits[2] & 0x80) // negative temperature
-	{
-		bits[2] = bits[2] & 0x7F;
-		sign = -1;
-	}
-	temperature = sign * word(bits[2], bits[3]) * 0.1;
-
-
-	// TEST CHECKSUM
-	uint8_t sum = bits[0] + bits[1] + bits[2] + bits[3];
-	if (bits[4] != sum) return -1;
-
-	return 0;
-}
-
-/////////////////////////////////////////////////////
-//
-// PRIVATE
-//
-
 // return values:
 //  0 : OK
 // -2 : timeout
