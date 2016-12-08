@@ -13,7 +13,7 @@
 #define dht_h
 
 #include <wiringPi.h>
-
+#define TIMEOUT 10000
 #define DHT_LIB_VERSION "0.1.01"
 
 typedef unsigned int uint_8_t;
@@ -30,19 +30,6 @@ private:
 	uint8_t bits[5];  // buffer to receive data
 	int read(uint8_t pin);
 };
-#endif
-//
-// END OF FILE
-//
-
-#define TIMEOUT 10000
-
-/////////////////////////////////////////////////////
-//
-// PUBLIC
-//
-
-
 // return values:
 //  0 : OK
 // -1 : checksum error
@@ -151,3 +138,7 @@ int dht::read(uint8_t pin)
 
 	return 0;
 }
+#endif
+//
+// END OF FILE
+//
