@@ -7,10 +7,9 @@ HTSRCDIR=./src/
 HTSRC=TempHum.cpp
 HTM=$(addprefix $(SRCDIR), %(HTSRC))
 
-all:
-	$(HTEXEC)
+all:$(HTEXEC)
 
-$(HTEXEC) : 
+$(HTEXEC): 
 	$(CC) $(CFLAGS) $(HTM) -o $(HTEXEC)
 	
 clean:
