@@ -12,15 +12,11 @@
 int main()
 {
 	wiringPiSetup ();
-	while (1)
+	dht DHT;
+	int chk = DHT.read11(DHT11_PIN);
+	if (chk == 0)
 	{
-		dht DHT;
-		int chk = DHT.read11(DHT11_PIN);
-		if (chk == 0)
-		{
-			printf("%f\n", DHT.humidity);
-			printf("%f\n", DHT.temperature);
-		}
-		sleep(1);
+		printf("%f\n", DHT.humidity);
+		printf("%f\n", DHT.temperature);
 	}
 }
