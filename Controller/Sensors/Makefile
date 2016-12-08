@@ -5,7 +5,7 @@ OPTS=-O3
 
 SRCDIR=./src/
 HTSRC=TempHum.cpp
-HTM=$(SRCDIR)%(HTSRC)
+HTM=$(SRCDIR)$(HTSRC)
 
 all:$(HTEXEC)
 
