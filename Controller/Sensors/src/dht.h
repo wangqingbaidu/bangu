@@ -49,7 +49,7 @@ int dht::read11(uint8_t pin)
 	// TEST CHECKSUM
 	uint8_t sum = bits[0] + bits[2]; // bits[1] && bits[3] both 0
 
-	printf("bht:%d\nbs:%d\n", bits[0], bits[2], bits[4]);
+	printf("bht:%d\nbs:%d\n", bits[0] + bits[2], bits[4]);
 	if (bits[4] != sum) return -1;
 
 	return 0;
