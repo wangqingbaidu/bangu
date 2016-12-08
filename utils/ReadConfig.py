@@ -84,7 +84,7 @@ class BanguConfig:
         if self.configuration.has_key('pins') and self.configuration.has_key('TmpHum'):
             pin_count = 0
             temp = {}
-            for p in self.configuration.keys():
+            for p in self.configuration['TmpHum'].keys():
                 if pin_count:
                     print "Pin %s ignored! Use the first one!" %p
                     continue
