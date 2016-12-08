@@ -16,6 +16,8 @@
 
 #define DHT_LIB_VERSION "0.1.01"
 
+typedef unsigned int uint_8_t;
+
 class dht
 {
 public:
