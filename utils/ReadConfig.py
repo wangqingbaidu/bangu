@@ -48,7 +48,7 @@ class BanguConfig:
     def __valid_config(self):
         self.__valid_pins_section()
         self.__valid_weather_pins_section()
-        
+        self.__valid_tmphum_pin_section()
         
     
     def __valid_pins_section(self):
@@ -65,7 +65,7 @@ class BanguConfig:
             
     def __valid_weather_pins_section(self):        
         if self.configuration.has_key('pins') and self.configuration.has_key('weatherLED'):
-            tmp = {}
+            temp = {}
             for wpin in self.configuration['weatherLED'].keys():
                 try:
                     low = wpin.lower()
@@ -74,12 +74,34 @@ class BanguConfig:
                         self.configuration['pins'][pin] = 'out'
                         print 'pin %d is add to be out' %pin
                     assert self.configuration['pins'][pin] == 'out'
-                    tmp[low] = pin
+                    temp[low] = pin
                 except:
                     print "Wrong configure of pins %s=%s or this pin is set to be `in`" \
                         %(wpin, self.configuration['weatherLED'][wpin])
-            self.configuration['weatherLED'] = tmp    
-        
+            self.configuration['weatherLED'] = temp
+            
+    def __valid_tmphum_pin_section(self):        
+        if self.configuration.has_key('pins') and self.configuration.has_key('TmpHum'):
+            pin_count = 0
+            temp = {}
+            for p in self.configuration.keys():
+                if pin_count:
+                    print "Pin %s ignored! Use the first one!" %p
+                    continue
+                
+                pin_count += 1
+                try:
+                    pin = int(self.configuration['TmpHum'][p])
+                    if not self.configuration['pins'].has_key(pin):
+                        self.configuration['pins'][pin] = 'in'
+                        print 'pin %d is add to be in' %pin
+                    assert self.configuration['pins'][pin] == 'in'
+                    temp['pin'] = pin
+                except:
+                    print "Wrong configure of pins %s=%s or this pin is set to be `out`" \
+                        %(p, self.configuration['TmpHum'][p])
+            self.configuration['TmpHum'] = temp
+            
     def get_pins_settings(self):
         return {} if not self.configuration.has_key('pins') else self.configuration['pins']
     
@@ -88,5 +110,8 @@ class BanguConfig:
     
     def get_weather_pins_settings(self):
         return {} if not self.configuration.has_key('weatherLED') else self.configuration['weatherLED']
+    
+    def get_tmphum_pin_setting(self):
+        return {} if not self.configuration.has_key('TmpHum') else self.configuration['TmpHum']
 
 configurations = BanguConfig()  

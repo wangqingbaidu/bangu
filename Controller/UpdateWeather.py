@@ -72,5 +72,4 @@ def ThreadUpdateWeather2DB(decay = 600):
 if __name__ == '__main__':
     GetWeather2DB()
     desc = model.get_latest_weather().desc
-    
     print desc

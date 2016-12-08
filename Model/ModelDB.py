@@ -54,8 +54,15 @@ class ModelDB:
         self.session.execute(Weather.__table__.insert(), weather)
         self.session.commit()
     
+    def insert_tmphum(self, tmphum):
+        self.session.execute(TmpHum.__tablename__.insert(), tmphum)
+        self.session.commit()
+        
     def get_latest_weather(self):
         return self.session.query(Weather).order_by(Weather.id.desc()).first()
+    
+    def get_latest_tmphum(self):
+        return self.session.query(TmpHum).order_by(TmpHum.id.desc()).first()
         
 class City(BaseModel):    
     __tablename__ = 'city'
@@ -75,6 +82,13 @@ class Weather(BaseModel):
     pm25 = Column(Float)
     desc = Column(Integer)
     suggestion = Column(CHAR(100))
+    
+class TmpHum(BaseModel):
+    __tablename__ = 'tmphum'
+    id = Column(Integer, primary_key=True)
+    tmp = Column(Float)
+    hum = Column(Float)
+    
 
 if __name__ == '__main__':
     m = ModelDB()

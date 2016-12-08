@@ -121,7 +121,10 @@ int main(int argc, char* argv[])
 {
 	wiringPiSetup();
 	dht DHT;
-	int chk = DHT.read11(DHT11_PIN);
+	int pin = DHT11_PIN
+	if (argc > 1)
+		pin = atoi(argv[1])
+	int chk = DHT.read11(pin);
 	if (chk == 0)
 	{
 		printf("%d %d\n", int(DHT.humidity), int(DHT.temperature));

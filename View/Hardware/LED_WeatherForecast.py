@@ -69,6 +69,11 @@ def WeatherLEDFlicker(rpin=11, gpin=13, ypin=15, db = model):
     
 def ThreadWeatherLEDFlicker():
     wled = configurations.get_weather_pins_settings()
+    if not wled:
+        wled['rpin'] = 11
+        wled['gpin'] = 13
+        wled['ypin'] = 15
+        
     try:
         db = ModelDB()
         while True:

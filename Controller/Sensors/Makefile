@@ -1,10 +1,10 @@
-HTEXEC=../TempHum
+HTEXEC=TmpHum
 CFLAGS=-Wall -Wfatal-errors -g -lwiringPi
 CC=g++
 OPTS=-O3 
 
 SRCDIR=./src/
-HTSRC=TempHum.cpp
+HTSRC=TmpHum.cpp
 HTM=$(SRCDIR)$(HTSRC)
 
 all:$(HTEXEC)
