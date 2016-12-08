@@ -10,7 +10,7 @@ dht DHT;
 
 #define DHT11_PIN 23//put the sensor in the digital pin 4
 
-void main()
+int main()
 {
 	wiringPiSetup () ;
 	while (1)
