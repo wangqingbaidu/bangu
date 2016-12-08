@@ -13,6 +13,7 @@
 #define dht_h
 
 #include <wiringPi.h>
+#include <stdio.h>
 #define TIMEOUT 10000
 #define DHT_LIB_VERSION "0.1.01"
 
