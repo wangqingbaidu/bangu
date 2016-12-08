@@ -45,11 +45,11 @@ int dht::read11(uint8_t pin)
 	// CONVERT AND STORE
 	humidity    = bits[0];  // bit[1] == 0;
 	temperature = bits[2];  // bits[3] == 0;
-	printf("h:%f\nt:%f\n", humidity, temperature);
+//	printf("h:%f\nt:%f\n", humidity, temperature);
 	// TEST CHECKSUM
 	uint8_t sum = bits[0] + bits[2]; // bits[1] && bits[3] both 0
 
-	printf("bht:%d\nbs:%d\n", bits[0] + bits[2], bits[4]);
+//	printf("bht:%d\nbs:%d\n", bits[0] + bits[2], bits[4]);
 	if (bits[4] != sum) return -1;
 
 	return 0;
@@ -96,7 +96,7 @@ int dht::read(uint8_t pin)
 		while(digitalRead(pin) == HIGH)
 			if (loopCnt-- == 0) return -2;
 
-		if ((micros() - t) > 50)
+		if ((micros() - t) > 40)
 		{
 			bits[idx] |= (1 << cnt);
 		}

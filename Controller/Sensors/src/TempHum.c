@@ -21,6 +21,6 @@ int main()
 			printf("%f\n", DHT.humidity);
 			printf("%f\n", DHT.temperature);
 		}
-		sleep(1);
+		sleep(5);
 	}
 }
