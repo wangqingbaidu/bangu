@@ -55,7 +55,7 @@ class ModelDB:
         self.session.commit()
     
     def insert_tmphum(self, tmphum):
-        self.session.execute(TmpHum.__tablename__.insert(), tmphum)
+        self.session.execute(TmpHum.__table__.insert(), tmphum)
         self.session.commit()
         
     def get_latest_weather(self):
