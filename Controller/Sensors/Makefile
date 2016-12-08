@@ -3,9 +3,9 @@ CFLAGS=-Wall -Wfatal-errors -g -lwiringPi
 CC=g++
 OPTS=-O3 
 
-HTSRCDIR=./src/
+SRCDIR=./src/
 HTSRC=TempHum.cpp
-HTM=$(addprefix $(SRCDIR), %(HTSRC))
+HTM=$(SRCDIR)%(HTSRC)
 
 all:$(HTEXEC)
 
