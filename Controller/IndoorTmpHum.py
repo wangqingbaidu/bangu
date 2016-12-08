@@ -25,7 +25,9 @@ def GetTmpHum2DB(cfg = configurations.get_tmphum_pin_setting(), db = model):
     home = GetBanguHome.getHome()
     cmd = os.path.join(home, 'Controller/Sensors/TmpHum ')
     if cfg:
-        cmd += cfg['pin']
+        map2writingPi = {16:'4', 18:'5'}
+        if map2writingPi.has_key(cfg['pin']):
+            cmd += map2writingPi[cfg['pin']]
     try:
         hum_tmp = os.popen(cmd).read()
         if hum_tmp:
@@ -43,7 +45,7 @@ def IndoorTmpHumThread(decay = 600):
         GetTmpHum2DB(db = db)
         time.sleep(decay)
         
-if __name__ == '__mian__':
+if __name__ == '__main__':
     GetTmpHum2DB(db = model)
     desc = model.get_latest_tmphum()
     print desc
