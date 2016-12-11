@@ -107,12 +107,13 @@ class BanguConfig:
             temp = {}
             for p in self.configuration["LCD1602"].keys():
                 try:
+                    low = p.lower()
                     pin = int(self.configuration['LCD1602'][p])
                     if not self.configuration['pins'].has_key(pin):
                         self.configuration['pins'][pin] = 'out'
                         print 'pin %d is added to be `out`.' %pin
                     assert self.configuration['pins'][pin] == 'out'
-                    temp['pin'] = pin
+                    temp['low'] = pin
                 except:
                     print "Wrong configure of pins %s=%s or this pin is set to be `in`" \
                         %(p, self.configuration['LCD1602'][p])
