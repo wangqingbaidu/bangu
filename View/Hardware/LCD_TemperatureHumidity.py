@@ -19,7 +19,7 @@ import GetBanguHome
 from Model import model
 from Model import ModelDB
 import time
-from lcd1602.LCD1602 import lcd
+from lcd1602 import lcd
 
 def LCDTemperatureHumidity(lcd = None, db = model):
     TH = db.get_latest_tmphum()
