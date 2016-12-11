@@ -42,7 +42,7 @@ def GetTmpHum2DB(cfg = configurations.get_tmphum_pin_setting(), db = model):
     except:
         pass
     
-def ThreadIndoorTmpHum2DB(decay = 60):
+def ThreadIndoorTmpHum2DB(decay = 5):
     db = ModelDB()
     while True:
         GetTmpHum2DB(db = db)

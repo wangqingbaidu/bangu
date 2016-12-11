@@ -1,5 +1,6 @@
 #BANGU -- From Zero To One   盘古, 开天辟地              
 ##<font color=red>Weather with LED completed!</font>
+##<font color=red>LCD display indoor temperature and humidity completed!</font>
 
 This project is about smart ehouse which base on python, I use [Raspberry pi](https://www.raspberrypi.org/) to get senor data and GPIO to display message . Also it can be simply displayed on screen through a website which is based on Django.
 
@@ -16,6 +17,8 @@ Later I will display all the mother board and sensors which I have already used.
 >1.Raspberry pi 2 or later
 >
 >2.Some LED
+>
+>3.DHT11
 
 ##How to use?
 bangu is very easy to install and auto run when Raspberry pi is reboot!
