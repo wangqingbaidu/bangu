@@ -24,11 +24,13 @@ from Model import model
 def GetTmpHum2DB(cfg = configurations.get_tmphum_pin_setting(), db = model):
     home = GetBanguHome.getHome()
     cmd = os.path.join(home, 'Controller/Sensors/TmpHum ')
-    if cfg:
-        map2writingPi = {16:'4', 18:'5'}
-        if map2writingPi.has_key(cfg['pin']):
-            cmd += map2writingPi[cfg['pin']]
+    
     try:
+        if cfg:
+            map2writingPi = {16:'4', 18:'5'}
+            if map2writingPi.has_key(cfg['pin']):
+                cmd += map2writingPi[cfg['pin']]
+
         hum_tmp = os.popen(cmd).read()
         if hum_tmp:
             humtmp = {}

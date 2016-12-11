@@ -72,7 +72,7 @@ class BanguConfig:
                     pin = int(self.configuration['weatherLED'][wpin])
                     if not self.configuration['pins'].has_key(pin):
                         self.configuration['pins'][pin] = 'out'
-                        print 'pin %d is add to be out' %pin
+                        print 'pin %d is added to be out' %pin
                     assert self.configuration['pins'][pin] == 'out'
                     temp[low] = pin
                 except:
@@ -94,13 +94,30 @@ class BanguConfig:
                     pin = int(self.configuration['TmpHum'][p])
                     if not self.configuration['pins'].has_key(pin):
                         self.configuration['pins'][pin] = 'in'
-                        print 'pin %d is add to be in' %pin
+                        print 'pin %d is added to be `in`.' %pin
                     assert self.configuration['pins'][pin] == 'in'
                     temp['pin'] = pin
                 except:
                     print "Wrong configure of pins %s=%s or this pin is set to be `out`" \
                         %(p, self.configuration['TmpHum'][p])
             self.configuration['TmpHum'] = temp
+            
+    def __valid_lcd_pin_section(self):
+        if self.configuration.has_key('pins') and self.configuration.has_key('LCD1602'):
+            temp = {}
+            for p in self.configuration["LCD1602"].keys():
+                try:
+                    pin = int(self.configuration['LCD1602'][p])
+                    if not self.configuration['pins'].has_key(pin):
+                        self.configuration['pins'][pin] = 'out'
+                        print 'pin %d is added to be `out`.' %pin
+                    assert self.configuration['pins'][pin] == 'out'
+                    temp['pin'] = pin
+                except:
+                    print "Wrong configure of pins %s=%s or this pin is set to be `in`" \
+                        %(p, self.configuration['LCD1602'][p])
+        
+            self.configuration['LCD1602'] = temp
             
     def get_pins_settings(self):
         return {} if not self.configuration.has_key('pins') else self.configuration['pins']
@@ -113,5 +130,11 @@ class BanguConfig:
     
     def get_tmphum_pin_setting(self):
         return {} if not self.configuration.has_key('TmpHum') else self.configuration['TmpHum']
+    
+    def get_lcd_pin_settings(self):
+        return {} if not self.configuration.has_key('LCD1602') else self.configuration['LCD1602']
 
 configurations = BanguConfig()  
+
+if __name__ == '__main__':
+    print configurations.get_lcd_pin_settings()

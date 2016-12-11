@@ -18,7 +18,7 @@ import GetBanguHome
 
 import RPi.GPIO as GPIO
 GPIO.setwarnings(False)
-from utils.ReadConfig import BanguConfig
+from utils.ReadConfig import configurations
 
 class RaspGPIO:
     """
@@ -30,7 +30,7 @@ class RaspGPIO:
     """
     def __init__(self,
                  model = 'board',
-                 pins = BanguConfig().get_pins_settings()):
+                 pins = configurations.get_pins_settings()):
         
         self.__Define_GPIO_model(model)            
         self.__Define_GPIO_pin(pins)
