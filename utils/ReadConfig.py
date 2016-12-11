@@ -49,7 +49,7 @@ class BanguConfig:
         self.__valid_pins_section()
         self.__valid_weather_pins_section()
         self.__valid_tmphum_pin_section()
-        
+        self.__valid_lcd_pin_section()
     
     def __valid_pins_section(self):
         if self.configuration.has_key('pins'):
@@ -113,7 +113,7 @@ class BanguConfig:
                         self.configuration['pins'][pin] = 'out'
                         print 'pin %d is added to be `out`.' %pin
                     assert self.configuration['pins'][pin] == 'out'
-                    temp['low'] = pin
+                    temp[low] = pin
                 except:
                     print "Wrong configure of pins %s=%s or this pin is set to be `in`" \
                         %(p, self.configuration['LCD1602'][p])
