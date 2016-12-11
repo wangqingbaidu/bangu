@@ -49,6 +49,6 @@ def ThreadIndoorTmpHum2DB(decay = 5):
         time.sleep(decay)
         
 if __name__ == '__main__':
-    GetTmpHum2DB(db = model)
+    ThreadIndoorTmpHum2DB()
     desc = model.get_latest_tmphum()
     print desc.hum, desc.tmp
