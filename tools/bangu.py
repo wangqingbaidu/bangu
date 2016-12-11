@@ -94,7 +94,7 @@ elif args.opts == 'start':
     thread.start_new_thread(ThreadUpdateWeather2DB, (600,))
     thread.start_new_thread(ThreadWeatherLEDFlicker, tuple())
     thread.start_new_thread(ThreadIndoorTmpHum2DB, (60,))
-    thread.start_new_thread(ThreadLCDTemperatureHumidity. tuple())
+    thread.start_new_thread(ThreadLCDTemperatureHumidity, tuple())
     
     while True:
         time.sleep(901022)
