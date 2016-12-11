@@ -57,6 +57,7 @@ class LCD1602:
 
     def message(self, text):
         """ Send string to LCD. Newline wraps to second line"""
+        self.clear()
         for char in text:
             if char == '\n':
                 self.cmd(0xC0) # next line
