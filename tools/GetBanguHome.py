@@ -35,4 +35,9 @@ def getHome(bangu_home=os.getenv('BANGUHOME', '~/bangu')):
             break
         else:
             bangu_home = os.path.dirname(bangu_home) 
+            if bangu_home == '' or bangu_home == '/':
+                bangu_home = '/root/bangu'
+                if not os.path.exists(bangu_home):
+                    print 'Can not find bangu HOME!'
+                    exit()
     return bangu_home
