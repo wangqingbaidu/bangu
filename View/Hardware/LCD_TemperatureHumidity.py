@@ -25,7 +25,7 @@ def LCDTemperatureHumidity(lcd = None, db = model):
     TH = db.get_latest_tmphum()
     Tmp = TH.tmp
     Hum = TH.hum
-    text = 'Temperature: %d\nHumidity: %d' %(Tmp, Hum)
+    text = 'Temperature: %.1f\nHumidity: %.1f' %(Tmp, Hum)
     lcd.message(text)
     
 def ThreadLCDTemperatureHumidity():
