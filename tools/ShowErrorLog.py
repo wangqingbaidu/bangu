@@ -31,7 +31,7 @@ parser = argparse.ArgumentParser(description='Get bangu error log.')
 if __name__ == '__main__':
     parser.add_argument('-time', type = int, default=1)
     args = parser.parse_args()
-    print 'Getting %d hour(s) log...' %args.time
+    print "Getting log of %d hour(s)..." %args.time
     log = model.get_log(args.time)
     for l in log:
         print l.name, l.datetime, l.log
