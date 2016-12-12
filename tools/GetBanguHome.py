@@ -33,5 +33,5 @@ print 'Bangu Home is', current_path
 sys.path.append(current_path)
 reload(sys)
 
-def getHome(bangu_home=os.getenv('BANGUHOME')):
-    return bangu_home if bangu_home else current_path
+def getHome():
+    return current_path
