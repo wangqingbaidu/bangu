@@ -17,6 +17,14 @@ Note: Please keep the above information whenever or wherever the codes are used.
 
 import sys, os
 current_path = os.getcwd()
+"""
+    Once imported by other model, adds bangu home to system
+
+    Methods
+    -------------
+    @getHome: current_path contains bangu home.
+
+"""
 while True:
     items = os.listdir(current_path)
     if 'Model' in items and 'View' in items and 'Controller' in items:

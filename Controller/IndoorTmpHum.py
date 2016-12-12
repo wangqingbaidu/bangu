@@ -22,6 +22,16 @@ from Model import ModelDB
 from Model import model
 
 def GetTmpHum2DB(cfg = configurations.get_tmphum_pin_setting(), db = model):
+    """
+    This method is used to put indoor temperature and humidity to DB.
+    One who want to use this must `make` in Sensor Directory which generate exec file.
+    @map2writingPi variable maps Board pins to writingPi pins. You can get details by
+    referring to http://wiringpi.com/pins/.
+    Parameters
+    -------------
+    @cfg: Bangu system basic settings.
+    @db: which DB connection to be used, Test use global. Thread use own. 
+    """
     home = GetBanguHome.getHome()
     cmd = os.path.join(home, 'Controller/Sensors/TmpHum ')
     

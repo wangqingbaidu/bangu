@@ -6,6 +6,19 @@ from RaspGPIO import raspgpio
 from utils.ReadConfig import configurations
 
 class LCD1602:
+    """
+    This class is used to display message on lcd1602 sensor.
+    Parameters
+    -------------
+    @pin_rs: pin of reset.
+    @pin_e: pin of enable.
+    @pins_db: pin from high bit to low bit.
+    
+    Methods
+    -------------
+    @clear: clear message on led.
+    @message: display message on lcd1602.
+    """
     def __init__(self, pin_rs=21, pin_e=20, pins_db=[16, 7, 8, 25]):
         self.pin_rs = pin_rs
         self.pin_e = pin_e

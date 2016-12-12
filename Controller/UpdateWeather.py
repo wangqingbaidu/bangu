@@ -26,6 +26,7 @@ from Model import model
 def GetWeather2DB(cfg = configurations.get_basic_settings(), db = model):
     """
     This method is used to put weather which get from API to DB.
+    Go to http://apistore.baidu.com/ and get your own `apikey`
     Parameters
     -------------
     @cfg: Bangu system basic settings.

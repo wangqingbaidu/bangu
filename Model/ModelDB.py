@@ -29,9 +29,15 @@ from datetime import timedelta, datetime
 class ModelDB:
     """
     This class is used to define all operations when contact to database.
+    Class XXX which based on @BaseModel is abstract database data. 
     Parameters
     -------------
     @echo: whether to display the execute sql.
+    
+    Methods
+    -------------
+    @insert_XXX: insert XXX data to db.
+    @get_XXX: get XXX data from db. 
     """
     def __init__(self,
                  echo = False):

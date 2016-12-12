@@ -24,6 +24,16 @@ from datetime import datetime, timedelta
 from utils.ReadConfig import configurations
 totalRunTime = 0
 def WeatherLEDFlicker(rpin=11, gpin=13, ypin=15, db = model):
+    """
+    This method is used to blink by different color leds.
+    If weather isn't updated for a long time. All led will blink. 
+    Documents of this API, refer to http://docs.heweather.com/224292
+    Parameters
+    -------------
+    @rpin: pin of red led.
+    @gpin: pin of green led.
+    @ypin: pin of yellow led.
+    """
     global totalRunTime
     raspgpio.pin_set_low(rpin)
     raspgpio.pin_set_low(gpin)

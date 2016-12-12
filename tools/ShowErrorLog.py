@@ -21,6 +21,7 @@ import argparse
 parser = argparse.ArgumentParser(description='Get bangu error log.')
 
 '''
+    Get Error log from database.
     Errors in the following thread.
         @ThreadUpdateWeather2DB
         @ThreadWeatherLEDFlicker
