@@ -22,6 +22,8 @@ Later I will display all the mother board and sensors which I have already used.
 >
 >3.DHT11
 
+>4.A piece of LCD1602 
+
 ##How to use?
 bangu is very easy to install and auto run when Raspberry pi is reboot!
 
