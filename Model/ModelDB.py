@@ -34,7 +34,7 @@ class ModelDB:
     """
     def __init__(self,
                  echo = False):
-        DB_CONNECT_STRING = 'sqlite:///%s/bangu.db' %GetBanguHome.getHome(os.getcwd())
+        DB_CONNECT_STRING = 'sqlite:///%s/bangu.db' %GetBanguHome.getHome()
         self.engine = create_engine(DB_CONNECT_STRING, echo=echo)
         self.session = sessionmaker(bind=self.engine)()
 #         self.flush_db()
