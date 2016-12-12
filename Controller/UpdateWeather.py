@@ -61,7 +61,11 @@ def GetWeather2DB(cfg = configurations.get_basic_settings(), db = model):
             
             db.insert_weather(weather)
     except:
-        pass
+        log = {}
+        log['name'] = 'ThreadUpdateWeather2DB'
+        log['log'] = 'Can not get weather info, maybe network is not connected!'
+        log['datetime'] = datetime.now()
+        db.insert_errorlog(log)
         
 def ThreadUpdateWeather2DB(decay = 600):
     db = ModelDB()

@@ -20,12 +20,15 @@ from Model import model
 from Model import ModelDB
 import time
 from lcd1602 import lcd
+from datetime import datetime, timedelta
 
 def LCDTemperatureHumidity(lcd = None, db = model):
     TH = db.get_latest_tmphum()
     Tmp = TH.tmp
     Hum = TH.hum
-    text = 'Temperature:%d\n Humidity  :%d%%' %(int(Tmp), int(Hum))
+    text = '%s\n   T:%d H:%d%%' %(datetime.now().strftime("%Y-%m-%d %H:%M:%S"), int(Tmp), int(Hum))
+    if datetime.now() - TH.datetime < timedelta(minutes = 10, seconds = 1):
+        text = '%s\nData out of time.' %datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     lcd.message(text)
     
 def ThreadLCDTemperatureHumidity():
@@ -34,7 +37,11 @@ def ThreadLCDTemperatureHumidity():
         try:
             LCDTemperatureHumidity(lcd, db)
         except:
-            pass
+            log = {}
+            log['name'] = 'ThreadLCDTemperatureHumidity'
+            log['log'] = 'Can not get Tmp and Hum data from db!'  
+            log['datetime'] = datetime.now()
+            db.insert_errorlog(log) 
         
         time.sleep(1)
 

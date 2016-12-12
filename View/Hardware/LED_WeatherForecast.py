@@ -80,7 +80,11 @@ def ThreadWeatherLEDFlicker():
             WeatherLEDFlicker(wled['rpin'], wled['gpin'], wled['ypin'], db)
             time.sleep(1)
     except:
-        print 'Red or Green or Yellow LED not set!'    
+        log = {}
+        log['name'] = 'ThreadWeatherLEDFlicker'
+        log['log'] = 'Red or Green or Yellow LED not set!'  
+        log['datetime'] = datetime.now()
+        db.insert_errorlog(log) 
         
 if __name__ == '__main__':
     while True:

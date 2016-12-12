@@ -24,6 +24,7 @@ from sqlalchemy.types import CHAR, Integer, String, Float, DateTime
 BaseModel = declarative_base()
 from utils.ParserCityJson import ParserCityJson
 import os
+from datetime import timedelta, datetime
 
 class ModelDB:
     """
@@ -58,11 +59,23 @@ class ModelDB:
         self.session.execute(TmpHum.__table__.insert(), tmphum)
         self.session.commit()
         
+    def insert_errorlog(self, errorlog):
+        self.session.execute( ErrorLog.__table__.insert(), errorlog)
+        self.session.commit()
+        
     def get_latest_weather(self):
         return self.session.query(Weather).order_by(Weather.id.desc()).first()
     
     def get_latest_tmphum(self):
         return self.session.query(TmpHum).order_by(TmpHum.id.desc()).first()
+
+    def get_log(self, delta = None):
+        toTime = datetime.now()
+        if not delta:
+            delta = 87600
+        fromTime = datetime.now() - timedelta(hours = delta)  
+        return self.session.query.filter(ErrorLog.datetime >= fromTime and \
+                ErrorLog.datetime <= toTime).order_by(ErrorLog.datetime.desc()).all()
         
 class City(BaseModel):    
     __tablename__ = 'city'
@@ -89,7 +102,13 @@ class TmpHum(BaseModel):
     tmp = Column(Float)
     hum = Column(Float)
     datetime  = Column(DateTime) 
-    
+
+class ErrorLog(BaseModel):
+    __tablename__ = 'errorlog'
+    id = Column(Integer, primary_key=True)
+    log = Column(String)
+    name = Column(String)
+    datetime  = Column(DateTime)     
 
 if __name__ == '__main__':
     m = ModelDB()
