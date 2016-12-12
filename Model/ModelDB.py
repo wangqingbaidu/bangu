@@ -74,7 +74,7 @@ class ModelDB:
         if not delta:
             delta = 87600
         fromTime = datetime.now() - timedelta(hours = delta)  
-        return self.session.query.filter(ErrorLog.datetime >= fromTime and \
+        return self.session.query(ErrorLog).filter(ErrorLog.datetime >= fromTime and \
                 ErrorLog.datetime <= toTime).order_by(ErrorLog.datetime.desc()).all()
         
 class City(BaseModel):    
