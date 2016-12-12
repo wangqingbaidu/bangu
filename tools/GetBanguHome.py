@@ -23,21 +23,15 @@ while True:
         break
     else:
         current_path = os.path.dirname(current_path)
+        if current_path == '' or current_path == '/':
+            current_path = '/root/bangu'
+            if not os.path.exists(current_path):
+                print 'Can not find bangu HOME!'
+                exit()
 
 print 'Bangu Home is', current_path    
 sys.path.append(current_path)
 reload(sys)
 
-def getHome(bangu_home=os.getenv('BANGUHOME', '~/bangu')):
-    while True:
-        items = os.listdir(bangu_home)
-        if 'Model' in items and 'View' in items and 'Controller' in items:
-            break
-        else:
-            bangu_home = os.path.dirname(bangu_home) 
-            if bangu_home == '' or bangu_home == '/':
-                bangu_home = '/root/bangu'
-                if not os.path.exists(bangu_home):
-                    print 'Can not find bangu HOME!'
-                    exit()
-    return bangu_home
+def getHome(bangu_home=os.getenv('BANGUHOME')):
+    return bangu_home if bangu_home else current_path
