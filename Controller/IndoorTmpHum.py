@@ -39,10 +39,17 @@ def GetTmpHum2DB(cfg = configurations.get_tmphum_pin_setting(), db = model):
             humtmp['tmp'] = int(tmp)
             humtmp['datetime'] = datetime.now()
             db.insert_tmphum(humtmp)
+        else:
+            log = {}
+            log['name'] = 'ThreadIndoorTmpHum2DB'
+            log['log'] = 'Can not get temperature and humidity from sensor. Try again!'  
+            log['datetime'] = datetime.now()
+            db.insert_errorlog(log) 
+            
     except:
         log = {}
         log['name'] = 'ThreadIndoorTmpHum2DB'
-        log['log'] = 'Can not get temperature and humidity from sensor. Try again!'  
+        log['log'] = 'Command is not executed successfully!'  
         log['datetime'] = datetime.now()
         db.insert_errorlog(log) 
         pass

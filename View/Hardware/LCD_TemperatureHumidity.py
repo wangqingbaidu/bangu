@@ -26,9 +26,9 @@ def LCDTemperatureHumidity(lcd = None, db = model):
     TH = db.get_latest_tmphum()
     Tmp = TH.tmp
     Hum = TH.hum
-    text = '%s\n   T:%d H:%d%%' %(datetime.now().strftime("%Y-%m-%d %H:%M:%S"), int(Tmp), int(Hum))
-    if datetime.now() - TH.datetime < timedelta(minutes = 10, seconds = 1):
-        text = '%s\nData out of time.' %datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    text = '%s\n   T:%d H:%d%%' %(datetime.now().strftime("%Y-%m-%d %H:%M"), int(Tmp), int(Hum))
+    if datetime.now() - TH.datetime > timedelta(minutes = 10):
+        text = '%s\nData out of time.' %datetime.now().strftime("%Y-%m-%d %H:%M")
     lcd.message(text)
     
 def ThreadLCDTemperatureHumidity():
