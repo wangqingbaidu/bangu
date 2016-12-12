@@ -42,7 +42,6 @@ def ThreadLCDTemperatureHumidity():
             log['log'] = 'Can not get Tmp and Hum data from db!'  
             log['datetime'] = datetime.now()
             db.insert_errorlog(log) 
-        
         time.sleep(1)
 
 if __name__ == '__main__':
