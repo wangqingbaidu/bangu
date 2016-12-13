@@ -1,5 +1,5 @@
 #BANGU -- From Zero To One   盘古, 开天辟地
-
+![](http://i.imgur.com/aFFeNV6.jpg)
 This project is about smart ehouse which base on python, I use [Raspberry pi](https://www.raspberrypi.org/) to get senor data and GPIO to display message . Also it can be simply displayed on screen through a website which is based on Django.
 
 You can contact me via email: 564326047@qq.com(wangqingbaidu) 
@@ -36,3 +36,7 @@ Just one command to enjoy bangu, one thing you have to take care is that you sho
 All settings are in `BANGUHOME/bangu.cfg`
 
 Board model and 11, 13, 15 pin is used to display Red, Green, Yellow
+
+##Show
+
+![](http://i.imgur.com/91Xp4hc.jpg)
