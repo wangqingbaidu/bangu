@@ -26,6 +26,12 @@ Later I will display all the mother board and sensors which I have already used.
 >4.A piece of LCD1602 
 
 ##How to use?
+Clone srouce code to your `Home`
+
+`git clone https://github.com/wangqingbaidu/bangu.git`
+
+`cd bangu`
+
 bangu is very easy to install and auto run when Raspberry pi is reboot!
 
 Just one command to enjoy bangu, one thing you have to take care is that you should run the follow command in  `ROOT`
