@@ -32,15 +32,15 @@ def GetWeather2DB(cfg = configurations.get_basic_settings(), db = model):
     @cfg: Bangu system basic settings.
     @db: which DB connection to be used, Test use global. Thread use own. 
     """
-    if type(cfg) != dict or not cfg.has_key('apikey'):
-        print 'apikey must be contained!'
-        exit()
-    
-    if not cfg.has_key('city') or not cfg.has_key('country'):
-        cfg['city'] = 'beijing'
-        cfg['counrty'] = 'CN'
-    
     try:
+        if type(cfg) != dict or not cfg.has_key('apikey'):
+            print 'apikey must be contained!'
+            exit()
+        
+        if not cfg.has_key('city') or not cfg.has_key('country'):
+            cfg['city'] = 'beijing'
+            cfg['counrty'] = 'CN'
+    
         url = 'http://apis.baidu.com/heweather/weather/free?city=%s' %cfg['city']
         req = urllib2.Request(url)
         
