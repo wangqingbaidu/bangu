@@ -55,10 +55,14 @@ def GetWeather2DB(cfg = configurations.get_basic_settings(), db = model):
             weather['country'] = cfg['country']
             weather['datetime'] = datetime.now()
             weather['humidity'] = json_content['now']['hum']
-            weather['tmp_max'] = float(json_content['daily_forecast'][0]['tmp']['max'])
-            weather['tmp_min'] = float(json_content['daily_forecast'][0]['tmp']['min'])
+            weather['tmp_max'] = float(json_content['daily_forecast'][1]['tmp']['max'])
+            weather['tmp_min'] = float(json_content['daily_forecast'][1]['tmp']['min'])
             weather['pm25'] = float(json_content['aqi']['city']['pm25'])
-            weather['desc'] = int(json_content['now']['cond']['code'])
+            #If beyond 8 o'clock, then use tomorrow weather.
+            if datetime.now().hour >= 20:                
+                weather['desc'] = int(json_content['daily_forecast'][1]['cond']['code_d'])
+            else:
+                weather['desc'] = int(json_content['now']['cond']['code'])
             
             db.insert_weather(weather)
     except:
