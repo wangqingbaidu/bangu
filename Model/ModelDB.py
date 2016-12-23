@@ -66,7 +66,11 @@ class ModelDB:
         self.session.commit()
         
     def insert_errorlog(self, errorlog):
-        self.session.execute( ErrorLog.__table__.insert(), errorlog)
+        self.session.execute(ErrorLog.__table__.insert(), errorlog)
+        self.session.commit()
+        
+    def insert_audio_token(self, access_token):
+        self.session.execute(AudioToken.__table__.insert(), access_token)
         self.session.commit()
         
     def get_latest_weather(self):
@@ -82,6 +86,10 @@ class ModelDB:
         fromTime = datetime.now() - timedelta(hours = delta)  
         return self.session.query(ErrorLog).filter(ErrorLog.datetime >= fromTime, \
                 ErrorLog.datetime <= toTime).order_by(ErrorLog.datetime.desc()).all()
+    
+    def get_latest_audio_token(self):
+        return self.session.query(AudioToken).order_by(AudioToken.id.desc()).first().access_token
+        
         
 class City(BaseModel):    
     __tablename__ = 'city'
@@ -115,6 +123,17 @@ class ErrorLog(BaseModel):
     log = Column(String)
     name = Column(String)
     datetime  = Column(DateTime)     
+
+class AudioToken(BaseModel):
+    __tablename__ = 'audio_token'
+    id = Column(Integer, primary_key=True)
+    access_token = Column(String)
+    session_key = Column(String)
+    scope = Column(String)
+    refresh_token = Column(String)
+    session_secret = Column(String)
+    expires_in = Column(String)
+    datetime  = Column(DateTime)         
 
 if __name__ == '__main__':
     m = ModelDB()

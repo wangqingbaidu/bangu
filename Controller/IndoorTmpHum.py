@@ -25,7 +25,7 @@ def GetTmpHum2DB(cfg = configurations.get_tmphum_pin_setting(), db = model):
     """
     This method is used to put indoor temperature and humidity to DB.
     One who want to use this must `make` in Sensor Directory which generate exec file.
-    @map2writingPi variable maps Board pins to writingPi pins. You can get details by
+    @map2writingPi: variable maps Board pins to writingPi pins. You can get details by
     referring to http://wiringpi.com/pins/.
     Parameters
     -------------
