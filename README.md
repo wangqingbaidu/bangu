@@ -6,9 +6,6 @@ You can contact me via email: 564326047@qq.com(wangqingbaidu)
 
 Or visit my blog  [www.wangqingbaidu.cn](http://www.wangqingbaidu.cn) for latest news.
 
-###For business or industrialization please call (+86)13261527505, Mr. Zhang
-
-
 Later I will display all the mother board and sensors which I have already used. This will help anyone who wants to implement by their own.
 
 

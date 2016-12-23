@@ -17,6 +17,7 @@ Note: Please keep the above information whenever or wherever the codes are used.
 import GetBanguHome
 
 import ConfigParser, os
+import smtplib
 class BanguConfig:
     """
     This class is used to initialize bangu configurations.
@@ -50,6 +51,7 @@ class BanguConfig:
         self.__valid_weather_pins_section()
         self.__valid_tmphum_pin_section()
         self.__valid_lcd_pin_section()
+        self.__valid_email_section()
     
     def __valid_pins_section(self):
         if self.configuration.has_key('pins'):
@@ -120,6 +122,22 @@ class BanguConfig:
         
             self.configuration['LCD1602'] = temp
             
+    def __valid_email_section(self):
+        if self.configuration.has_key('email'):
+            try:
+                username = self.configuration['email']['username']
+                password = self.configuration['email']['password']
+                server = self.configuration['email']['smtp']
+                smtp = smtplib.SMTP()  
+                smtp.connect(server)
+                smtp.login(username, password)
+                smtp.quit() 
+            except:
+                print 'Email check failed! Use bangu default email:ibangu@yeah.net'
+                self.configuration['email']['username'] = 'ibangu@yeah.net'
+                self.configuration['email']['password'] = '51bangu'
+                server = self.configuration['email']['smtp'] = 'smtp.yeah.net'
+            
     def get_pins_settings(self):
         return {} if not self.configuration.has_key('pins') else self.configuration['pins']
     
@@ -134,6 +152,9 @@ class BanguConfig:
     
     def get_lcd_pin_settings(self):
         return {} if not self.configuration.has_key('LCD1602') else self.configuration['LCD1602']
+    
+    def get_email_settings(self):
+        return {} if not self.configuration.has_key('email') else self.configuration['email']
 
 configurations = BanguConfig()  
 

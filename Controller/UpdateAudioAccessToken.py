@@ -38,7 +38,7 @@ def getAudioAccessToken2DB(cfg = configurations.get_basic_settings(), db = model
         log['datetime'] = datetime.now()
         db.insert_errorlog(log)
 
-def ThreadAudioAccessToken2DB(decay = 600):
+def ThreadAudioAccessToken2DB(decay = 901022):
     db = ModelDB()
     while True:
         getAudioAccessToken2DB(db = db)
@@ -48,3 +48,4 @@ if __name__ == '__main__':
     getAudioAccessToken2DB()
     desc = model.get_latest_audio_token()
     print desc
+    
