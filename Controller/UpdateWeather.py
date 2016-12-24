@@ -61,11 +61,23 @@ def GetWeather2DB(cfg = configurations.get_basic_settings(), db = model):
             #If beyond 8 o'clock, then use tomorrow weather.
             if datetime.now().hour >= 20:                
                 weather['desc'] = int(json_content['daily_forecast'][1]['cond']['code_d'])
+                weather['descCN'] = json_content['daily_forecast'][1]['cond']['txt_d']
             else:
                 weather['desc'] = int(json_content['now']['cond']['code'])
+                weather['descCN'] = json_content['now']['cond']['txt']
             
+            
+            weather['comf'] = json_content['suggestion']['comf']['txt']
+            weather['drsg'] = json_content['suggestion']['drsg']['txt']
+            weather['flu'] = json_content['suggestion']['flu']['txt']
+
+#             suggestion = '舒适指数:{comf}\n穿衣指数:{drsg}\n感冒指数:{flu}'.decode('utf8')
+#             weather['suggestion'] = suggestion.format(comf=json_content['suggestion']['comf']['txt'],
+#                                                       drsg=json_content['suggestion']['drsg']['txt'],
+#                                                       flu=json_content['suggestion']['flu']['txt'])
             db.insert_weather(weather)
-    except:
+    except Exception,e:
+        print e
         log = {}
         log['name'] = 'ThreadUpdateWeather2DB'
         log['log'] = 'Can not get weather info, maybe network is not connected!'

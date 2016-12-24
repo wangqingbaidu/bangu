@@ -108,7 +108,11 @@ class Weather(BaseModel):
     tmp_min = Column(Float)
     pm25 = Column(Float)
     desc = Column(Integer)
-    suggestion = Column(CHAR(100))
+    descCN = Column(String)
+#     suggestion = Column(String)
+    comf = Column(String)
+    flu = Column(String)
+    drsg = Column(String)
     
 class TmpHum(BaseModel):
     __tablename__ = 'tmphum'

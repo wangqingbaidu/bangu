@@ -19,7 +19,8 @@ import urllib2
 import json
 from utils.ReadConfig import configurations
 from Model import model, ModelDB
-import datetime, time
+from datetime import datetime
+import time
 
 def getAudioAccessToken2DB(cfg = configurations.get_basic_settings(), db = model):
     try:
