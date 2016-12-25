@@ -25,8 +25,8 @@ BaseModel = declarative_base()
 from utils.ParserCityJson import ParserCityJson
 from datetime import timedelta, datetime
 
-error_enum = [{'id':1, 'thread':'', 
-               'suggestion':'Unkonwn error!'},
+error_enum = [{'id':1, 'thread':'Unknown', 
+               'suggestion':'Unknown error!'},
               {'id':2, 'thread':'ThreadUpdateWeather2DB', 
                'suggestion':'Can not get weather info, maybe network is not connected!'},
               {'id':3, 'thread':'ThreadWeatherLEDFlicker', 
@@ -35,7 +35,7 @@ error_enum = [{'id':1, 'thread':'',
                'suggestion':'Command is not executed successfully!'},
               {'id':5, 'thread':'ThreadLCDTemperatureHumidity', 
                'suggestion':'Can not get Tmp and Hum data from db!'},
-              {'id':6, 'thread':'PushImage2iphone', 
+              {'id':6, 'thread':'ThreadPushImage2Phone', 
                'suggestion':'Push message error, Check appid or secret!'}]
 
 class ModelDB:

@@ -40,7 +40,7 @@ def PushImage2Phone(cfg = configurations.get_basic_settings(), db = model):
                                                    suggestion=msg_db.comf)})
 
     except Exception,e:
-        putErrorlog2DB('PushImage2iphone', e, db)
+        putErrorlog2DB('ThreadPushImage2Phone', e, db)
 
 def ThreadPushImage2Phone(when = 23):
     db = ModelDB()
