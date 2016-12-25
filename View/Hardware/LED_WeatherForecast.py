@@ -85,13 +85,13 @@ def ThreadWeatherLEDFlicker():
         wled['gpin'] = 13
         wled['ypin'] = 15
         
-    try:
-        db = ModelDB()
-        while True:
+    db = ModelDB()
+    while True:            
+        try:
             WeatherLEDFlicker(wled['rpin'], wled['gpin'], wled['ypin'], db)
             time.sleep(1)
-    except Exception, e:
-        putErrorlog2DB('ThreadWeatherLEDFlicker', e, db)
+        except Exception, e:
+            putErrorlog2DB('ThreadWeatherLEDFlicker', e, db)
         
 if __name__ == '__main__':
     while True:
