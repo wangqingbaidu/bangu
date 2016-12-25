@@ -15,7 +15,6 @@ Contact Info: you can send an email to 564326047@qq.com(Vlon)
 Note: Please keep the above information whenever or wherever the codes are used.
 '''
 import argparse, shutil, os, time, sys
-from Model.ModelDB import init_db
 parser = argparse.ArgumentParser(description='install bangu by root')
 parser.add_argument('opts', choices=['install', 'start', 'stop'])
 args = parser.parse_args()
@@ -78,6 +77,8 @@ esac
     os.system('insserv -v -d /etc/init.d/bangu')
     
     #Init db.
+    import GetBanguHome
+    from Model.ModelDB import init_db
     init_db()
     
 elif args.opts == 'start':
