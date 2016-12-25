@@ -22,6 +22,7 @@ from RaspGPIO import raspgpio
 import time
 from datetime import datetime, timedelta
 from utils.ReadConfig import configurations
+from Controller import putErrorlog2DB
 totalRunTime = 0
 def WeatherLEDFlicker(rpin=11, gpin=13, ypin=15, db = model):
     """
@@ -89,12 +90,8 @@ def ThreadWeatherLEDFlicker():
         while True:
             WeatherLEDFlicker(wled['rpin'], wled['gpin'], wled['ypin'], db)
             time.sleep(1)
-    except:
-        log = {}
-        log['name'] = 'ThreadWeatherLEDFlicker'
-        log['log'] = 'Red or Green or Yellow LED not set!'  
-        log['datetime'] = datetime.now()
-        db.insert_errorlog(log) 
+    except Exception, e:
+        putErrorlog2DB('ThreadWeatherLEDFlicker', e, db)
         
 if __name__ == '__main__':
     while True:

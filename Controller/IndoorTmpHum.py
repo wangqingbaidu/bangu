@@ -20,6 +20,7 @@ from utils.ReadConfig import configurations
 import time, os
 from Model import ModelDB
 from Model import model
+from Controller import putErrorlog2DB
 
 def GetTmpHum2DB(cfg = configurations.get_tmphum_pin_setting(), db = model):
     """
@@ -54,15 +55,10 @@ def GetTmpHum2DB(cfg = configurations.get_tmphum_pin_setting(), db = model):
             log['name'] = 'ThreadIndoorTmpHum2DB'
             log['log'] = 'Can not get temperature and humidity from sensor. Try again!'  
             log['datetime'] = datetime.now()
-            db.insert_errorlog(log) 
-            
-    except:
-        log = {}
-        log['name'] = 'ThreadIndoorTmpHum2DB'
-        log['log'] = 'Command is not executed successfully!'  
-        log['datetime'] = datetime.now()
-        db.insert_errorlog(log) 
-        pass
+            db.insert_errorlog(log)  
+    
+    except Exception,e:
+        putErrorlog2DB('ThreadIndoorTmpHum2DB', e, db)
     
 def ThreadIndoorTmpHum2DB(decay = 5):
     db = ModelDB()

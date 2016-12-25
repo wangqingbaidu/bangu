@@ -22,6 +22,7 @@ from utils.ReadConfig import configurations
 import time
 from Model import ModelDB
 from Model import model
+from Controller import putErrorlog2DB
 
 def GetWeather2DB(cfg = configurations.get_basic_settings(), db = model):
     """
@@ -77,12 +78,7 @@ def GetWeather2DB(cfg = configurations.get_basic_settings(), db = model):
 #                                                       flu=json_content['suggestion']['flu']['txt'])
             db.insert_weather(weather)
     except Exception,e:
-        print e
-        log = {}
-        log['name'] = 'ThreadUpdateWeather2DB'
-        log['log'] = 'Can not get weather info, maybe network is not connected!'
-        log['datetime'] = datetime.now()
-        db.insert_errorlog(log)
+        putErrorlog2DB('ThreadUpdateWeather2DB', e, db)
         
 def ThreadUpdateWeather2DB(decay = 600):
     db = ModelDB()

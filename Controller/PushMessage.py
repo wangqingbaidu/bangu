@@ -16,14 +16,13 @@ Note: Please keep the above information whenever or wherever the codes are used.
 '''
 import GetBanguHome
 
-import urllib2
-import json
 from utils.ReadConfig import configurations
 from Model import model, ModelDB
-from datetime import datetime, timedelta
+from datetime import datetime
 import time
 from utils.InstaPush import App
 from utils.Seconds2When import getSecond2When
+from Controller import putErrorlog2DB
 
 def PushImage2Phone(cfg = configurations.get_basic_settings(), db = model):
     try:
@@ -41,12 +40,7 @@ def PushImage2Phone(cfg = configurations.get_basic_settings(), db = model):
                                                    suggestion=msg_db.comf)})
 
     except Exception,e:
-        print e
-        log = {}
-        log['name'] = 'PushImage2iphone'
-        log['log'] = 'Push message error, Check appid or secret!'
-        log['datetime'] = datetime.now()
-        db.insert_errorlog(log)
+        putErrorlog2DB('PushImage2iphone', e, db)
 
 def ThreadPushImage2Phone(when = 23):
     db = ModelDB()

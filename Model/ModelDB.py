@@ -19,12 +19,24 @@ import GetBanguHome
 from sqlalchemy.engine import create_engine
 from sqlalchemy.orm.session import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.sql.schema import Column
+from sqlalchemy.sql.schema import Column, ForeignKey
 from sqlalchemy.types import CHAR, Integer, String, Float, DateTime
 BaseModel = declarative_base()
 from utils.ParserCityJson import ParserCityJson
-import os
 from datetime import timedelta, datetime
+
+error_enum = [{'id':1, 'thread':'', 
+               'suggestion':'Unkonwn error!'},
+              {'id':2, 'thread':'ThreadUpdateWeather2DB', 
+               'suggestion':'Can not get weather info, maybe network is not connected!'},
+              {'id':3, 'thread':'ThreadWeatherLEDFlicker', 
+               'suggestion':'Red or Green or Yellow LED not set!'},
+              {'id':4, 'thread':'ThreadIndoorTmpHum2DB', 
+               'suggestion':'Command is not executed successfully!'},
+              {'id':5, 'thread':'ThreadLCDTemperatureHumidity', 
+               'suggestion':'Can not get Tmp and Hum data from db!'},
+              {'id':6, 'thread':'PushImage2iphone', 
+               'suggestion':'Push message error, Check appid or secret!'}]
 
 class ModelDB:
     """
@@ -64,6 +76,10 @@ class ModelDB:
     def insert_tmphum(self, tmphum):
         self.session.execute(TmpHum.__table__.insert(), tmphum)
         self.session.commit()
+        
+    def insert_error(self, error):
+        self.session.execute(Error.__table__.insert(), error)
+        self.session.commit()   
         
     def insert_errorlog(self, errorlog):
         self.session.execute(ErrorLog.__table__.insert(), errorlog)
@@ -121,11 +137,17 @@ class TmpHum(BaseModel):
     hum = Column(Float)
     datetime  = Column(DateTime) 
 
+class Error(BaseModel):
+    __tablename__ = 'error'
+    id = Column(Integer, primary_key=True)
+    thread = Column(String)
+    suggestion = Column(String)
+    
 class ErrorLog(BaseModel):
     __tablename__ = 'errorlog'
     id = Column(Integer, primary_key=True)
-    log = Column(String)
-    name = Column(String)
+    error_type = Column(Integer, ForeignKey('error.id'))
+    e = Column(String)
     datetime  = Column(DateTime)     
 
 class AudioToken(BaseModel):
@@ -139,7 +161,11 @@ class AudioToken(BaseModel):
     expires_in = Column(String)
     datetime  = Column(DateTime)         
 
+def init_db(db = ModelDB()):
+    c = ParserCityJson()
+    db.insert_cities(c.get_cities())
+    db.insert_error(error_enum)
+
 if __name__ == '__main__':
-    m = ModelDB()
-    c = ParserCityJson('../city.json')
+    init_db()
 #     m.insert_cities(c.get_cities())

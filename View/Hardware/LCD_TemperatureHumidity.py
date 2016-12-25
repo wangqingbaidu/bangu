@@ -21,6 +21,7 @@ from Model import ModelDB
 import time
 from lcd1602 import lcd
 from datetime import datetime, timedelta
+from Controller import putErrorlog2DB
 
 def LCDTemperatureHumidity(lcd = None, textFormer = None, db = model):
     TH = db.get_latest_tmphum()
@@ -40,12 +41,8 @@ def ThreadLCDTemperatureHumidity():
     while True:
         try:
             text = LCDTemperatureHumidity(lcd, text, db)
-        except:
-            log = {}
-            log['name'] = 'ThreadLCDTemperatureHumidity'
-            log['log'] = 'Can not get Tmp and Hum data from db!'  
-            log['datetime'] = datetime.now()
-            db.insert_errorlog(log) 
+        except Exception,e:
+            putErrorlog2DB('ThreadLCDTemperatureHumidity', e, db)
         time.sleep(1)
 
 if __name__ == '__main__':

@@ -17,6 +17,7 @@ Note: Please keep the above information whenever or wherever the codes are used.
 import GetBanguHome
 
 import json, os
+from GetBanguHome import getHome
 class ParserCityJson:
     """
     This class is used to convert city json file to dict type.
@@ -29,7 +30,7 @@ class ParserCityJson:
     @jsonFile: Path to city json file.
     """
     cities = None
-    def __init__(self, jsonFile = '../city.json'):
+    def __init__(self, jsonFile = os.path.join(getHome(), 'city.json')):
         self.jsonFile = jsonFile
         
     def parser_city_json(self):
