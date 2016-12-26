@@ -31,6 +31,12 @@ def PushImage2Phone(cfg = configurations.get_basic_settings(), db = model):
             exit()
         
         app = App(appid=cfg['insta_appid'], secret=cfg['insta_secret'])
+        
+#         msg = '室内温度：{tmp}℃\n室内湿度:{hum}%%'.decode('utf8')
+#         msg_db = db.get_latest_tmphum()
+#         app.notify(event_name='weather', 
+#                    trackers={'message': msg.format(tmp = msg_db.tmp, hum = msg_db.hum)})
+
         msg = '天气:{cond} {min}℃~{max}℃\n{suggestion}\nFrom BANGU'.decode('utf8')
         msg_db = db.get_latest_weather()
         app.notify(event_name='weather', 
