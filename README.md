@@ -10,10 +10,11 @@ Later I will display all the mother board and sensors which I have already used.
 
 
 ##News
->###1.  2016-11-27 Weather with LED completed!                                                          
+>###1. 2016-11-27 Weather with LED completed!                                                          
 >###2. 2016-12-12 LCD display indoor temperature and humidity completed!          
 >###3. 2016-12-19 InstaPush added!   
 >###4. 2016-12-23 Baidu Voice TTS,  Email module!
+>###5. 2016-12-25 Log merge!
 
 ##Hardware Required
 >1.Raspberry pi 2 or later
