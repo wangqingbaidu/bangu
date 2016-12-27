@@ -22,9 +22,9 @@ def getSecond2When(hour = None, minute = None, second = None):
     try:
         now = datetime.now()
         to = datetime(now.year, now.month, now.day, 
-                          hour if hour else now.hour,
-                          minute if minute else now.minute,
-                          second if second else now.second)
+                          hour if hour != None else 0,
+                          minute if minute != None else 0,
+                          second if second != None else 0)
         
         return (to - now).seconds if to > now else 0
     except:
