@@ -26,7 +26,7 @@ def getSecond2When(hour = None, minute = None, second = None):
                           minute if minute != None else 0,
                           second if second != None else 0)
         
-        return (to - now).seconds if to > now else 0
+        return (to - now).seconds + 1 if to > now else 0
     except:
         return 0
     
