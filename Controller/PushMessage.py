@@ -54,7 +54,7 @@ def ThreadPushImage2Phone(when = 23):
         hour = datetime.now().hour
         if hour == when:
             PushImage2Phone(db = db)
-        st = getSecond2When(hour = when, minute=10)
+        st = getSecond2When(hour = when)
         time.sleep(st if st else 3600)
         
 if __name__ == '__main__':
