@@ -79,14 +79,14 @@ esac
     
     #Init db.
     import GetBanguHome
-    from Model.ModelDB import init_db
     if not os.path.exists(bangu_home + '/bangu.db'):
+        from Model.ModelDB import init_db
         init_db()
     
     #Restart Raspberry Pi.
     from utils.termcolor import cprint
     cprint('BANGU installed successfully.', 'green')
-    cprint("Reboot Raspberry Pi Now? yes[y] or No[n]", 'yellow', attrs=['blink'])
+    cprint("Reboot Raspberry Pi Now? yes[y]/No[n]", 'yellow', attrs=['blink'])
     reboot = raw_input()
     if reboot.lower() == 'y' or reboot.lower() == 'yes':
         subprocess.call('reboot', stdout=subprocess.PIPE,stderr=subprocess.PIPE)
