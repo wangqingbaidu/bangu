@@ -80,7 +80,8 @@ esac
     #Init db.
     import GetBanguHome
     from Model.ModelDB import init_db
-    init_db()
+    if not os.path.exists(bangu_home + '/bangu.db'):
+        init_db()
     
     #Restart Raspberry Pi
     from utils.termcolor import cprint
