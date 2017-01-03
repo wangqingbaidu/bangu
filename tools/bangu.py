@@ -20,10 +20,16 @@ parser = argparse.ArgumentParser(description='install bangu by root')
 parser.add_argument('opts', choices=['install', 'start', 'stop'])
 args = parser.parse_args()
 
+print 
+
 if args.opts == 'install':
     #install GetBanguHome model to system.
-    shutil.copy('GetBanguHome.py', '/usr/local/lib/python2.7/dist-packages/')
-    
+    gethome_path = os.path.join(os.path.dirname(sys.argv[0]), 'GetBanguHome.py')
+    if os.path.exists(gethome_path):
+        shutil.copy(gethome_path, '/usr/local/lib/python2.7/dist-packages/')
+    else:
+        print 'Can not find GetBanguHome.py'
+        exit(0)
     #Change environment settings
     bangu_home = os.getcwd()
     while True:
