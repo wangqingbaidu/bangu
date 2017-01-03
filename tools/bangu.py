@@ -15,6 +15,7 @@ Contact Info: you can send an email to 564326047@qq.com(Vlon)
 Note: Please keep the above information whenever or wherever the codes are used.
 '''
 import argparse, shutil, os, time, sys
+import subprocess
 parser = argparse.ArgumentParser(description='install bangu by root')
 parser.add_argument('opts', choices=['install', 'start', 'stop'])
 args = parser.parse_args()
@@ -80,6 +81,13 @@ esac
     import GetBanguHome
     from Model.ModelDB import init_db
     init_db()
+    
+    #Restart Raspberry Pi
+    from utils.termcolor import cprint
+    cprint("BANGU installed successfully. Reboot Raspberry Pi Now? yes[y] or No[n]", 'red', attrs=['blink'])
+    reboot = raw_input()
+    if reboot.lower() == 'y' or reboot.lower() == 'yes':
+        subprocess.call('reboot', stdout=subprocess.PIPE,stderr=subprocess.PIPE)
     
 elif args.opts == 'start':
 #     time.sleep(10)
