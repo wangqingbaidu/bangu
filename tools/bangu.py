@@ -83,7 +83,7 @@ esac
     if not os.path.exists(bangu_home + '/bangu.db'):
         init_db()
     
-    #Restart Raspberry Pi
+    #Restart Raspberry Pi.
     from utils.termcolor import cprint
     cprint('BANGU installed successfully.', 'green')
     cprint("Reboot Raspberry Pi Now? yes[y] or No[n]", 'yellow', attrs=['blink'])
