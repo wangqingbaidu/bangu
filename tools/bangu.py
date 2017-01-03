@@ -85,7 +85,8 @@ esac
     
     #Restart Raspberry Pi
     from utils.termcolor import cprint
-    cprint("BANGU installed successfully. Reboot Raspberry Pi Now? yes[y] or No[n]", 'red', attrs=['blink'])
+    cprint('BANGU installed successfully.', 'green')
+    cprint("Reboot Raspberry Pi Now? yes[y] or No[n]", 'yellow', attrs=['blink'])
     reboot = raw_input()
     if reboot.lower() == 'y' or reboot.lower() == 'yes':
         subprocess.call('reboot', stdout=subprocess.PIPE,stderr=subprocess.PIPE)
