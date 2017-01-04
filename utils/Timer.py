@@ -20,19 +20,17 @@ from datetime import datetime
 from termcolor import cprint
 class Timer:
     def __init__(self, d, func, args=[], start_type='every'):
-        s = getSecond2Datetime(d)
-        if s:
-            self.timer = threading.Timer(s, func, args=args)
-        else:
-            self.timer = None
+        self.func = func
+        self.args = args
         self.d = d
         self.fn = func.__name__
         self.start_type = start_type
     
     def start(self):
         if self.start_type.lower() == 'once':
-            if self.timer:
-                self.timer.start()
+            s = getSecond2Datetime(self.d)
+            if s:
+                self.timer = threading.Timer(s, self.func, args=self.args)
             else:
                 cprint("Warning: Timer for %s in %s ignored!" %(self.fn, self.d.strftime('%Y-%m-%d %H:%M:%S')), 
                        'yellow')
@@ -40,7 +38,7 @@ class Timer:
             while True:
                 st = getSecond2When(hour = self.d.hour, minute=self.d.minute, second=self.d.second)
                 time.sleep(st if st else getSecond2When(hour = 23, minute=59, second=59) + 1)
-                self.timer.start()
+                threading.Thread(target=self.func, args=self.args)
             
 
 if __name__ == '__main__':
