@@ -15,8 +15,7 @@ Contact Info: you can send an email to 564326047@qq.com(Vlon)
 Note: Please keep the above information whenever or wherever the codes are used.
 '''
 from Seconds2When import getSecond2Datetime, getSecond2When
-import threading, time, thread
-from datetime import datetime
+import threading, time
 from termcolor import cprint
 class Timer:
     def __init__(self, d, func, args={}, start_type='every'):
@@ -38,7 +37,7 @@ class Timer:
             while True:
                 st = getSecond2When(hour = self.d.hour, minute=self.d.minute, second=self.d.second)
                 time.sleep(st if st else getSecond2When(hour = 23, minute=59, second=59) + 1)
-                thread.start_new_thread(self.func, kwargs = self.args)
+                threading.Thread(target=self.func, kwargs=self.args).start()
             
 
 if __name__ == '__main__':
