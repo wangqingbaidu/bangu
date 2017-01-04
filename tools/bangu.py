@@ -20,8 +20,6 @@ parser = argparse.ArgumentParser(description='install bangu by root')
 parser.add_argument('opts', choices=['install', 'start', 'stop'])
 args = parser.parse_args()
 
-print 
-
 if args.opts == 'install':
     #install GetBanguHome model to system.
     gethome_path = os.path.join(os.path.dirname(sys.argv[0]), 'GetBanguHome.py')
@@ -118,7 +116,7 @@ elif args.opts == 'start':
     thread.start_new_thread(ThreadWeatherLEDFlicker, tuple())
     thread.start_new_thread(ThreadIndoorTmpHum2DB, (10,))
     thread.start_new_thread(ThreadLCDTemperatureHumidity, tuple())
-    thread.start_new_thread(ThreadPushImage2Phone, (['%H:%M:%S', '11:03:00'],))
+    thread.start_new_thread(ThreadPushImage2Phone, ([('%H:%M:%S', '11:03:00')],))
     thread.start_new_thread(ThreadAudioAccessToken2DB, (999999,))
     
     while True:
