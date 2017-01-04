@@ -16,19 +16,24 @@ Note: Please keep the above information whenever or wherever the codes are used.
 '''
 import GetBanguHome
 from datetime import datetime
-
-def getSecond2When(hour = None, minute = None, second = None):
+def getSecond2When(year = None, month = None, day = None, hour = None, minute = None, second = None):
     #If there exists a bug while converting, 0 will be returned. 
     try:
         now = datetime.now()
-        to = datetime(now.year, now.month, now.day, 
-                          hour if hour != None else 0,
-                          minute if minute != None else 0,
-                          second if second != None else 0)
+        to = datetime(year if year != None else now.year, 
+                      month if month != None else now.month, 
+                      day if day != None else now.day, 
+                      hour if hour != None else 0,
+                      minute if minute != None else 0,
+                      second if second != None else 0)
         
         return (to - now).seconds + 1 if to > now else 0
     except:
         return 0
+    
+def getSecond2Datetime(d):
+    #If there exists a bug while converting, 0 will be returned. 
+    return getSecond2When(d.year, d.month, d.day, d.hour, d.minute, d.second)
     
 if __name__ == '__main__':
     print getSecond2When(hour= -23, minute=10)

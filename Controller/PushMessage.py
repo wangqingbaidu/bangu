@@ -23,6 +23,7 @@ import time
 from utils.InstaPush import App
 from utils.Seconds2When import getSecond2When
 from Controller import putErrorlog2DB
+from utils.Timer import Timer
 
 def PushImage2Phone(cfg = configurations.get_basic_settings(), db = model):
     try:
@@ -48,14 +49,18 @@ def PushImage2Phone(cfg = configurations.get_basic_settings(), db = model):
     except Exception,e:
         putErrorlog2DB('ThreadPushImage2Phone', e, db)
 
-def ThreadPushImage2Phone(when = 23):
+def ThreadPushImage2Phone(when = []):
     db = ModelDB()
-    while True:
-        hour = datetime.now().hour
-        if hour == when:
-            PushImage2Phone(db = db)
-        st = getSecond2When(hour = when)
-        time.sleep(st if st else 3600)
+    for w in when:
+        try:
+            if len(w) == 2:
+                Timer(datetime.strptime(w[0], w[1]), PushImage2Phone, (db)).start()
+            elif len(w) == 3:
+                assert w[2].lower() in ['every', 'once']
+                Timer(datetime.strptime(w[0], w[1]), PushImage2Phone, (db), w[2]).start()
+        except Exception,e:
+            putErrorlog2DB('ThreadPushImage2Phone', e, db)
+            
         
 if __name__ == '__main__':
     PushImage2Phone()
