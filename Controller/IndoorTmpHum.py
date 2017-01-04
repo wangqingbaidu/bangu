@@ -49,11 +49,10 @@ def GetTmpHum2DB(cfg = configurations.get_tmphum_pin_setting(), db = model):
             humtmp['hum'] = int(hum)
             humtmp['tmp'] = int(tmp)
             humtmp['datetime'] = datetime.now()
-            db.insert_tmphum(humtmp)
-        else:
-            putErrorlog2DB('ThreadIndoorTmpHum2DB', 'No data', db)
+            db.insert_tmphum(humtmp)            
     
-    except:
+    except Exception,e:
+        putErrorlog2DB('ThreadIndoorTmpHum2DB', e, db)
         pass
         
     

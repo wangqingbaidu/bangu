@@ -32,7 +32,7 @@ parser = argparse.ArgumentParser(description='Get bangu error log.')
 '''
 
 if __name__ == '__main__':
-    parser.add_argument('-time', type = int, default=1)
+    parser.add_argument('-t', type = int, default=1)
     args = parser.parse_args()
     print "Getting log of %d hour(s)..." %args.time
     id_enum = {}
