@@ -19,6 +19,7 @@ import GetBanguHome
 from Model import model
 import argparse
 from Model.ModelDB import error_enum
+from utils.termcolor import cprint
 parser = argparse.ArgumentParser(description='Get bangu error log.')
 
 '''
@@ -34,12 +35,12 @@ parser = argparse.ArgumentParser(description='Get bangu error log.')
 if __name__ == '__main__':
     parser.add_argument('-t', type = int, default=1)
     args = parser.parse_args()
-    print "Getting log of %d hour(s)..." %args.time
+    cprint("Getting log of %d hour(s)..." %args.t, 'yellow')
     id_enum = {}
     for i in error_enum:
         id_enum[i['id']] = i
         
-    log = model.get_log(args.time)
+    log = model.get_log(args.t)
     for l in log:
         print id_enum[l.error_type]['thread'], l.datetime, l.e
         
