@@ -38,7 +38,7 @@ class Timer:
                        'yellow')
         elif self.start_type.lower() == 'every':
             while True:
-                st = getSecond2When(hour = self.d.hour, self.d.minute, self.d.second)
+                st = getSecond2When(hour = self.d.hour, minute=self.d.minute, second=self.d.second)
                 time.sleep(st if st else getSecond2When(hour = 23, 59, 59) + 1)
                 self.timer.start()
             
