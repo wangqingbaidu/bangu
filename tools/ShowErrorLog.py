@@ -35,6 +35,9 @@ parser = argparse.ArgumentParser(description='Get bangu error log.')
 if __name__ == '__main__':
     parser.add_argument('-t', type = int, default=1)
     args = parser.parse_args()
+    if args.t <= 0:
+        cprint("Time must positive! Your input %d" %args.t, 'red')
+        exit()
     cprint("Getting log of %d hour(s)..." %args.t, 'yellow')
     id_enum = {}
     for i in error_enum:
