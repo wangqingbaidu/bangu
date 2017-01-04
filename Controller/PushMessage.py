@@ -54,10 +54,10 @@ def ThreadPushImage2Phone(when = []):
     for w in when:
         try:
             if len(w) == 2:
-                Timer(datetime.strptime(w[0], w[1]), PushImage2Phone, (db)).start()
+                Timer(datetime.strptime(w[0], w[1]), PushImage2Phone, (db,)).start()
             elif len(w) == 3:
                 assert w[2].lower() in ['every', 'once']
-                Timer(datetime.strptime(w[0], w[1]), PushImage2Phone, (db), w[2]).start()
+                Timer(datetime.strptime(w[0], w[1]), PushImage2Phone, (db,), w[2]).start()
         except Exception,e:
             putErrorlog2DB('ThreadPushImage2Phone', e, db)
             
