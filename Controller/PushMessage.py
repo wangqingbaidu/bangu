@@ -63,6 +63,6 @@ def ThreadPushImage2Phone(when = []):
             
         
 if __name__ == '__main__':
-#     PushImage2Phone()
-    import threading
-    threading.Thread(target=PushImage2Phone, kwargs={'db': model}).start()
+    PushImage2Phone()
+#     import threading
+#     threading.Thread(target=PushImage2Phone, kwargs={'db': model}).start()

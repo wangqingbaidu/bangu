@@ -15,6 +15,7 @@ Later I will display all the mother board and sensors which I have already used.
 >###3. 2016-12-19 InstaPush added!   
 >###4. 2016-12-23 Baidu Voice TTS,  Email module!
 >###5. 2016-12-25 Log merge!
+>###6. 2017-01-04 Timer scheduler.
 
 ##Hardware Required
 >1.Raspberry pi 2 or later
