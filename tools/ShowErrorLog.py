@@ -29,7 +29,7 @@ parser = argparse.ArgumentParser(description='Get bangu error log.')
         @ThreadWeatherLEDFlicker
         @ThreadIndoorTmpHum2DB
         @ThreadLCDTemperatureHumidity
-        @ThreadPushImage2Phone
+        @ThreadPushMessage2Phone
 '''
 
 if __name__ == '__main__':

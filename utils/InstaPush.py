@@ -19,7 +19,6 @@ Note: Please keep the above information whenever or wherever the codes are used.
 
 import json
 import requests
-from pygments.styles import trac
 
 class Instapush(object):
     def __init__(self, user_token):
