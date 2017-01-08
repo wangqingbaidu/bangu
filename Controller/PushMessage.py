@@ -50,7 +50,7 @@ def PushMessage2Phone(cfg = configurations.get_basic_settings(), db = model):
                                min = msg_db.tmp_min,
                                max = msg_db.tmp_max,
                                suggestion=msg_db.comf)
-        print message
+#         print message
         app.notify(message)
 
     except Exception,e:
