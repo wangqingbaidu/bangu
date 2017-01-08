@@ -16,10 +16,10 @@ Contact Info: you can send an email to 564326047@qq.com(Vlon)
 
 Note: Please keep the above information whenever or wherever the codes are used.
 '''
-import GetBanguHome
 
 import json
 import requests
+from pygments.styles import trac
 
 class Instapush(object):
     def __init__(self, user_token):
@@ -51,12 +51,16 @@ class App(object):
         app = App(appid='584f57f0a4c48a9bd4bf1804', secret='682b5cdec67110bcda62acb783973eeb')
         app.notify(event_name='weather', trackers={ 'message': 'I am Bangu\nFrom wangqingbaidu.cn'})
     """
-    def __init__(self, appid, secret):
-        self.appid = appid
-        self.secret = secret
+    def __init__(self, appid, secret, event_name = None, tracker = None):
+        self.appid = appid if appid else '584f57f0a4c48a9bd4bf1804'
+        self.secret = secret if secret else '682b5cdec67110bcda62acb783973eeb'
         self._headers = {}
+        self.set_event_tricker(event_name, tracker)
 
-
+    def set_event_tricker(self, event_name, tracker):
+        self.event_name = event_name if event_name else 'weather'
+        self.tracker = tracker if tracker else 'message'
+        
     @property
     def headers(self):
         if not self._headers:
@@ -80,8 +84,8 @@ class App(object):
                            headers=self.headers).json()
         return ret
 
-    def notify(self, event_name, trackers):
-        payload = {'event': event_name, 'trackers': trackers}
+    def notify(self, text):
+        payload = {'event': self.event_name, 'trackers': {self.tracker:text}}
         ret = requests.post('http://api.instapush.im/v1/post',
                             headers=self.headers,
                             data=json.dumps(payload)).json()

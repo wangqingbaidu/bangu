@@ -19,19 +19,25 @@ import GetBanguHome
 from utils.ReadConfig import configurations
 from Model import model, ModelDB
 from datetime import datetime
-import time
 from utils.InstaPush import App
-from utils.Seconds2When import getSecond2When
+from utils.Pushover import Pushover
 from Controller import putErrorlog2DB
 from utils.Timer import Timer
 
-def PushImage2Phone(cfg = configurations.get_basic_settings(), db = model):
+def PushMessage2Phone(cfg = configurations.get_basic_settings(), db = model):
     try:
         if type(cfg) != dict or not cfg.has_key('insta_appid') or not cfg.has_key('insta_secret'):
             print 'insta_appid and insta_secret must be contained!'
             exit()
         
-        app = App(appid=cfg['insta_appid'], secret=cfg['insta_secret'])
+        app = None
+        if cfg['notification'] == 'pushover':
+            print cfg['pushover_user'],cfg["pushover_token"]
+            app = Pushover(user=cfg['pushover_user'], token=cfg["pushover_token"])
+        elif cfg['notification'] == 'instapush':
+            app = App(appid=cfg['insta_appid'], secret=cfg['insta_secret'], event_name='weather', tracker='message')
+        else:
+            raise Exception('Notification app %s not found!' %cfg['notification'])
         
 #         msg = '室内温度：{tmp}℃\n室内湿度:{hum}%%'.decode('utf8')
 #         msg_db = db.get_latest_tmphum()
@@ -40,29 +46,31 @@ def PushImage2Phone(cfg = configurations.get_basic_settings(), db = model):
 
         msg = '天气:{cond} {min}℃~{max}℃\n{suggestion}\nFrom BANGU'.decode('utf8')
         msg_db = db.get_latest_weather()
-        app.notify(event_name='weather', 
-                   trackers={'message': msg.format(cond=msg_db.descCN,
-                                                   min = msg_db.tmp_min,
-                                                   max = msg_db.tmp_max,
-                                                   suggestion=msg_db.comf)})
+        message = msg.format(cond=msg_db.descCN,
+                               min = msg_db.tmp_min,
+                               max = msg_db.tmp_max,
+                               suggestion=msg_db.comf)
+        print message
+        app.notify(message)
 
     except Exception,e:
-        putErrorlog2DB('ThreadPushImage2Phone', e, db)
+        putErrorlog2DB('ThreadPushMessage2Phone', e, db)
 
-def ThreadPushImage2Phone(when = []):
+def ThreadPushMessage2Phone(when = []):
     db = ModelDB()
     for w in when:
         try:
             if len(w) == 2:
-                Timer(datetime.strptime(w[0], w[1]), PushImage2Phone, {'db':db}).start()
+                Timer(datetime.strptime(w[0], w[1]), PushMessage2Phone, {'db':db}).start()
             elif len(w) == 3:
                 assert w[2].lower() in ['every', 'once']
-                Timer(datetime.strptime(w[0], w[1]), PushImage2Phone, {'db':db}, w[2]).start()
+                Timer(datetime.strptime(w[0], w[1]), PushMessage2Phone, {'db':db}, w[2]).start()
         except Exception,e:
             putErrorlog2DB('ThreadPushImage2Phone', e, db)
             
         
 if __name__ == '__main__':
-    PushImage2Phone()
+    PushMessage2Phone()
+#     ThreadPushMessage2Phone([('2017-01-08 17:32:24', '%Y-%m-%d %H:%M:%S')])
 #     import threading
 #     threading.Thread(target=PushImage2Phone, kwargs={'db': model}).start()

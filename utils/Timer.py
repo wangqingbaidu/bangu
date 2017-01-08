@@ -36,6 +36,7 @@ class Timer:
         elif self.start_type.lower() == 'every':
             while True:
                 st = getSecond2When(hour = self.d.hour, minute=self.d.minute, second=self.d.second)
+                print st
                 time.sleep(st if st else getSecond2When(hour = 23, minute=59, second=59) + 1)
                 threading.Thread(target=self.func, kwargs=self.args).start()
             
