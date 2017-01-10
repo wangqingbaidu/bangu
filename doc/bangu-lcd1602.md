@@ -8,20 +8,6 @@
 ##二、代码详解
 ####<font color=red>本文的引脚都指的是树莓派的Board model的引脚。</font>
 >1.初始化代码
-"""python
-def __init__(self, pin_rs=21, pin_e=20, pins_db=[16, 7, 8, 25]):
-    self.pin_rs = pin_rs
-    self.pin_e = pin_e
-    self.pins_db = pins_db
-    cfg = configurations.get_lcd_pin_settings()
-    try:
-        self.pin_rs = cfg['rs']
-        self.pin_e = cfg['e']
-        self.pins_db = [cfg['bit4'], cfg['bit3'], cfg['bit2'], cfg['bit1']]
-    except:
-        pass
-    self.clear()
-"""
 ><pre class="brush:python;">def __init__(self, pin_rs=21, pin_e=20, pins_db=[16, 7, 8, 25]):
     self.pin_rs = pin_rs
     self.pin_e = pin_e
