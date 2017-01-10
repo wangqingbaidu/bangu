@@ -73,4 +73,3 @@ def message(self, text):
 >最后给大家整份lcd1602的代码连接，建议结合bangu项目进行测试。
 
 [https://github.com/wangqingbaidu/bangu/blob/master/View/Hardware/lcd1602.py](https://github.com/wangqingbaidu/bangu/blob/master/View/Hardware/lcd1602.py)
-###☛[Bangu 地址](https://github.com/wangqingbaidu/bangu/)☚
