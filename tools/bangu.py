@@ -130,8 +130,3 @@ elif args.opts == 'stop':
             print item.replace('\n', ''), '\t---------------\tKilled!'
             os.system('kill -9 %s'% pid)
         
-    
-    
-
-    
-    
