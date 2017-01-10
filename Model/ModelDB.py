@@ -119,16 +119,16 @@ class Weather(BaseModel):
     city = Column(CHAR(20))
     country = Column(CHAR(20))
     datetime  = Column(DateTime)    
-    humidity  = Column(CHAR(10))
+#     humidity  = Column(CHAR(10))
     tmp_max = Column(Float)
     tmp_min = Column(Float)
-    pm25 = Column(Float)
+#     pm25 = Column(Float)
     desc = Column(Integer)
     descCN = Column(String)
 #     suggestion = Column(String)
-    comf = Column(String)
-    flu = Column(String)
-    drsg = Column(String)
+#     comf = Column(String)
+#     flu = Column(String)
+#     drsg = Column(String)
     
 class TmpHum(BaseModel):
     __tablename__ = 'tmphum'

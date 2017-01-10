@@ -42,40 +42,33 @@ def GetWeather2DB(cfg = configurations.get_basic_settings(), db = model):
             cfg['city'] = 'beijing'
             cfg['counrty'] = 'CN'
     
-        url = 'http://apis.baidu.com/heweather/weather/free?city=%s' %cfg['city']
+        url = 'https://api.thinkpage.cn/v3/weather/daily.json?location=%s&key=%s' \
+            %(cfg['city'],cfg['weather_apikey'])
+        print url
         req = urllib2.Request(url)
         
-        req.add_header("apikey", cfg['weather_apikey'])
+#         req.add_header("apikey", )
         
         resp = urllib2.urlopen(req)
         content = resp.read()
         weather = {}
+        print content
         if(content):
-            json_content = json.loads(content)['HeWeather data service 3.0'][0]
+            json_content = json.loads(content)["results"][0]['daily']
             weather['city'] = cfg['city']
             weather['country'] = cfg['country']
             weather['datetime'] = datetime.now()
-            weather['humidity'] = json_content['now']['hum']
-            weather['tmp_max'] = float(json_content['daily_forecast'][1]['tmp']['max'])
-            weather['tmp_min'] = float(json_content['daily_forecast'][1]['tmp']['min'])
-            weather['pm25'] = float(json_content['aqi']['city']['pm25'])
+            weather['tmp_max'] = float(json_content[1]['high'])
+            weather['tmp_min'] = float(json_content[1]['low'])
+            weather['wind_speed'] = float(json_content[1]['wind_speed'])
             #If beyond 8 o'clock, then use tomorrow weather.
             if datetime.now().hour >= 20:                
-                weather['desc'] = int(json_content['daily_forecast'][1]['cond']['code_d'])
-                weather['descCN'] = json_content['daily_forecast'][1]['cond']['txt_d']
+                weather['desc'] = int(json_content[1]['code_day'])
+                weather['descCN'] = json_content[1]['text_day']
             else:
-                weather['desc'] = int(json_content['now']['cond']['code'])
-                weather['descCN'] = json_content['now']['cond']['txt']
+                weather['desc'] = int(json_content[0]['code_day'])
+                weather['descCN'] = json_content[0]['text_day']
             
-            
-            weather['comf'] = json_content['suggestion']['comf']['txt']
-            weather['drsg'] = json_content['suggestion']['drsg']['txt']
-            weather['flu'] = json_content['suggestion']['flu']['txt']
-
-#             suggestion = '舒适指数:{comf}\n穿衣指数:{drsg}\n感冒指数:{flu}'.decode('utf8')
-#             weather['suggestion'] = suggestion.format(comf=json_content['suggestion']['comf']['txt'],
-#                                                       drsg=json_content['suggestion']['drsg']['txt'],
-#                                                       flu=json_content['suggestion']['flu']['txt'])
             db.insert_weather(weather)
     except Exception,e:
         putErrorlog2DB('ThreadUpdateWeather2DB', e, db)
