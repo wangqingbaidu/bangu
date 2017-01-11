@@ -32,7 +32,7 @@ def PushMessage2Phone(cfg = configurations.get_basic_settings(), db = model):
         
         app = None
         if cfg['notification'] == 'pushover':
-            print cfg['pushover_user'],cfg["pushover_token"]
+#             print cfg['pushover_user'],cfg["pushover_token"]
             app = Pushover(user=cfg['pushover_user'], token=cfg["pushover_token"])
         elif cfg['notification'] == 'instapush':
             app = App(appid=cfg['insta_appid'], secret=cfg['insta_secret'], event_name='weather', tracker='message')
@@ -44,7 +44,7 @@ def PushMessage2Phone(cfg = configurations.get_basic_settings(), db = model):
 #         app.notify(event_name='weather', 
 #                    trackers={'message': msg.format(tmp = msg_db.tmp, hum = msg_db.hum)})
 
-        msg = '天气:{cond}\n气温:{min}℃~{max}℃\nFrom BANGU'.decode('utf8')
+        msg = '天气:{cond} 气温:{min}℃~{max}℃\nFrom Bangu'.decode('utf8')
         msg_db = db.get_latest_weather()
         message = msg.format(cond=msg_db.descCN,
                                min = msg_db.tmp_min,
@@ -69,7 +69,7 @@ def ThreadPushMessage2Phone(when = []):
             
         
 if __name__ == '__main__':
-    PushMessage2Phone()
-#     ThreadPushMessage2Phone([('2017-01-08 17:32:24', '%Y-%m-%d %H:%M:%S')])
+#     PushMessage2Phone()
+    ThreadPushMessage2Phone([('2017-1-11 09:37:50', '%Y-%m-%d %H:%M:%S')])
 #     import threading
 #     threading.Thread(target=PushImage2Phone, kwargs={'db': model}).start()

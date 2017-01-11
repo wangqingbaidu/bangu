@@ -14,7 +14,8 @@ Contact Info: you can send an email to 564326047@qq.com(Vlon)
 
 Note: Please keep the above information whenever or wherever the codes are used.
 '''
-import threading, time, datetime
+import threading, time
+from datetime import datetime
 from termcolor import cprint
 
 def getSecond2When(year = None, month = None, day = None, hour = None, minute = None, second = None):
@@ -28,8 +29,10 @@ def getSecond2When(year = None, month = None, day = None, hour = None, minute = 
                       minute if minute != None else 0,
                       second if second != None else 0)
         
+#         print (to - now).seconds
         return (to - now).seconds + 1 if to > now else 0
-    except:
+    except Exception, e:
+        print e
         return 0
     
 def getSecond2Datetime(d):
@@ -59,6 +62,7 @@ class Timer:
                 if st == 0:                    
                     time.sleep(getSecond2When(hour = 23, minute=59, second=59) + 1)
                 else:
+                    time.sleep(st)
                     threading.Thread(target=self.func, kwargs=self.args).start()
             
 
