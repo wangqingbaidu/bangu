@@ -43,6 +43,7 @@ Later I will display all the mother board and sensors which I have already used.
 >###5. 2016-12-25 Log merge!
 >###6. 2017-01-04 Timer scheduler.
 >###7. 2017-01-08 Add supports of another powerful message push app which is called [pushover](https://pushover.net/).
+>###8. 2017-01-11 Transform Baidu API to others gradually.
 
 ##Hardware Required
 >1.Raspberry pi 2 or later
