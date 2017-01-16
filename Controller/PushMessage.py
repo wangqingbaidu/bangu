@@ -69,7 +69,7 @@ def ThreadPushMessage2Phone(when = []):
             
         
 if __name__ == '__main__':
-#     PushMessage2Phone()
-    ThreadPushMessage2Phone([('2017-1-11 09:37:50', '%Y-%m-%d %H:%M:%S')])
+    PushMessage2Phone()
+#     ThreadPushMessage2Phone([('2017-1-12 10:27:40', '%Y-%m-%d %H:%M:%S')])
 #     import threading
 #     threading.Thread(target=PushImage2Phone, kwargs={'db': model}).start()
