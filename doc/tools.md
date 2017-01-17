@@ -1,4 +1,4 @@
-Bangu详解（二）--- Tools安装脚本
+#Bangu详解（二）--- Tools安装脚本
 
 ##一、`GetBanguHome.py`
 这个脚本是用来安装到python目录的，用来获取寻找bangu的安装目录，默认会在当前目录上递归的寻找，直到碰到包含`Controller`, `Model`, `View`三个目录为止，表示着寻找到了根目录，如果寻找到`\`依然没有结果，就再寻找一次`/root/bangu`这个推荐安装目录。
