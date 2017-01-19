@@ -14,6 +14,7 @@ Contact Info: you can send an email to 564326047@qq.com(Vlon)
 
 Note: Please keep the above information whenever or wherever the codes are used.
 '''
+import GetBanguHome
 from datetime import datetime
 import urllib2
 from bs4 import BeautifulSoup
