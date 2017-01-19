@@ -20,6 +20,17 @@ from bs4 import BeautifulSoup
 from utils.obj2dict import obj2dict
 
 class weather:
+    """    
+    ---------
+    Attribute
+    ---------
+    @__attrs_map: Map from attribute to Chinese.
+    
+    -------------
+    Public Method
+    -------------
+    @__str__: Convert non-empty attribute to string    
+    """
     __attrs_map = {'humidity':'湿度:',
                    'temperature':'温度:',
                    'wind':'风力:',
@@ -58,6 +69,33 @@ class weather:
 
         
 class WeatherAPI:
+    """
+    ---------
+    Attribute
+    ---------
+    @url_map: dict. Key is parser type, value is url of this type.
+    @last_update: datetime. Last update time of this instance.
+    @suggestion: str. Suggestion of current weather.
+    @now: weather. Weather info of now.
+    @forecast: weather list. Weather info of former three days.
+    @month:  weather list. Weather info of this month.
+    
+    -------------
+    Public Method
+    -------------
+    @refresh:
+        input: None
+        output: None
+        Refresh weather info.
+    
+    --------------
+    Private Method
+    --------------
+    @__parser_XXX:
+        input: Block of XXX
+        output: None
+        Parser XXX block to weather of weather list
+    """
     urlmap = {'moji':'http://tianqi.moji.com/'}
     last_update = None
     suggestion = None
