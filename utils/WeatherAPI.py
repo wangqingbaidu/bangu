@@ -63,7 +63,7 @@ class weather:
     def __str__(self):
         attrs_dict = obj2dict(self)
         attrs_list = ['{key}{value}'.format(key=self.__attrs_map[k],
-                                            value=attrs_dict[k].encode('utf8'))
+                                            value=attrs_dict[k].lstrip().encode('utf8'))
                       for k in attrs_dict if attrs_dict[k]]
           
         return '\t'.join(sorted(attrs_list))
