@@ -121,7 +121,7 @@ class WeatherAPI:
             raise Exception('Web connection error.')
         
     def __parser_content(self):
-        soup = BeautifulSoup(self.content, 'html5lib')
+        soup = BeautifulSoup(self.content, 'html.parser')
         now_block = soup.select('div[class="wrap clearfix wea_info"]')
         forecast_block = soup.select('div[class="forecast clearfix"]')
         month_block = soup.find_all(attrs={'class':"grid clearfix",'id':"calendar_grid"})
