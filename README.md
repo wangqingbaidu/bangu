@@ -36,15 +36,16 @@ Later I will display all the mother board and sensors which I have already used.
 期望能跟大家一起，玩转树莓派。
 
 ##News
->###1. 2016-11-27 Weather with LED completed!                                                          
->###2. 2016-12-12 LCD display indoor temperature and humidity completed!          
->###3. 2016-12-19 InstaPush added!   
->###4. 2016-12-23 Baidu Voice TTS,  Email module!
->###5. 2016-12-25 Log merge!
->###6. 2017-01-04 Timer scheduler.
->###7. 2017-01-08 Add supports of another powerful message push app which is called [pushover](https://pushover.net/).
->###8. 2017-01-11 Transform Baidu API to others gradually.
->###9. 2017-01-17 Create documents on some moduler.
+>####1.	2016-11-27 Weather with LED completed!                                                          
+>####2.	2016-12-12 LCD display indoor temperature and humidity completed!          
+>####3.	2016-12-19 InstaPush added!   
+>####4.	2016-12-23 Baidu Voice TTS,  Email module!
+>####5.	2016-12-25 Log merge!
+>####6.	2017-01-04 Timer scheduler.
+>####7. 	2017-01-08 Add supports of another powerful message push app which is called [pushover](https://pushover.net/).
+>####8.	2017-01-11 Transform Baidu API to others gradually.
+>####9.	2017-01-17 Create documents on some moduler.
+>####10.	2017-01-20 Use [http://tianqi.moji.com/](http://tianqi.moji.com/) as weather API which based on python reptile. See [Src code](https://github.com/wangqingbaidu/bangu/blob/master/utils/WeatherAPI.py) for details.
 
 ##Hardware Required
 >1.Raspberry pi 2 or later
