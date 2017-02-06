@@ -44,6 +44,9 @@ if __name__ == '__main__':
         id_enum[i['id']] = i
         
     log = model.get_log(args.t)
+    count = 0
     for l in log:
         print id_enum[l.error_type]['thread'], l.datetime, l.e
+        count += 1
         
+    print 'Total contains %d error logs.' %count
