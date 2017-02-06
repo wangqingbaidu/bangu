@@ -60,14 +60,14 @@ def WeatherLEDFlicker(rpin=11, gpin=13, ypin=15, db = model):
             raspgpio.pin_set_low(rpin)
     elif AlarmCode == 1:
                 if totalRunTime % 2 == 0:
-                        raspgpio.pin_set_heigh(gpin)
-                else:
-                        raspgpio.pin_set_low(gpin)
-    elif AlarmCode == 2:
-                if totalRunTime % 2 == 0:
                         raspgpio.pin_set_heigh(ypin)
                 else:
                         raspgpio.pin_set_low(ypin)
+    elif AlarmCode == 2:
+                if totalRunTime % 2 == 0:
+                        raspgpio.pin_set_heigh(gpin)
+                else:
+                        raspgpio.pin_set_low(gpin)
     else:
         if totalRunTime % 2 ==0:
             raspgpio.pin_set_heigh(rpin)
