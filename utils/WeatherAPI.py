@@ -85,7 +85,7 @@ def getConditionCode(condition = None):
     elif u'雨'.encode('utf8') in condition_str or\
          u'雪'.encode('utf8') in condition_str or\
          u'霾'.encode('utf8') in condition_str:
-        return 1
+        return 0
     else:
         return -1
         
