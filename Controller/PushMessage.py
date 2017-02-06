@@ -44,11 +44,12 @@ def PushMessage2Phone(cfg = configurations.get_basic_settings(), db = model):
 #         app.notify(event_name='weather', 
 #                    trackers={'message': msg.format(tmp = msg_db.tmp, hum = msg_db.hum)})
 
-        msg = '天气:{cond} 气温:{min}℃~{max}℃\nFrom Bangu'.decode('utf8')
+        msg = '天气:{cond} 气温:{min}~{max}\n{suggestion}\nFrom Bangu'.decode('utf8')
         msg_db = db.get_latest_weather()
         message = msg.format(cond=msg_db.descCN,
-                               min = msg_db.tmp_min,
-                               max = msg_db.tmp_max)
+                             suggestion = msg_db.suggestion,
+                             min = msg_db.tmp_min,
+                             max = msg_db.tmp_max)
 #         print message
         app.notify(message)
 
