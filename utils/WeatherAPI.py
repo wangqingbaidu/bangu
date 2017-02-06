@@ -44,30 +44,50 @@ class weather:
     temperature = None
     wind = None
     condition = None
+    condition_code = None
     pm25 = None
     pm25_desc = None
     
     tmp_max = None
     tmp_min = None
     
-    def __init__(self, t = None, h = None, w = None, c = None, p = None, pd = None, tmax = None, tmin = None):
+    def __init__(self, t = None, h = None, w = None, c = None, cc = None, 
+                 p = None, pd = None, tmax = None, tmin = None):
         self.temperature = t
         self.humidity = h
         self.wind = w
         self.condition = c
+        self.condition_code = cc
         self.pm25 = p
         self.pm25_desc = pd
         self.tmp_max = tmax
         self.tmp_min = tmin
         
     def __str__(self):
-        attrs_dict = obj2dict(self)
+        attrs_dict = obj2dict(self, ept=['condition_code'])
         attrs_list = ['{key}{value}'.format(key=self.__attrs_map[k],
                                             value=attrs_dict[k].strip().encode('utf8'))
                       for k in attrs_dict if attrs_dict[k]]
           
         return '\t'.join(sorted(attrs_list))
 
+def getConditionCode(condition = None):
+    """
+    This model is used to compute condition code with the given condition
+    """
+    condition_str = str(condition.encode('utf8'))
+    if u'晴'.encode('utf8') in condition_str or\
+       u'云'.encode('utf8') in condition_str:
+        return 0
+    elif u'雾'.encode('utf8') in condition_str or\
+         u'阴'.encode('utf8') in condition_str:
+        return 1
+    elif u'雨'.encode('utf8') in condition_str or\
+         u'雪'.encode('utf8') in condition_str or\
+         u'霾'.encode('utf8') in condition_str:
+        return 2
+    else:
+        return -1
         
 class WeatherAPI:
     """
@@ -107,16 +127,20 @@ class WeatherAPI:
     def __init__(self, api_type='moji', debug=False):
         self.type = api_type
         self.debug = debug
+        self.api_type = api_type
         if self.urlmap.has_key(api_type):
-            self.content = urllib2.urlopen(self.urlmap[api_type]).read()
+            self.refresh()
+#             self.content = urllib2.urlopen(self.urlmap[self.api_type]).read()
+#             self.last_update = datetime.now()
+#             self.__parser_content()
         else:
             raise Exception("API type not found! Now tianqi.moji.com api supports only.")
-        self.__parser_content()
         
     def refresh(self):
         try:
             self.content = urllib2.urlopen(self.urlmap[self.api_type]).read()
             self.last_update = datetime.now()
+            self.__parser_content()
         except:
             raise Exception('Web connection error.')
         
@@ -142,6 +166,7 @@ class WeatherAPI:
             'div[class="left"] div[class="wea_weather clearfix"] em')[0].string + '℃'.decode('utf8')
         self.now.condition = now_block.select(
             'div[class="left"] div[class="wea_weather clearfix"] b')[0].string
+        self.now.condition_code = getConditionCode(self.now.condition)
         
         self.now.humidity = now_block.select(
             'div[class="left"] div[class="wea_about clearfix"] span')[0].string.split()[-1]
@@ -155,7 +180,8 @@ class WeatherAPI:
         for d in days:
             w = weather()
             item = d.select('li')
-            w.condition = item[1].get_text().lstrip()
+            w.condition = item[1].get_text().lstrip()            
+            w.condition_code = getConditionCode(w.condition)
             w.tmp_min = item[2].string.split()[0][:-1] + '℃'.decode('utf8')
             w.tmp_max = item[2].string.split()[-1][:-1] + '℃'.decode('utf8')
             w.wind = item[3].em.string + item[3].b.string 
@@ -171,6 +197,7 @@ class WeatherAPI:
             w = weather()
             try:
                 w.condition = d.img['alt']
+                w.condition_code = getConditionCode(w.condition)
                 w.tmp_min = str(int(d.p.string.split('/')[0])) + '℃'.decode('utf8')
                 w.tmp_max = str(int(d.p.string.split('/')[1][:-1])) + '℃'.decode('utf8')
                 self.month.append(w)
@@ -178,7 +205,10 @@ class WeatherAPI:
                     print w
             except:
                 pass
-        
+            
+weather_info = WeatherAPI(api_type='moji')    
 if __name__ == '__main__':
     w = WeatherAPI(debug=True, api_type='moji')
+    print w.now.condition_code
+#     w.refresh()
     

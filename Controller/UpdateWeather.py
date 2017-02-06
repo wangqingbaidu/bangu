@@ -60,7 +60,7 @@ def GetWeather2DB(cfg = configurations.get_basic_settings(), db = model):
             weather['datetime'] = datetime.now()
             weather['tmp_max'] = float(json_content[1]['high'])
             weather['tmp_min'] = float(json_content[1]['low'])
-            weather['wind_speed'] = float(json_content[1]['wind_speed'])
+            weather['wind'] = json_content[1]['wind_speed']
             #If beyond 8 o'clock, then use tomorrow weather.
             if datetime.now().hour >= 20:                
                 weather['desc'] = int(json_content[1]['code_day'])
@@ -73,13 +73,49 @@ def GetWeather2DB(cfg = configurations.get_basic_settings(), db = model):
     except Exception,e:
         putErrorlog2DB('ThreadUpdateWeather2DB', e, db)
         
+def GetWeather2DB_Self_API(cfg = configurations.get_basic_settings(), db = model):
+    """
+    This method is used to put weather which get from API to DB.
+    Use self parser to get weather info.
+    See utils.WeatherAPI for details.
+    Parameters
+    -------------
+    @cfg: Bangu system basic settings.
+    @db: which DB connection to be used, Test use global. Thread use own. 
+    """
+    try:
+        from utils.WeatherAPI import weather_info
+        weather = {}
+        weather['city'] = cfg['city']
+        weather['country'] = cfg['country']
+        weather['datetime'] = datetime.now()
+        
+        weather_info.refresh()
+        weather['humidity'] = weather_info.now.humidity
+        weather['tmp_max'] = weather_info.forecast[0].tmp_max
+        weather['tmp_min'] = weather_info.forecast[0].tmp_min
+        weather['wind'] = weather_info.now.wind
+        weather['pm25'] = weather_info.now.pm25
+        #If beyond 8 o'clock, then use tomorrow weather.
+        if datetime.now().hour >= 20:                
+            weather['desc'] = weather_info.now.condition_code
+            weather['descCN'] = weather_info.forecast[1].condition
+        else:
+            weather['desc'] = weather_info.now.condition_code
+            weather['descCN'] = weather_info.now.condition
+            
+        weather['suggestion'] = weather_info.suggestion
+        db.insert_weather(weather)
+    except Exception,e:
+        putErrorlog2DB('ThreadUpdateWeather2DB', e, db)
+        
 def ThreadUpdateWeather2DB(decay = 600):
     db = ModelDB()
     while True:
-        GetWeather2DB(db = db)
+        GetWeather2DB_Self_API(db = db)
         time.sleep(decay)
         
 if __name__ == '__main__':
-    GetWeather2DB()
+    GetWeather2DB_Self_API()
     desc = model.get_latest_weather().desc
     print desc
