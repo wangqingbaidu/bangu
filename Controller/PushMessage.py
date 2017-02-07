@@ -18,11 +18,13 @@ import GetBanguHome
 
 from utils.ReadConfig import configurations
 from Model import model, ModelDB
-from datetime import datetime
+import datetime
 from utils.InstaPush import App
 from utils.Pushover import Pushover
 from Controller import putErrorlog2DB
 from utils.Timer import Timer
+import thread
+from time import sleep
 
 def PushMessage2Phone(cfg = configurations.get_basic_settings(), db = model):
     try:
@@ -61,16 +63,17 @@ def ThreadPushMessage2Phone(when = []):
     for w in when:
         try:
             if len(w) == 2:
-                Timer(datetime.strptime(w[0], w[1]), PushMessage2Phone, {'db':db}).start()
+                Timer(datetime.datetime.strptime(w[0], w[1]), PushMessage2Phone, {'db':db}).start()
             elif len(w) == 3:
                 assert w[2].lower() in ['every', 'once']
-                Timer(datetime.strptime(w[0], w[1]), PushMessage2Phone, {'db':db}, w[2]).start()
+                Timer(datetime.datetime.strptime(w[0], w[1]), PushMessage2Phone, {'db':db}, w[2]).start()
         except Exception,e:
             putErrorlog2DB('ThreadPushImage2Phone', e, db)
             
         
 if __name__ == '__main__':
 #     PushMessage2Phone()
-    ThreadPushMessage2Phone([('2017-2-7 09:07:59', '%Y-%m-%d %H:%M:%S')])
+    thread.start_new_thread(ThreadPushMessage2Phone, ([('15:05:00', '%H:%M:%S')],))
+    sleep(11000)
 #     import threading
 #     threading.Thread(target=PushImage2Phone, kwargs={'db': model}).start()
