@@ -116,7 +116,9 @@ elif args.opts == 'start':
     thread.start_new_thread(ThreadWeatherLEDFlicker, tuple())
     thread.start_new_thread(ThreadIndoorTmpHum2DB, (10,))
     thread.start_new_thread(ThreadLCDTemperatureHumidity, tuple())
-    thread.start_new_thread(ThreadPushMessage2Phone, ([('23:00:00', '%H:%M:%S')],))
+    thread.start_new_thread(ThreadPushMessage2Phone, ([('23:00:00', '%H:%M:%S'),
+                                                       ('08:00:00', '%H:%M:%S'),
+                                                       ('12:00:00', '%H:%M:%S')],))
     thread.start_new_thread(ThreadAudioAccessToken2DB, (999999,))
     
     while True:
