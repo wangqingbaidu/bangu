@@ -56,15 +56,17 @@ class Timer:
                 cprint("Warning: Timer for %s in %s ignored!" %(self.fn, self.d.strftime('%Y-%m-%d %H:%M:%S')), 
                        'yellow')
         elif self.start_type.lower() == 'every':
-            while True:
-                st = getSecond2When(hour = self.d.hour, minute=self.d.minute, second=self.d.second)
-#                 print st
-                if st == 0:                    
-                    time.sleep(getSecond2When(hour = 23, minute=59, second=59) + 1)
-                else:
-                    time.sleep(st)
-                    threading.Thread(target=self.func, kwargs=self.args).start()
+            threading.Thread(target=self.__loop).start()
             
-
+    def __loop(self):
+        while True:
+            st = getSecond2When(hour = self.d.hour, minute=self.d.minute, second=self.d.second)
+#           print st
+            if st == 0:                    
+                time.sleep(getSecond2When(hour = 23, minute=59, second=59) + 1)
+            else:
+                time.sleep(st)
+                threading.Thread(target=self.func, kwargs=self.args).start()
+        
 if __name__ == '__main__':
     print getSecond2When(hour= -23, minute=10)

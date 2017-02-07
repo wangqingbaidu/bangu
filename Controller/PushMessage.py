@@ -59,13 +59,14 @@ def PushMessage2Phone(cfg = configurations.get_basic_settings(), db = model):
         putErrorlog2DB('ThreadPushMessage2Phone', e, db)
 
 def ThreadPushMessage2Phone(when = []):
-    db = ModelDB()
     for w in when:
         try:
             if len(w) == 2:
+                db = ModelDB()
                 Timer(datetime.datetime.strptime(w[0], w[1]), PushMessage2Phone, {'db':db}).start()
             elif len(w) == 3:
                 assert w[2].lower() in ['every', 'once']
+                db = ModelDB()
                 Timer(datetime.datetime.strptime(w[0], w[1]), PushMessage2Phone, {'db':db}, w[2]).start()
         except Exception,e:
             putErrorlog2DB('ThreadPushImage2Phone', e, db)
@@ -73,7 +74,9 @@ def ThreadPushMessage2Phone(when = []):
         
 if __name__ == '__main__':
 #     PushMessage2Phone()
-    thread.start_new_thread(ThreadPushMessage2Phone, ([('15:05:00', '%H:%M:%S')],))
+    thread.start_new_thread(ThreadPushMessage2Phone, ([('15:30:00', '%H:%M:%S'),
+                                                       ('15:30:30', '%H:%M:%S'),
+                                                       ('15:30:59', '%H:%M:%S')],))
     sleep(11000)
 #     import threading
 #     threading.Thread(target=PushImage2Phone, kwargs={'db': model}).start()
