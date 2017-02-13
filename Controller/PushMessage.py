@@ -26,7 +26,31 @@ from utils.Timer import Timer
 import thread
 from time import sleep
 
-def PushMessage2Phone(cfg = configurations.get_basic_settings(), db = model):
+def GetWeatherInfo(db = model):
+    try:        
+#         msg = '室内温度：{tmp}℃\n室内湿度:{hum}%%'.decode('utf8')
+#         msg_db = db.get_latest_tmphum()
+#         app.notify(event_name='weather', 
+#                    trackers={'message': msg.format(tmp = msg_db.tmp, hum = msg_db.hum)})
+
+        msg = '天气:{cond} 气温:{min}~{max}\n{suggestion}\nFrom Bangu'.decode('utf8')
+        msg_db = db.get_latest_weather()
+        message = msg.format(cond=msg_db.descCN,
+                             suggestion = msg_db.suggestion,
+                             min = msg_db.tmp_min,
+                             max = msg_db.tmp_max)
+#         print message
+        return message
+
+    except Exception,e:
+        putErrorlog2DB('ThreadPushMessage2Phone_GetWeatherInfo', e, db)
+
+def GetReminderInfo(db = model):
+    return "惦记交周报".decode("utf8")
+
+func_map = {"weather":GetWeatherInfo, "reminder":GetReminderInfo}
+
+def PushMessage2Phone(cfg = configurations.get_basic_settings(), db=model, msg_type = 'weather'):
     try:
         if type(cfg) != dict or not cfg.has_key('insta_appid') or not cfg.has_key('insta_secret'):
             print 'insta_appid and insta_secret must be contained!'
@@ -41,17 +65,7 @@ def PushMessage2Phone(cfg = configurations.get_basic_settings(), db = model):
         else:
             raise Exception('Notification app %s not found!' %cfg['notification'])
         
-#         msg = '室内温度：{tmp}℃\n室内湿度:{hum}%%'.decode('utf8')
-#         msg_db = db.get_latest_tmphum()
-#         app.notify(event_name='weather', 
-#                    trackers={'message': msg.format(tmp = msg_db.tmp, hum = msg_db.hum)})
-
-        msg = '天气:{cond} 气温:{min}~{max}\n{suggestion}\nFrom Bangu'.decode('utf8')
-        msg_db = db.get_latest_weather()
-        message = msg.format(cond=msg_db.descCN,
-                             suggestion = msg_db.suggestion,
-                             min = msg_db.tmp_min,
-                             max = msg_db.tmp_max)
+        message = func_map[msg_type](db)
 #         print message
         app.notify(message)
 
@@ -68,13 +82,19 @@ def ThreadPushMessage2Phone(when = []):
                 assert w[2].lower() in ['every', 'once']
                 db = ModelDB()
                 Timer(datetime.datetime.strptime(w[0], w[1]), PushMessage2Phone, {'db':db}, w[2]).start()
+            elif len(w) == 4:
+                assert w[2].lower() in ['every', 'once']
+                db = ModelDB()
+                Timer(datetime.datetime.strptime(w[0], w[1]), 
+                      PushMessage2Phone, {'db':db, "msg_type":w[3]}, 
+                      w[2]).start()
         except Exception,e:
             putErrorlog2DB('ThreadPushImage2Phone', e, db)
             
         
 if __name__ == '__main__':
-#     PushMessage2Phone()
-    thread.start_new_thread(ThreadPushMessage2Phone, ([('15:30:00', '%H:%M:%S'),
+#     PushMessage2Phone(msg_type='reminder')
+    thread.start_new_thread(ThreadPushMessage2Phone, ([('14:32:55', '%H:%M:%S', 'every', 'reminder'),
                                                        ('15:30:30', '%H:%M:%S'),
                                                        ('15:30:59', '%H:%M:%S')],))
     sleep(11000)
