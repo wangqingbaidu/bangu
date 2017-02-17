@@ -117,5 +117,5 @@ def ThreadUpdateWeather2DB(decay = 600):
         
 if __name__ == '__main__':
     GetWeather2DB_Self_API()
-    desc = model.get_latest_weather().desc
+    desc = model.get_latest_weather().tmp_max
     print desc

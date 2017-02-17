@@ -117,7 +117,8 @@ class WeatherAPI:
         output: None
         Parser XXX block to weather of weather list
     """
-    urlmap = {'moji':'http://tianqi.moji.com/'}
+    urlmap = {'moji':'https://tianqi.moji.com/weather/china/beijing/haidian-district'}
+#     urlmap = {'moji':'https://tianqi.moji.com'}
     last_update = None
     suggestion = None
     now = weather()
