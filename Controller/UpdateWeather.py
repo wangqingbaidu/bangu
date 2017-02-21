@@ -23,7 +23,7 @@ import time
 from Model import ModelDB
 from Model import model
 from Controller import putErrorlog2DB
-from utils import WeatherAPI
+from utils.WeatherAPI import WeatherAPI
 
 def GetWeather2DB(cfg = configurations.get_basic_settings(), db = model):
     """
@@ -119,18 +119,4 @@ if __name__ == '__main__':
     GetWeather2DB_Self_API()
     desc = model.get_latest_weather().tmp_max
     print desc
-     
-    time.sleep(10)
-    GetWeather2DB_Self_API()
-    desc = model.get_latest_weather().tmp_max
-    print desc
-     
-    time.sleep(10)
-    GetWeather2DB_Self_API()
-    desc = model.get_latest_weather().tmp_max
-    print desc
-     
-    time.sleep(10)
-    GetWeather2DB_Self_API()
-    desc = model.get_latest_weather().tmp_max
-    print desc
+    
