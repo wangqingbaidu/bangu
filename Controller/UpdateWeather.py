@@ -23,6 +23,7 @@ import time
 from Model import ModelDB
 from Model import model
 from Controller import putErrorlog2DB
+from utils import WeatherAPI
 
 def GetWeather2DB(cfg = configurations.get_basic_settings(), db = model):
     """
@@ -84,13 +85,12 @@ def GetWeather2DB_Self_API(cfg = configurations.get_basic_settings(), db = model
     @db: which DB connection to be used, Test use global. Thread use own. 
     """
     try:
-        from utils.WeatherAPI import weather_info
         weather = {}
         weather['city'] = cfg['city']
         weather['country'] = cfg['country']
         weather['datetime'] = datetime.now()
         
-        weather_info.refresh()
+        weather_info = WeatherAPI(api_type='moji')
         weather['humidity'] = weather_info.now.humidity
         weather['tmp_max'] = weather_info.forecast[0].tmp_max
         weather['tmp_min'] = weather_info.forecast[0].tmp_min
@@ -116,6 +116,21 @@ def ThreadUpdateWeather2DB(decay = 600):
         time.sleep(decay)
         
 if __name__ == '__main__':
+    GetWeather2DB_Self_API()
+    desc = model.get_latest_weather().tmp_max
+    print desc
+     
+    time.sleep(10)
+    GetWeather2DB_Self_API()
+    desc = model.get_latest_weather().tmp_max
+    print desc
+     
+    time.sleep(10)
+    GetWeather2DB_Self_API()
+    desc = model.get_latest_weather().tmp_max
+    print desc
+     
+    time.sleep(10)
     GetWeather2DB_Self_API()
     desc = model.get_latest_weather().tmp_max
     print desc
