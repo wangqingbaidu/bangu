@@ -191,6 +191,11 @@ class WeatherAPI:
             self.forecast.append(w)
             if self.debug:
                 print w
+        log_f = open("log_f", 'w')
+        log_f.write("%s\t%s\t%s\n" %(self.last_update.strftime("%b-%d-%y %H:%M:%S"), 
+                                     self.forecast[0].tmp_max,
+                                     self.forecast[0].tmp_min))
+        log_f.close()
                 
     def __parser_month_block(self, month_block = None):
         days = month_block.select('ul li')
