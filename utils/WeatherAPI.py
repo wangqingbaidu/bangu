@@ -214,7 +214,7 @@ class WeatherAPI:
             except:
                 pass
             
-weather_info = WeatherAPI(api_type='moji')    
+# weather_info = WeatherAPI(api_type='moji')    
 if __name__ == '__main__':
     w = WeatherAPI(debug=True, api_type='moji')
     print w.now.condition_code
