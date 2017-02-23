@@ -142,7 +142,8 @@ class WeatherAPI:
             self.content = urllib2.urlopen(self.urlmap[self.api_type]).read()
             self.last_update = datetime.now()
             self.__parser_content()
-        except:
+        except Exception, e:
+            print e
             raise Exception('Web connection error.')
         
     def __parser_content(self):
@@ -191,10 +192,11 @@ class WeatherAPI:
             self.forecast.append(w)
             if self.debug:
                 print w
+                
         log_f = open("log_f", 'w')
-        log_f.write("%s\t%s\t%s\n" %(self.last_update.strftime("%b-%d-%y %H:%M:%S"), 
-                                     self.forecast[0].tmp_max,
-                                     self.forecast[0].tmp_min))
+        log_f.write("%s\t%s\t%s\n".encode('utf8') %(datetime.now().strftime('%b-%d-%y %H:%M:%S'), 
+                                     self.forecast[0].tmp_max.encode('utf8'),
+                                     self.forecast[0].tmp_min.encode('utf8')))
         log_f.close()
                 
     def __parser_month_block(self, month_block = None):
