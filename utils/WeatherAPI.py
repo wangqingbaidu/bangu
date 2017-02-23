@@ -193,7 +193,7 @@ class WeatherAPI:
             if self.debug:
                 print w
                 
-        log_f = open("log_f", 'w')
+        log_f = open("/root/bangu/log_f", 'a')
         log_f.write("%s\t%s\t%s\n".encode('utf8') %(datetime.now().strftime('%b-%d-%y %H:%M:%S'), 
                                      self.forecast[0].tmp_max.encode('utf8'),
                                      self.forecast[0].tmp_min.encode('utf8')))
