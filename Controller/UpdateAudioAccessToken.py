@@ -21,6 +21,7 @@ from utils.ReadConfig import configurations
 from Model import model, ModelDB
 from datetime import datetime
 import time
+from Controller import putErrorlog2DB
 
 def getAudioAccessToken2DB(cfg = configurations.get_basic_settings(), db = model):
     try:
@@ -31,13 +32,10 @@ def getAudioAccessToken2DB(cfg = configurations.get_basic_settings(), db = model
             %(cfg['audio_apikey'], cfg['audio_secretkey'])
         f = urllib2.urlopen(url) 
         audio_token = json.loads(f.read())
+        audio_token['datetime'] = datetime.now()
         db.insert_audio_token(audio_token)
-    except:
-        log = {}
-        log['name'] = 'getAudioAccessToken2DB'
-        log['log'] = 'Can not get token info, maybe network is not connected!'
-        log['datetime'] = datetime.now()
-        db.insert_errorlog(log)
+    except Exception, e:
+        putErrorlog2DB('ThreadAudioAccessToken2DB', e, db)
 
 def ThreadAudioAccessToken2DB(decay = 901022):
     db = ModelDB()

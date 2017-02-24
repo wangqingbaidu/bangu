@@ -16,30 +16,27 @@ Note: Please keep the above information whenever or wherever the codes are used.
 '''
 import GetBanguHome
 
-import urllib2, urllib, json, subprocess
+import urllib, subprocess
 from Model import model, ModelDB
-import datetime
+from Controller import putErrorlog2DB
 class Audio:
-    def __init__(self, model = None):
-        if not model:
+    def __init__(self, db = None):
+        if not db:
             self.__db = ModelDB()
         else:
             self.__db = model
     
     def getAudioAccessToken(self):        
-        key = '24.7fdd91428b28017345669368767bcd27.2592000.1485051599.282335-6828205'
+        key = '24.a30b0be4c797528a794f2da64207c665.2592000.1490496832.282335-6828205'
         try:
-            key = self.db.get_latest_audio_token()
-        except:            
-            log = {}
-            log['name'] = 'Audio.getAudioAccessToken'
-            log['log'] = 'Get aduio access token error, using default key %' %key
-            log['datetime'] = datetime.now()
-            self.__db.insert_errorlog(log)
+            key = self.__db.get_latest_audio_token()
+        except Exception, e:            
+            putErrorlog2DB('Audio2Text', e, self.__db)
         return key
     
     def talk(self, msg=None):
         key = self.getAudioAccessToken()
+#         print key
         if msg:
             url = 'http://tsn.baidu.com/text2audio?tex=%s&lan=zh&cuid=A4-DB-30-FC-5A-F3&ctp=1&tok=%s' \
                 %(urllib.quote(msg), key)

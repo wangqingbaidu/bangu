@@ -36,7 +36,11 @@ error_enum = [{'id':1, 'thread':'Unknown',
               {'id':5, 'thread':'ThreadLCDTemperatureHumidity', 
                'suggestion':'Can not get Tmp and Hum data from db!'},
               {'id':6, 'thread':'ThreadPushImage2Phone', 
-               'suggestion':'Push message error, Check appid or secret!'}]
+               'suggestion':'Push message error, Check appid or secret!'},
+              {'id':7, 'thread':'ThreadAudioAccessToken2DB', 
+               'suggestion':'Can not get token info, maybe network is not connected!'},              
+              {'id':8, 'thread':'Audio2Text', 
+               'suggestion':'Can not get token from db, Check database configuration!'}]
 
 class ModelDB:
     """
