@@ -1,0 +1,124 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>带节假日JS万年历控件代码演示 - 爱编程w2bc.com</title>
+    <script src="./js/calendar.js"></script>
+    <style>
+        *
+        {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            border: none;
+        }
+        body
+        {
+            background: #fff;
+        }
+        .content
+        {
+            border: 3px solid #ddd;
+            width: 405px;
+            margin: 100px auto;
+        }
+        .datetable
+        {
+            border-top: 1px solid #ccc;
+            border-left: 1px solid #ccc;
+            background: #fff;
+        }
+        .datetable td
+        {
+            border-bottom: 1px solid #ccc;
+            border-right: 1px solid #ccc;
+            text-align: center;
+        }
+        .datetable thead
+        {
+            background: #006600;
+        }
+        .datetable thead td
+        {
+            padding: 10px 5px;
+            font: normal 12px/normal 'microsoft yahei';
+            color: #fff;
+            text-align: center;
+        }
+        .datetable thead td span
+        {
+            padding: 0 5px;
+        }
+        .datetable tbody td
+        {
+            padding: 5px 3px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body onload="initial();" style="background: black" >
+    <form name="CLD" class="content">
+    <table width="100%" border="0" cellpadding="0" cellspacing="0" class="datetable">
+        <thead>
+            <tr>
+                <td colspan="7">
+                    <span>公历</span>
+                    <select name="SY" onchange="changeCld();" style="font-size: 9pt">
+                        <script>
+                            for (i = 1900; i < 2050; i++) document.write('<option>' + i);
+                        </script>
+                    </select><span>年</span>
+                    <select name="SM" onchange="changeCld();" style="font-size: 9pt">
+                        <script>
+                            for (i = 1; i < 13; i++) document.write('<option>' + i);
+                        </script>
+                    </select><span>月</span> </font><span id="GZ"></span>
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="background: #eee;">
+                <td width="54">
+                    日
+                </td>
+                <td width="54">
+                    一
+                </td>
+                <td width="54">
+                    二
+                </td>
+                <td width="54">
+                    三
+                </td>
+                <td width="54">
+                    四
+                </td>
+                <td width="54">
+                    五
+                </td>
+                <td width="54">
+                    六
+                </td>
+            </tr>
+            <script>
+                var gNum;
+                for (i = 0; i < 6; i++) {
+                    document.write('<tr align="center">');
+                    for (j = 0; j < 7; j++) {
+                        gNum = i * 7 + j;
+                        document.write('<td id="GD' + gNum + '"><font id="SD' + gNum + '" size=2 face="Arial Black"');
+                        if (j == 0) document.write('color="red"');
+                        if (j == 6) document.write('color="red"');
+                        document.write('></font><br/><font id="LD' + gNum + '" size=2 style="font-size:9pt"></font></td>');
+                    }
+                    document.write('</tr>');
+                }
+            </script>
+        </tbody>
+    </table>
+    </form>
+    <br />
+    <br />
+    <br />
+</body>
+</html>
