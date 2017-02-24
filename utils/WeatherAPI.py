@@ -139,6 +139,11 @@ class WeatherAPI:
         
     def refresh(self):
         try:
+            # Empty all 
+            self.suggestion = None
+            self.now = weather()
+            self.forecast = []
+            self.month = []
             self.content = urllib2.urlopen(self.urlmap[self.api_type]).read()
             self.last_update = datetime.now()
             self.__parser_content()
