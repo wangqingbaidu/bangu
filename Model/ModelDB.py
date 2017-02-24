@@ -40,7 +40,7 @@ error_enum = [{'id':1, 'thread':'Unknown',
               {'id':7, 'thread':'ThreadAudioAccessToken2DB', 
                'suggestion':'Can not get token info, maybe network is not connected!'},              
               {'id':8, 'thread':'Audio2Text', 
-               'suggestion':'Can not get token from db, Check database configuration!'}]
+               'suggestion':'Check database configuration! Maybe you should install mplayer'}]
 
 class ModelDB:
     """

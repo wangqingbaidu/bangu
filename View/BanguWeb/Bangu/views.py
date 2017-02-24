@@ -15,58 +15,6 @@ import MirrorDisplay
 displayHtml = None
 HtmlChanged = False
 
-class TempHum:
-    def __init__(self):
-        self.serials = serial.Serial('/dev/ttyACM0', 115200, timeout=1)
-        self.serials.isOpen()
-        
-    def __del__(self):
-        if self.serials:
-            self.serials.close()
-            
-    def getline(self):
-        return self.serials.readline()
-    
-#person_pin = 11
-#temphum = TempHum()
-
-def hasPerson(request):
-    state = {}
-    GPIO.setmode(GPIO.BOARD)
-    GPIO.setup(person_pin, GPIO.IN)
-    if GPIO.input(person_pin) == GPIO.HIGH:
-        state['has_person'] = 1
-    else:
-        state['has_person'] = 0
-    
-    response = HttpResponse()
-    response['Access-Control-Allow-Origin'] = '*'
-    response['content_type'] = "application/json"
-    response.write(json.dumps(state))
-    return response   
-    
-    
-def getTempHum(request):
-    msg = {}
-    try:
-        res = temphum.getline()
-        res = res.strip("\r\n")
-        res = res.split(",")
-        if res[0] == 'OK':
-            msg['res'] = 'OK'
-            msg["Temperature"] = res[2]
-            msg["Humidity"] = res[1]
-        else:
-            msg['res'] = 'SError'
-    except KeyboardInterrupt:
-        print 'An error occurred while opening the serial'
-        msg['res'] = 'RError'
-        
-    response = HttpResponse()
-    response['Access-Control-Allow-Origin'] = '*'
-    response['content_type'] = "application/json"
-    response.write(json.dumps(msg))
-    return response
 
 def getDisplay(request):
     global  displayHtml, HtmlChanged

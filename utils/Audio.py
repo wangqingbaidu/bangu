@@ -40,8 +40,11 @@ class Audio:
         if msg:
             url = 'http://tsn.baidu.com/text2audio?tex=%s&lan=zh&cuid=A4-DB-30-FC-5A-F3&ctp=1&tok=%s' \
                 %(urllib.quote(msg), key)
-            
-            subprocess.call(['mplayer', url], stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+            try:
+                subprocess.call(['mplayer', url], stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+            except Exception, e:
+                putErrorlog2DB('Audio2Text', e, self.__db)
+                
             
             
 if __name__ == '__main__':
