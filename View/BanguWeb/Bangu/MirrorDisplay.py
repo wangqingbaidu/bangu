@@ -6,42 +6,22 @@ Email:zhangzhiwei@ict.ac.cn
 From Institute of Computing Technology
 All Rights Reserved.
 '''
-from MagicMirror.apiUtils import getNews, getChat
-import json
 
-def displayNews(num=32, keyword="娱乐"):
-    jsonContent = json.loads(getNews(num=num, keyword=keyword))
-    htmlTemplate = """
-        <div style="clear:both">
-            <div style="float:left;">
-                <img style="height:120px;width:172px" src='{0}'>
-            </div>    
-            <div style="float:left; width:70%; margin-top:-12px; margin-left:10px">
-                <h3 style="color:#FFFFFF">{1}</h3>
-                <h4 style="color:#FFFAFA">{2}</h4>
-            </div>
-        </div>
-    """
-    resHtml = '<div style="margin:0 auto;width:80%">'
-    htmlTemplate = """
-    <hr>
-    <h3>{0}</h3>
-    <h4>{1}</h4>
-    <hr>
-    """
-    resHtml = ''
-    if jsonContent:
-        count = 0
-        for item in jsonContent['retData']['data']:
-            if item.has_key('img_url') and item['abstract'] != '':
-                resHtml += htmlTemplate.format(#item['img_url'].encode('utf8'), 
-                                               item['title'].encode('utf8'), 
-                                               item['abstract'].encode('utf8'))
-                count += 1
-                if count == 6:
-                    break
-        return resHtml + '</div>'
-        
+import json
+import urllib2
+import urllib
+
+def getChat(info = None, key='4826d18cc4f563f60c355e7fc249ba09', userid='2A0876AE1EF42048AB98B6DE76289264'):
+    url = 'http://www.tuling123.com/openapi/api?info={0}&key={1}&userid={2}'.format(
+            urllib.quote(info), key, userid)
+    req = urllib2.Request(url)
+    resp = urllib2.urlopen(req)
+    content = resp.read()
+    if(content):
+        return content.decode('utf8')
+    else:
+        return None
+
 def displayChatInfo(rcv=None, fontid='008'):
     if u'谁'.encode('utf8') in rcv:
         if u'最漂亮'.encode('utf8') in rcv or u'最美丽'.encode('utf8') in rcv or u'最好看'.encode('utf8') in rcv:
@@ -67,4 +47,4 @@ def displayChatInfo(rcv=None, fontid='008'):
 
 if __name__ == "__main__":
     #print displayNews()
-    print displayChatInfo("wo", '007')
+    print getChat('你好')

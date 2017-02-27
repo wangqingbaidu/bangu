@@ -16,8 +16,9 @@ Note: Please keep the above information whenever or wherever the codes are used.
 '''
 import GetBanguHome
 
-import ConfigParser, os
+import ConfigParser, os, json
 import smtplib
+import urllib2
 class BanguConfig:
     """
     This class is used to initialize bangu configurations.
@@ -52,6 +53,7 @@ class BanguConfig:
         self.__valid_tmphum_pin_section()
         self.__valid_lcd_pin_section()
         self.__valid_email_section()
+        self.__valid_tuling_section()
     
     def __valid_pins_section(self):
         if self.configuration.has_key('pins'):
@@ -136,8 +138,25 @@ class BanguConfig:
                 print 'Email check failed! Use bangu default email:ibangu@yeah.net'
                 self.configuration['email']['username'] = 'ibangu@yeah.net'
                 self.configuration['email']['password'] = '51bangu'
-                server = self.configuration['email']['smtp'] = 'smtp.yeah.net'
+                self.configuration['email']['smtp'] = 'smtp.yeah.net'
             
+    def __valid_tuling_section(self):
+        if self.configuration.has_key('tuling') :
+            try:
+                key = self.configuration['tuling']['tuling_key']
+                userid = self.configuration['tuling']['tuling_userid']
+                url = 'http://www.tuling123.com/openapi/api?info={0}&key={1}&userid={2}'.format('hello', key, userid)
+                req = urllib2.Request(url)
+                resp = urllib2.urlopen(req)
+                content = resp.read()
+                assert json.loads(content)['code'] == 100000, 'return code error'
+            except Exception, e:
+                print e
+                print 'key: {key} or userid: {userid} error use default.'.format(
+                    key= key, userid=userid)
+                self.configuration['tuling']['tuling_key'] = '4826d18cc4f563f60c355e7fc249ba09'
+                self.configuration['tuling']['tuling_userid'] = '2A0876AE1EF42048AB98B6DE76289264'                    
+    
     def get_pins_settings(self):
         return {} if not self.configuration.has_key('pins') else self.configuration['pins']
     
@@ -155,8 +174,11 @@ class BanguConfig:
     
     def get_email_settings(self):
         return {} if not self.configuration.has_key('email') else self.configuration['email']
+    
+    def get_tuling_settings(self):
+        return {} if not self.configuration.has_key('tuling') else self.configuration['tuling']
 
 configurations = BanguConfig()  
 
 if __name__ == '__main__':
-    print configurations.get_lcd_pin_settings()
+    print configurations.get_tuling_settings()
