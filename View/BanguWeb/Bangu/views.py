@@ -25,7 +25,6 @@ from utils.Audio import Audio
 displayHtml = None
 HtmlChanged = False
 
-audio = Audio()
 
 def getDisplay(request):
     global  displayHtml, HtmlChanged
@@ -37,7 +36,7 @@ def getDisplay(request):
     else:        
         msg['change'] = HtmlChanged
         
-    audio.talk('hello bangu')
+    Audio().talk('hello bangu')
     response = HttpResponse()
     response['Access-Control-Allow-Origin'] = '*'
     response['content_type'] = "application/json"
