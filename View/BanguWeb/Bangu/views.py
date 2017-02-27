@@ -29,7 +29,7 @@ HtmlChanged = False
 
 
 def getDisplay(request):
-    global  displayHtml, HtmlChanged
+    global  displayHtml, HtmlChanged, audioMessage
     msg = {}
     if HtmlChanged:
         msg['content'] = displayHtml
@@ -58,7 +58,7 @@ def getChatting(request):
         info = request.GET.get('info')
     except:
         info = ''
-    global displayHtml, HtmlChanged
+    global displayHtml, HtmlChanged, audioMessage
     audioMessage, displayHtml = displayChatInfo(rcv = info.encode('utf8'))
     HtmlChanged = True
 
