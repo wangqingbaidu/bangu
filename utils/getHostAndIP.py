@@ -15,13 +15,15 @@ Contact Info: you can send an email to 564326047@qq.com(Vlon)
 Note: Please keep the above information whenever or wherever the codes are used.
 '''
 import GetBanguHome
-import socket
+import socket, platform, os
 
 def getHostNameIP():
     host_name = socket.getfqdn(socket.gethostname())
     ip_address = socket.gethostbyname(host_name)
-    return (host_name, ip_address)
+    if 'linux' in platform.platform().lower():
+        ip_address = os.popen("ifconfig | grep 'inet addr:' | grep -v '127.0.0.1' | cut -d: -f2 | awk '{print $1}' | head -1").read()[:-1]  
 
+    return (host_name, ip_address)
 def getHostName():
     return getHostNameIP()[0]
 
