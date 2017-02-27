@@ -37,16 +37,16 @@ def displayChatInfo(rcv=None):
     # prefix information
     if u'谁'.encode('utf8') in rcv and u'人'.encode('utf8') in rcv:
         if u'最漂亮'.encode('utf8') in rcv or u'最美丽'.encode('utf8') in rcv or u'最好看'.encode('utf8') in rcv:
-            return '<img src="/static/img/b.png" />' 
+            return ("当然是白雪公主啦", '<img src="/static/img/b.png" />') 
     if u'多大了'.encode('utf8') in rcv or u'几岁'.encode('utf8') in rcv:
-        return '<h1 class="cover-heading">这个保密啦，我不会告诉你我是蛋蛋后。</h1>'
+        return ('这个保密啦，我不会告诉你我是蛋蛋后。','<h1 class="cover-heading">这个保密啦，我不会告诉你我是蛋蛋后。</h1>')
     info = u'亲爱的主人主人，欢迎您回来，一定是累了吧，休息一会吧！！！！'.encode('utf8')
     if rcv:
         chatRcv = getChat(rcv)
         if chatRcv:
             info = chatRcv.encode('utf8')
     resHtml = '<h1 class="cover-heading">%s</h1>'%info
-    return resHtml.replace(u'图灵机器人'.encode('utf8'), u'魔镜'.encode('utf8'))
+    return (info, resHtml.replace(u'图灵机器人'.encode('utf8'), u'魔镜'.encode('utf8')))
 
 if __name__ == "__main__":
     #print displayNews()

@@ -24,6 +24,7 @@ from utils.Audio import Audio
 import thread
 
 displayHtml = None
+audioMessage = None
 HtmlChanged = False
 
 
@@ -33,7 +34,7 @@ def getDisplay(request):
     if HtmlChanged:
         msg['content'] = displayHtml
         msg['change'] = HtmlChanged
-        thread.start_new_thread(Audio().talk, (displayHtml,))
+        thread.start_new_thread(Audio().talk, (audioMessage,))
         HtmlChanged = False
     else:        
         msg['change'] = HtmlChanged
@@ -58,7 +59,7 @@ def getChatting(request):
     except:
         info = ''
     global displayHtml, HtmlChanged
-    displayHtml = displayChatInfo(rcv = info.encode('utf8'))
+    audioMessage, displayHtml = displayChatInfo(rcv = info.encode('utf8'))
     HtmlChanged = True
 
     response = HttpResponse()
