@@ -33,12 +33,11 @@ def getDisplay(request):
     if HtmlChanged:
         msg['content'] = displayHtml
         msg['change'] = HtmlChanged
+        thread.start_new_thread(Audio().talk, (displayHtml,))
         HtmlChanged = False
     else:        
         msg['change'] = HtmlChanged
         
-    
-    thread.start_new_thread(Audio().talk, ('hello bangu',))
     response = HttpResponse()
     response['Access-Control-Allow-Origin'] = '*'
     response['content_type'] = "application/json"
