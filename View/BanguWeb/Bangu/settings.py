@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+from GetBanguHome import getHome
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -51,7 +52,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.security.SecurityMiddleware',
 )
 
-ROOT_URLCONF = 'MagicMirror.urls'
+ROOT_URLCONF = 'Bangu.urls'
 
 TEMPLATES = [
     {
@@ -69,7 +70,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'MagicMirror.wsgi.application'
+WSGI_APPLICATION = 'Bangu.wsgi.application'
 
 
 # Database
@@ -78,12 +79,23 @@ WSGI_APPLICATION = 'MagicMirror.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', 
-        'NAME': 'magicmirror', 
+        'NAME': 'Bangu', 
         'USER': 'root', 
         'PASSWORD': '901022', 
         'HOST': 'localhost', 
         'PORT': '3306',
         }
+}
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3', 
+        'NAME': os.path.join(getHome(),'bangu.db'),    
+        'USER': '',                     
+        'PASSWORD': '',                 
+        'HOST': '',
+        'PORT': ''
+    }
 }
 
 # Internationalization
