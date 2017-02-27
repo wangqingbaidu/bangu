@@ -21,6 +21,7 @@ from django.views.generic.base import TemplateView
 from utils.getHostAndIP import getIP
 from Controller.MirrorDisplay import displayChatInfo
 from utils.Audio import Audio
+import thread
 
 displayHtml = None
 HtmlChanged = False
@@ -36,7 +37,8 @@ def getDisplay(request):
     else:        
         msg['change'] = HtmlChanged
         
-    Audio().talk('hello bangu')
+    
+    thread.start_new_thread(Audio().talk, ('hello bangu',))
     response = HttpResponse()
     response['Access-Control-Allow-Origin'] = '*'
     response['content_type'] = "application/json"
