@@ -64,7 +64,7 @@ if args.opts == 'install':
 case $1 in
     start)
         python {0} {2}
-        python {1} runserver 0.0.0.0:80
+        python {1} runserver 0.0.0.0:80 > null &
         ;;
     stop)
         python {0} {3}
@@ -74,7 +74,7 @@ echo "Usage: $0 (start|stop)"
 ;;
 esac
 """.format(os.path.join(exe_dir, 'bangu.py'), 
-           os.path.join(exe_dir, 'View/BanguWeb/manage.py'), 
+           os.path.join(exe_dir, '../View/BanguWeb/manage.py'), 
            'start &', 'stop')
     bangu_auto = open('/etc/init.d/bangu', 'w')
     bangu_auto.write(sh)
@@ -89,6 +89,9 @@ esac
     if not os.path.exists(bangu_home + '/bangu.db'):
         from Model.ModelDB import init_db
         init_db()
+    
+    #Init BanguWeb database settings.
+    os.system('python %s migrate' %os.path.join(exe_dir, '../View/BanguWeb/manage.py'))
     
     #Restart Raspberry Pi.
     from utils.termcolor import cprint
