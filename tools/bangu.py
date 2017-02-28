@@ -63,16 +63,19 @@ if args.opts == 'install':
 ### END INIT INFO
 case $1 in
     start)
-        python {0} {1}
+        python {0} {2}
+        python {1} runserver 0.0.0.0:80
         ;;
     stop)
-        python {0} {2}
+        python {0} {3}
         ;;
 *)
 echo "Usage: $0 (start|stop)"
 ;;
 esac
-""".format(exe_dir + '/' + 'bangu.py', 'start &', 'stop')
+""".format(os.path.join(exe_dir, 'bangu.py'), 
+           os.path.join(exe_dir, 'View/BanguWeb/manage.py'), 
+           'start &', 'stop')
     bangu_auto = open('/etc/init.d/bangu', 'w')
     bangu_auto.write(sh)
     bangu_auto.close()
