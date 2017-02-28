@@ -93,6 +93,9 @@ esac
     #Init BanguWeb database settings.
     os.system('python %s migrate' %os.path.join(exe_dir, '../View/BanguWeb/manage.py'))
     
+    #Install mplayer
+    os.system('sudo apt-get install mplayer -y')
+    
     #Restart Raspberry Pi.
     from utils.termcolor import cprint
     cprint('BANGU installed successfully.', 'green')
