@@ -18,6 +18,7 @@ Later I will display all the mother board and sensors which I have already used.
 >4. 实现了TTS转化功能（还没有加入到项目中，只是测试通过，可以调用，木有应用场景） 
 >5. 实现发邮件的功能，可以根据订阅者的邮箱地址，定时发送邮件。 
 >6. 把log功能进行了整合，如果那个模块有问题，不会出现宕机，而是会输出到log中。
+>7. 添加基于Django的智能语音对话系统，访问树莓派ip，可以使用对应接口与树莓派语音聊天。
 
 ###哒遛君正准备添加的功能。
 >1. 基于深度学习的人脸识别系统（正在开发，话说哒遛君就是这个的。。。） 
@@ -47,7 +48,7 @@ Later I will display all the mother board and sensors which I have already used.
 >####9.	2017-01-17 Create documents on some moduler.
 >####10.	2017-01-20 Use [http://tianqi.moji.com/](http://tianqi.moji.com/) as weather API which based on python reptile. See [Src code](https://github.com/wangqingbaidu/bangu/blob/master/utils/WeatherAPI.py) for details.
 >####11.	2017-02-24 Baidu Audio to Text Service fixed, Add Magic Mirror web which is based on [iflytek](http://www.xfyun.cn/) speech recognition and [tuling](http://www.tuling123.com/) robot. Feature bangu can be interacted  with voice.
->
+>####12.  2017-2-28 Add BanguWeb which is based on Django, one can chat with bangu by visiting bangu's ip. Use the given format  `\$BANGUIP/api/chattingDisplay?info=Hello Bangu!`. Later I will develop an Android app for chatting.
 ![](http://i.imgur.com/30cNz9i.png)
 
 ##Hardware Required

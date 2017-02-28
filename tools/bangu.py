@@ -135,6 +135,6 @@ elif args.opts == 'stop':
     for item in res:
         if 'stop' not in item and 'grep bangu' not in item and 'python' in item:
             pid = item.split()[1]
-            print item.replace('\n', ''), '\t---------------\tKilled!'
+            print 'Killed!\t---------------\t', item.replace('\n', '')
             os.system('kill -9 %s'% pid)
         
