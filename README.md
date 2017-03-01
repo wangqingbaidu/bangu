@@ -49,16 +49,24 @@ Later I will display all the mother board and sensors which I have already used.
 >####10.	2017-01-20 Use [http://tianqi.moji.com/](http://tianqi.moji.com/) as weather API which based on python reptile. See [Src code](https://github.com/wangqingbaidu/bangu/blob/master/utils/WeatherAPI.py) for details.
 >####11.	2017-02-24 Baidu Audio to Text Service fixed, Add Magic Mirror web which is based on [iflytek](http://www.xfyun.cn/) speech recognition and [tuling](http://www.tuling123.com/) robot. Feature bangu can be interacted  with voice.
 >####12.  2017-2-28 Add BanguWeb which is based on Django, one can chat with bangu by visiting bangu's ip. Use the given format  `$BANGUIP/api/chattingDisplay?info=Hello Bangu!`. Later I will develop an Android app for chatting.
+
 ![](http://i.imgur.com/30cNz9i.png)
 
 ##Hardware Required
+#####Network connection is the most important.
+
 >1.Raspberry pi 2 or later
 >
 >2.Some LED
 >
 >3.DHT11
 
->4.A piece of LCD1602 
+>4.A piece of LCD1602
+> 
+>5.Loudspeaker
+>
+>6.Camera
+
 
 ##How to use?
 Clone srouce code to your `Home`
@@ -82,4 +90,5 @@ Board model and 11, 13, 15 pin is used to display Red, Green, Yellow
 
 ##Show
 
-![](http://i.imgur.com/91Xp4hc.jpg)
+
+![](http://i.imgur.com/iKfpfMk.jpg)
