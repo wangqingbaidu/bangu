@@ -46,9 +46,15 @@ Later I will display all the mother board and sensors which I have already used.
 >####7. 	2017-01-08 Add supports of another powerful message push app which is called [pushover](https://pushover.net/).
 >####8.	2017-01-11 Transform Baidu API to others gradually.
 >####9.	2017-01-17 Create documents on some moduler.
->####10.	2017-01-20 Use [http://tianqi.moji.com/](http://tianqi.moji.com/) as weather API which based on python reptile. See [Src code](https://github.com/wangqingbaidu/bangu/blob/master/utils/WeatherAPI.py) for details.
->####11.	2017-02-24 Baidu Audio to Text Service fixed, Add Magic Mirror web which is based on [iflytek](http://www.xfyun.cn/) speech recognition and [tuling](http://www.tuling123.com/) robot. Feature bangu can be interacted  with voice.
->####12.  2017-2-28 Add BanguWeb which is based on Django, one can chat with bangu by visiting bangu's ip. Use the given format  `$BANGUIP/api/chattingDisplay?info=Hello Bangu!`. Later I will develop an Android app for chatting.
+>####10. 2017-01-20 Use [http://tianqi.moji.com/](http://tianqi.moji.com/) as weather API which based on python reptile.   
+>> See [Src code](https://github.com/wangqingbaidu/bangu/blob/master/utils/WeatherAPI.py) for details.
+
+>####11. 2017-02-24 Baidu Audio to Text Service fixed.
+>####12. 2017-02-24 New interaction with bangu.
+>>Which is based on  [iflytek](http://www.xfyun.cn/) speech recognition and [tuling](http://www.tuling123.com/) robot. Feature bangu can be interacted  with voice.
+
+>####12.  2017-2-28 Add BanguWeb which is based on Django.
+>>One can chat with bangu by visiting bangu's ip. Use the given format  `$BANGUIP/api/chattingDisplay?info=Hello Bangu!`. Later I will develop an Android app for chatting.
 
 ![](http://i.imgur.com/30cNz9i.png)
 
