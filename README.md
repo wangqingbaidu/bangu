@@ -53,7 +53,7 @@ Later I will display all the mother board and sensors which I have already used.
 >####12. 2017-02-24 New interaction with bangu.
 >>Which is based on  [iflytek](http://www.xfyun.cn/) speech recognition and [tuling](http://www.tuling123.com/) robot. Feature bangu can be interacted  with voice.
 
->####12.  2017-2-28 Add BanguWeb which is based on Django.
+>####13.  2017-2-28 Add BanguWeb which is based on Django.
 >>One can chat with bangu by visiting bangu's ip. Use the given format  `$BANGUIP/api/chattingDisplay?info=Hello Bangu!`. Later I will develop an Android app for chatting.
 
 ![](http://i.imgur.com/30cNz9i.png)
