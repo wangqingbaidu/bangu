@@ -99,10 +99,10 @@ def GetWeather2DB_Self_API(cfg = configurations.get_basic_settings(), db = model
         #If beyond 8 o'clock, then use tomorrow weather.
         if datetime.now().hour >= 20:                
             weather['desc'] = weather_info.now.condition_code
-            weather['descCN'] = weather_info.forecast[1].condition
+            weather['descCN'] = weather_info.forecast[1].condition.strip()
         else:
             weather['desc'] = weather_info.now.condition_code
-            weather['descCN'] = weather_info.now.condition
+            weather['descCN'] = weather_info.now.condition.strip()
             
         weather['suggestion'] = weather_info.suggestion
         db.insert_weather(weather)
