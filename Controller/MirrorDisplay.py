@@ -44,7 +44,7 @@ def displayChatInfo(rcv=None):
         return ('这个保密啦，我不会告诉你我是蛋蛋后。','<h1 class="cover-heading">这个保密啦，我不会告诉你我是蛋蛋后。</h1>')
     
     if u'今天'.encode('utf8') in rcv and u'天气'.encode('utf8') in rcv:
-        info = GetWeatherInfo(ModelDB())
+        info = GetWeatherInfo(ModelDB()).replace('\n', ' ')
         return (info,
                 '<h1 class="cover-heading">%s</h1>' %info)
     info = u'亲爱的主人主人，欢迎您回来，一定是累了吧，休息一会吧！！！！'.encode('utf8')
