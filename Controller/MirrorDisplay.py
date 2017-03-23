@@ -19,6 +19,8 @@ import GetBanguHome
 import json
 import urllib2, urllib
 from utils.ReadConfig import configurations
+from Controller.PushMessage import GetWeatherInfo
+from Model import ModelDB
 
 def getChat(info = None, cfg = configurations.get_tuling_settings()):
     key = cfg['tuling_key']
@@ -40,6 +42,11 @@ def displayChatInfo(rcv=None):
             return ("当然是白雪公主啦", '<img src="/static/img/b.png" />') 
     if u'多大了'.encode('utf8') in rcv or u'几岁'.encode('utf8') in rcv:
         return ('这个保密啦，我不会告诉你我是蛋蛋后。','<h1 class="cover-heading">这个保密啦，我不会告诉你我是蛋蛋后。</h1>')
+    
+    if u'今天'.encode('utf8') in rcv and u'天气'.encode('utf8') in rcv:
+        info = GetWeatherInfo(ModelDB())
+        return (info,
+                '<h1 class="cover-heading">%s</h1>' %info)
     info = u'亲爱的主人主人，欢迎您回来，一定是累了吧，休息一会吧！！！！'.encode('utf8')
     if rcv:
         chatRcv = getChat(rcv)
@@ -50,4 +57,4 @@ def displayChatInfo(rcv=None):
 
 if __name__ == "__main__":
     #print displayNews()
-    print getChat('谁是世界上最漂亮的人')
+    print displayChatInfo('今天天气')[1]
