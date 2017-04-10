@@ -56,6 +56,9 @@ Later I will display all the mother board and sensors which I have already used.
 >#### 13.  2017-2-28 Add BanguWeb which is based on Django.
 >>One can chat with bangu by visiting bangu's ip. Use the given format  `$BANGUIP/api/chattingDisplay?info=Hello Bangu!`. Later I will develop an Android app for chatting.
 
+>#### 14.  2017-4-10 Add Android bangu app.
+>>Change ip address to your own BanguWeb's ip in settings, App can be used to interact with bangu by using voice.
+
 ![](http://i.imgur.com/30cNz9i.png)
 
 ## Hardware Required
