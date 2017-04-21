@@ -57,7 +57,7 @@ Later I will display all the mother board and sensors which I have already used.
 >>One can chat with bangu by visiting bangu's ip. Use the given format  `$BANGUIP/api/chattingDisplay?info=Hello Bangu!`. Later I will develop an Android app for chatting.
 
 >#### 14.  2017-4-10 Add Android bangu app.
->>Change ip address to your own BanguWeb's ip in settings, App can be used to interact with bangu by using voice.
+>>Change ip address to your own BanguWeb's ip in settings, App can be used to interact with bangu by using voice. [App is here](https://github.com/wangqingbaidu/bangu/blob/master/SpeechDemo.apk)
 
 ![](http://i.imgur.com/30cNz9i.png)
 
