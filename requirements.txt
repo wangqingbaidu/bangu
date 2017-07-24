@@ -4,5 +4,4 @@ sqlalchemy
 beautifulsoup
 GPIO
 beautifulsoup4
-mplayer
 termcolor
