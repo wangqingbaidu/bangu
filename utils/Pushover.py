@@ -48,5 +48,5 @@ class Pushover:
             pass
 
 if __name__ == "__main__":
-    Pushover().notify("2017年01月08日16:48:26")
+    Pushover().notify("2017-01-08-16:48:26")
         
