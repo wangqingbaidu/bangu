@@ -1,9 +1,6 @@
 # BANGU -- From Zero To One   盘古, 开天辟地
 ![](http://i.imgur.com/aFFeNV6.jpg)
 
-### News
-### 2017-11-8 I am going to add restart button to Raspberry.
-
 This project is about smart ehouse which base on python, I use [Raspberry pi](https://www.raspberrypi.org/) to get senor data and GPIO to display message . Also it can be simply displayed on screen through a website which is based on Django.
 
 You can contact me via email: 564326047@qq.com(wangqingbaidu) 
@@ -39,6 +36,9 @@ Later I will display all the mother board and sensors which I have already used.
 
 好啦就说到这里吧，大家有什么问题可以去我的博客转转，获得最新的信息，也可以发送到我的邮箱564326047@qq.com。
 期望能跟大家一起，玩转树莓派。
+
+### News
+### 2017-11-8 I am going to add restart button to Raspberry.
 
 ## What's done!
 >#### 1.	2016-11-27 Weather with LED completed!                                                          
