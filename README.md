@@ -38,7 +38,7 @@ Later I will display all the mother board and sensors which I have already used.
 期望能跟大家一起，玩转树莓派。
 
 ### News
-### 2017-11-8 I am going to add restart button to Raspberry.
+>#### 2017-11-8 I am going to add restart button to Raspberry.
 
 ## What's done!
 >#### 1.	2016-11-27 Weather with LED completed!                                                          
