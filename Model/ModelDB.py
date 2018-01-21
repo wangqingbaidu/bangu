@@ -63,6 +63,9 @@ class ModelDB:
 #         self.flush_db()
         self.init_db()
         
+    def close_conn(self):
+        self.session.close()
+        
     def init_db(self):
         BaseModel.metadata.create_all(bind = self.engine)
         

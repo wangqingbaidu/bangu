@@ -19,7 +19,7 @@ import  GetBanguHome
 from Model import model
 from Model import ModelDB
 from RaspGPIO import raspgpio
-import time
+import time, os
 from datetime import datetime, timedelta
 from utils.ReadConfig import configurations
 from Controller import putErrorlog2DB
@@ -59,16 +59,18 @@ def WeatherLEDFlicker(rpin=11, gpin=13, ypin=15, db = model):
         else:
             raspgpio.pin_set_low(rpin)
     elif AlarmCode == 1:
-                if totalRunTime % 2 == 0:
-                        raspgpio.pin_set_heigh(ypin)
-                else:
-                        raspgpio.pin_set_low(ypin)
+        if totalRunTime % 2 == 0:
+                raspgpio.pin_set_heigh(ypin)
+        else:
+                raspgpio.pin_set_low(ypin)
     elif AlarmCode == 2:
-                if totalRunTime % 2 == 0:
-                        raspgpio.pin_set_heigh(gpin)
-                else:
-                        raspgpio.pin_set_low(gpin)
+        if totalRunTime % 2 == 0:
+                raspgpio.pin_set_heigh(gpin)
+        else:
+                raspgpio.pin_set_low(gpin)
     else:
+        # Restart bangu.
+        os.system('service bangu restart')
         if totalRunTime % 2 ==0:
             raspgpio.pin_set_heigh(rpin)
             raspgpio.pin_set_heigh(gpin)

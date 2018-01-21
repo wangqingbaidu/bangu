@@ -114,7 +114,8 @@ def ThreadUpdateWeather2DB(decay = 600):
     while True:
         GetWeather2DB_Self_API(db = db)
         time.sleep(decay)
-        
+    db.close_conn()
+    
 if __name__ == '__main__':
     GetWeather2DB_Self_API()
     desc = model.get_latest_weather().tmp_max
