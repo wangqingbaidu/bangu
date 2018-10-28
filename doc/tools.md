@@ -22,7 +22,7 @@ gethome_path = os.path.join(os.path.dirname(sys.argv[0]), 'GetBanguHome.py')
 bashrc_path = os.environ['HOME'] + '/.bashrc' 
 if not 'export BANGUHOME=' + bangu_home in bashrc:
     os.system('echo "{0}" >> {1} && source {1}'.format('export BANGUHOME=' + bangu_home, bashrc_path))
-    ```
+```
 
 将`GetBanguHome.py`添加到系统目录，同时将此目录`export`到`~/.bashrc`
 
