@@ -65,7 +65,7 @@ def getChatting(request):
     response = HttpResponse()
     response['Access-Control-Allow-Origin'] = '*'
     response['content_type'] = "application/json"
-    response.write(json.dumps({'res':'done'}))
+    response.write(displayHtml)
     return response
             
 if __name__ == "__main__":
