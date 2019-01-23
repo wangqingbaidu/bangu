@@ -91,6 +91,11 @@ def displayChatInfo(rcv=None):
         info = u'您今年的绩效是S哦！'.encode('utf8')
         return (info, info)
 
+
+    if u'工资'.encode('utf8') in rcv and u'多少'.encode('utf8') in rcv:
+        info = u'您本月的工资为：20000RMB！'.encode('utf8')
+        return (info, info)
+
     info = u'亲爱的主人主人，欢迎您回来，一定是累了吧，休息一会吧！！！！'.encode('utf8')
     if rcv:
         chatRcv = getChatNew(rcv)
