@@ -65,21 +65,32 @@ def getChatNew(info=None, cfg=configurations.get_tuling_settings()):
     }
     req = urllib2.Request(url=url, data=json.dumps(textmod), headers=header_dict)
     res = urllib2.urlopen(req)
-    res = res.read()
-    print res
+    res = json.loads(res.read())
+    text_info = ""
+    if 'results' in res:
+        for r in res['results']:
+            if r['resultType'] == 'text':
+                text_info += r['values']['text']
+    # print text_info
+    return text_info
 
 def displayChatInfo(rcv=None):
     # prefix information
-    if u'谁'.encode('utf8') in rcv and u'人'.encode('utf8') in rcv:
-        if u'最漂亮'.encode('utf8') in rcv or u'最美丽'.encode('utf8') in rcv or u'最好看'.encode('utf8') in rcv:
-            return ("当然是白雪公主啦", '<img src="/static/img/b.png" />')
-    if u'多大了'.encode('utf8') in rcv or u'几岁'.encode('utf8') in rcv:
-        return ('这个保密啦，我不会告诉你我是蛋蛋后。', '<h1 class="cover-heading">这个保密啦，我不会告诉你我是蛋蛋后。</h1>')
+    # if u'谁'.encode('utf8') in rcv and u'人'.encode('utf8') in rcv:
+    #     if u'最漂亮'.encode('utf8') in rcv or u'最美丽'.encode('utf8') in rcv or u'最好看'.encode('utf8') in rcv:
+    #         return ("当然是白雪公主啦", '<img src="/static/img/b.png" />')
+    # if u'多大了'.encode('utf8') in rcv or u'几岁'.encode('utf8') in rcv:
+    #     return ('这个保密啦，我不会告诉你我是蛋蛋后。', '<h1 class="cover-heading">这个保密啦，我不会告诉你我是蛋蛋后。</h1>')
+    #
+    # if u'今天'.encode('utf8') in rcv and u'天气'.encode('utf8') in rcv:
+    #     info = GetWeatherInfo(ModelDB()).replace('\n', ' ').encode('utf8')
+    #     return (info,
+    #             '<h1 class="cover-heading">%s</h1>' % info)
 
-    if u'今天'.encode('utf8') in rcv and u'天气'.encode('utf8') in rcv:
-        info = GetWeatherInfo(ModelDB()).replace('\n', ' ').encode('utf8')
-        return (info,
-                '<h1 class="cover-heading">%s</h1>' % info)
+    if u'绩效'.encode('utf8') in rcv and u'多少'.encode('utf8') in rcv:
+        info = u'您今年的绩效是S哦！'.encode('utf8')
+        return (info, info)
+
     info = u'亲爱的主人主人，欢迎您回来，一定是累了吧，休息一会吧！！！！'.encode('utf8')
     if rcv:
         chatRcv = getChatNew(rcv)
@@ -91,4 +102,11 @@ def displayChatInfo(rcv=None):
 
 if __name__ == "__main__":
     # print displayNews()
-    print getChatNew('今天天气')[1]
+    a = """{"intent":{"actionName":"","code":10008,"intentName":"","parameters":{"date":"2019-01-24","city":"北京"}},"results":[{"groupType":1,"resultType":"text","values":{"text":"北京:周四,多云 西北风微风,最低气温-5度，最高气温5度"}}]}
+    """
+    b= json.loads(a)
+    if 'results' in b:
+        for r in b['results']:
+            if r['resultType'] == 'text':
+                print r['values']['text']
+    # print getChatNew('今天天气')[1]
