@@ -101,7 +101,7 @@ def displayChatInfo(rcv=None):
         chatRcv = getChatNew(rcv)
         if chatRcv:
             info = chatRcv.encode('utf8')
-    resHtml = '<h1 class="cover-heading">%s</h1>' % info
+    resHtml = info
     return (info, resHtml.replace(u'图灵机器人'.encode('utf8'), u'魔镜'.encode('utf8')))
 
 
