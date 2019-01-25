@@ -127,6 +127,7 @@ class BanguConfig:
     def __valid_email_section(self):
         if self.configuration.has_key('email'):
             try:
+                raise ValueError('None')
                 username = self.configuration['email']['username']
                 password = self.configuration['email']['password']
                 server = self.configuration['email']['smtp']

@@ -22,6 +22,19 @@ from utils.ReadConfig import configurations
 from Controller.PushMessage import GetWeatherInfo
 from Model import ModelDB
 
+a = [{"ask": u"请问您所在的科室？", 'required': False, 'info': u'科室'},
+     {"ask": u"请问您的报销单主题？", 'required': True, 'info': u'报销单主题'},
+     {"ask": u"请问您的有无PR？", 'required': True, 'info': u'有无PR'},
+     {"ask": u"您的预算来源公司是？", 'required': True, 'info': u'预算来源公司'},
+     {"ask": u"预算来源部门？", 'required': True, 'info': u'预算部门'},
+     {"ask": u"您的PR单号是？", 'required': True, 'info': u'PR单号'},
+     {"ask": u"请问你有无关联清单？", 'required': False, 'info': u'有无关联清单'},
+     {"ask": u"请您告诉我您的费用明细？", 'required': False, 'info': u'费用明细'},
+     {"ask": u"是否需要输入备注。", 'required': False, 'info': u'备注'},
+     {"ask": u"确认提交吗？", 'required': False}]
+
+guonei_count = -1
+
 
 def getChat(info=None, cfg=configurations.get_tuling_settings()):
     key = cfg['tuling_key']
@@ -74,6 +87,7 @@ def getChatNew(info=None, cfg=configurations.get_tuling_settings()):
     # print text_info
     return text_info
 
+
 def displayChatInfo(rcv=None):
     # prefix information
     # if u'谁'.encode('utf8') in rcv and u'人'.encode('utf8') in rcv:
@@ -87,10 +101,24 @@ def displayChatInfo(rcv=None):
     #     return (info,
     #             '<h1 class="cover-heading">%s</h1>' % info)
 
+    global guonei_count
+    if u'国内差旅' in rcv:
+        guonei_count = 0
+
+    if guonei_count != -1:
+        if a[guonei_count]['required'] and (u'不' in rcv or u'无' in rcv):
+            return u'此项不能为空', u'此项不能为空'
+        else:
+            a[guonei_count]['results'] = rcv
+            guonei_count += 1
+            if guonei_count == len(a) + 1:
+                results = ";".join(
+                    ["%s: %s" % (spec['info'], spec['results']) for spec in a if 'info' in spec and 'results' in spec])
+                return results, results
+            return a[guonei_count]['ask'], a[guonei_count]['ask']
     if u'绩效'.encode('utf8') in rcv and u'多少'.encode('utf8') in rcv:
         info = u'您今年的绩效是S哦！'.encode('utf8')
         return (info, info)
-
 
     if u'工资'.encode('utf8') in rcv and u'多少'.encode('utf8') in rcv:
         info = u'您本月的工资为：20000RMB！'.encode('utf8')
@@ -109,7 +137,7 @@ if __name__ == "__main__":
     # print displayNews()
     a = """{"intent":{"actionName":"","code":10008,"intentName":"","parameters":{"date":"2019-01-24","city":"北京"}},"results":[{"groupType":1,"resultType":"text","values":{"text":"北京:周四,多云 西北风微风,最低气温-5度，最高气温5度"}}]}
     """
-    b= json.loads(a)
+    b = json.loads(a)
     if 'results' in b:
         for r in b['results']:
             if r['resultType'] == 'text':
